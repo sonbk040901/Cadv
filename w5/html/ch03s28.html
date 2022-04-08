@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Retrieving error message text</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="ch03.html" title="Chapter 3. Function Descriptions" /><link rel="prev" href="ch03s27.html" title="Debugging information" /><link rel="next" href="ch04.html" title="Chapter 4. Error Messages" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Retrieving error message text</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s27.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Function Descriptions</th><td width="20%" align="right"> <a accesskey="n" href="ch04.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="btcerr"></a>Retrieving error message text</h2></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include "btree.h"</pre><p><code class="funcdef">void <strong class="fsfunc">btcerr</strong>(</code>int* <var class="pdparam">ierr</var>, int* <var class="pdparam">ioerr</var>, char* <var class="pdparam">srname</var>, char* <var class="pdparam">msg</var><code>)</code>;</p></div><p>
+        The <code class="function">btcerr</code> function returns the error
+        code (in <em class="parameter"><code>ierr</code></em>) and (if relevant) the
+        I/O error code (in <em class="parameter"><code>ioerr</code></em>) of the last
+        error encountered by the B Tree system.  In addition, it will
+        return the name of the function which detected the error (in
+        <em class="parameter"><code>srname</code></em>) and an error message in
+        <em class="parameter"><code>msg</code></em>.
+      </p><p>
+        The maximum number of chars returned in
+        <em class="parameter"><code>srname</code></em> is BT constant
+        <span class="emphasis"><em>ZRNAMESZ</em></span>.  The maximum number of chars
+        returned in <em class="parameter"><code>msg</code></em> is BT constant
+        <span class="emphasis"><em>ZMSGSZ</em></span>.  Both char arrays will be
+        zero-padded to <span class="emphasis"><em>ZRNAMESZ</em></span> and
+        <span class="emphasis"><em>ZMSGSZ</em></span> respectively.  Declaring these
+        arrays to be smaller than the BT constants will ensure
+        <code class="function">btcerr</code> acts as a very effective stack
+        smasher.
+      </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s27.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch04.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Debugging information </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 4. Error Messages</td></tr></table></div></body></html>

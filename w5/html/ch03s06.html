@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Set/unset support for duplicate keys</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="ch03.html" title="Chapter 3. Function Descriptions" /><link rel="prev" href="ch03s05.html" title="Closing a B Tree File" /><link rel="next" href="ch03s07.html" title="Set write through threshold for index file blocks" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Set/unset support for duplicate keys</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s05.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Function Descriptions</th><td width="20%" align="right"> <a accesskey="n" href="ch03s07.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="btdups"></a>Set/unset support for duplicate keys</h2></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include "btree.h"</pre><p><code class="funcdef">int <strong class="fsfunc">btdups</strong>(</code>BTA* <var class="pdparam">btact</var>, int <var class="pdparam">dups</var><code>)</code>;</p></div><p>
+        The <code class="function">btdups</code> controls support for duplicate
+        keys in the current root of the index file associated with
+        the <em class="parameter"><code>btact</code></em> context pointer.  Setting the
+        value of the <em class="parameter"><code>dups</code></em> to non-zero (TRUE)
+        will enable support for duplicate keys in the current root.  A
+        value of zero (FALSE) will disable duplicate key support for
+        the current root.  Enabling duplicate key support on the
+        superroot is not permitted.
+      </p><p>
+        Disabling duplicate key support on a root that previously
+        permitted them merely prevents further duplicate keys from
+        being inserted into the root BTree index.  Existing duplicates
+        will remain and must be managed by the application.
+      </p><p>
+        A non-zero return code indicates an error occurred.
+      </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s05.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s07.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Closing a B Tree File </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Set write through threshold for index file blocks</td></tr></table></div></body></html>

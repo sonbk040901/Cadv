@@ -1,0 +1,623 @@
+@Tuyen buyt so 01 : Gia Lam ⇄ Yen Nghia
+
+Ben xe Gia Lam - Ngo Gia Kham - Ngoc Lam - Nguyen Van Cu - Cau Chuong Duong - Tran Nhat Duat - Yen Phu - quay dau tai diem trung chuyen Long Bien – Yen Phu - Hang Dau – Hang Than – Quan Thanh - Hang Cot - Hang Ga - Hang Dieu - Duong Thanh - Phu Doan - Trieu Quoc Dat - Hai Ba Trung - Le Duan - Kham Thien - O Cho Dua - Nguyen Luong Bang - Tay Son – Cau vuot Nga tu So - Nguyen Trai - Tran Phu (Ha Dong) - Quang Trung (Ha Dong) - Ba La - Quoc lo 6 - Ben xe Yen Nghia
+
+@Tuyen buyt so 02 : Bac Co ⇄ Yen Nghia
+
+Bac Co - Tran Khanh Du - Tran Hung Dao - Le Thanh Tong - Hai Ba Trung - Quang Trung - Trang Thi - Dien Bien Phu - Tran Phu - Chu Van An - Ton Duc Thang - Nguyen Luong Bang - Tay Son - Nga tu So - Nguyen Trai - Tran Phu (Ha Dong) - Quang Trung (Ha Dong) - Ba La - Quoc lo 6 - Ben xe Yen Nghia
+
+@Tuyen buyt so 03 : Giap Bat ⇄ Gia Lam
+
+Ben xe Giap Bat - Giai Phong - Le Duan - Nguyen Thuong Hien - Yet Kieu - Tran Hung Dao - Tran Khanh Du - Tran Quang Khai - Tran Nhat Duat - Long Bien (Diem quay dau truoc pho Hang Khoai) - Tran Nhat Duat - Cau Chuong Duong - Nguyen Van Cu - Nguyen Son - Ngoc Lam - Ngo Gia Kham - Ben xe Gia Lam.
+
+@Tuyen buyt so 03B : Ben xe Nuoc Ngam ⇄ Vincom Phuc Loi
+
+Ben xe Nuoc Ngam - Ngoc Hoi - Giai Phong - Ben xe Giap Bat (Quang truong Ben xe Giap Bat) - Giai Phong - Dai La - Minh Khai - Cau Vinh Tuy - Dam Quang Trung - Chu Huy Man - Hoi Xa - Vu Xuan Thieu - Duong Phuc Loi - Ngo 193 Phuc loi - Ngach 195/9 Phuc Loi - Ngo 195 Phuc Loi - Phuc Loi (doi dien truong THPT Phuc Loi).
+
+@Tuyen buyt so 04 : Long Bien ⇄ Ben xe Nuoc Ngam
+
+Long Bien-quay dau tai doi dien pho Hang Than-Yen Phu- Diem trung chuyen Long Bien - Tran Nhat Duat - Nguyen Huu Huan - Ly Thai To - Ngo Quyen - Hai Ba Trung - Le Thanh Tong - Tran Thanh Tong - Tang Bat Ho - Yecxanh - Lo Duc - Kim Nguu - Nguyen Tam Trinh-Cau Voi- Tam Trinh - Duong Linh Nam - Duong dan cau Thanh Tri - Phap Van - Re trai tai nut giao duong vanh dai 3 va duong Ngoc Hoi (gan BX Nuoc Ngam) - Ngoc Hoi - BX Nuoc Ngam
+
+@Tuyen buyt so 05 : Linh Dam ⇄ Phu Dien
+
+Linh Dam (Khu do thi Linh Dam) - Nguyen Duy Trinh - Nguyen Huu Tho - Nghiem Xuan Yem - Kim Giang - Khuong Dinh - Nguyen Trai - Quay dau tai 177 Nguyen Trai - Nguyen Trai - Nguyen Tuan - Hoang Minh Giam - Nguyen Chanh – Mac Thai Tong - Trung Kinh – Pham Van Bach - Ton That Thuyet - Nguyen Hoang - Ham Nghi - Nguyen Co Thach - Ho Tung Mau –Quay dau tai phia truoc nghia trang Mai Dich –Ho Tung Mau - Cau Dien – Phu Dien - Ga Phu Dien – Cong lang Phu Dien - Phu Dien ( gan duong Trai Ga)
+
+@Tuyen buyt so 06A : Ben xe Giap Bat ⇄ Cau Gie
+
+Ben xe Giap Bat - Giai Phong - Kim Dong - Giai Phong - Ngoc Hoi - Quoc Lo 1 - Lien Ninh - Quan Ganh - Thi tran Thuong Tin - Tia - Do Xa - Nghe - Thi tran Phu Xuyen - Guot - Cau Gie (bai xe khu vuc nga 3 duong noi thong giua QL1A va duong 75)
+
+@Tuyen buyt so 06B : Ben xe Giap Bat ⇄ Hong Van
+
+Ben xe Giap Bat - Giai Phong - Kim Dong - quay dau tai diem mo - Kim Dong - Giai Phong - Ngoc Hoi - Thuong Tin - duong 427 - Hong Van (Van La, Thuong Tin).
+
+@Tuyen buyt so 06C : Ben xe Giap Bat ⇄ Phu Minh
+
+Ben xe Giap Bat - Giai Phong - Kim Dong - quay dau tai diem mo - Kim Dong - Giai Phong - Ngoc Hoi - Thuong Tin - Tia - Nga ba Do Xa - duong 429 (phia Dong) - Phu Minh (Phu Xuyen - Cong ty Viet Tuyen).
+
+@Tuyen buyt so 06D : Ben xe Giap Bat ⇄ Tan Dan
+
+Ben xe Giap Bat - Giai Phong - Kim Dong - quay dau tai diem mo - Kim Dong - Giai Phong - Ngoc Hoi - Thuong Tin - Tia - Quoc lo 1 - Re phai vao duong truc huyen Thao Chinh, Tan Dan - Tan Dan (doi dien cong thong Dai Nghiep, xa Tan Dan, huyen Phu Xuyen)
+
+@Tuyen buyt so 06E : Ben xe Giap Bat ⇄ Phu Tuc
+
+Ben xe Giap Bat - Giai Phong - Kim Dong - quay dau tai diem mo - Kim Dong - Giai Phong - Ngoc Hoi - Thuong Tin - duong 429 (phia Tay) - Re trai duong truc huyen Phu Tuc, Hoang Long - Phu Tuc (canh nha van hoa thon Luu Dong)
+
+@Tuyen buyt so 07 : Cau Giay ⇄ Noi Bai
+
+Bai do xe Cau Giay - Cau Giay - Diem trung chuyen Cau Giay (he truoc tuong rao Vuon thu Ha Noi) - Cau Giay - Nguyen Van Huyen - Hoang Quoc Viet - Pham Van Dong - Cau Thang Long - Vo Van Kiet - Duong duoi cau vuot Kim Chung - Vo Van Kiet - Quay dau tai diem mo (doi dien cong ty dich vu hang hoa hang khong - ACS) - Vo Van Kiet - San bay Noi Bai (San do P2, nha ga T1)
+
+@Tuyen buyt so 08A : Long Bien ⇄ Dong My
+
+Long Bien - Yen Phu - Diem trung chuyen Long Bien - Tran Nhat Duat - Nguyen Huu Huan - Ly Thai To - Ngo Quyen - Ly Thuong Kiet - Ba Trieu - Le Dai Hanh - Bach Mai - Le Thanh Nghi - Tran Dai Nghia - Dai La - Giai Phong - Duong Ngoc Hoi - Ngu Hiep - Dong My
+
+@Tuyen buyt so 08B : Long Bien ⇄ Van Phuc
+
+Long Bien - Nguyen Huu Huan - Ly Thai To - Ngo Quyen - Ly Thuong Kiet- Ba Trieu - Le Dai Hanh - Bach Mai - Le Thanh Nghi - Dai La - Giai Phong - Duong Vanh Dai 3 - Tu Hiep - De Huu Hong - Van Phuc
+
+@Tuyen buyt so 09A : Bo Ho ⇄ Khu lien co quan So nganh Ha Noi
+
+Bo Ho - Le Thai To - Trang Thi - Dien Bien Phu - Le Hong Phong - Doi Can - Lieu Giai – Nguyen Chi Thanh –De La Thanh-Kim Ma- Diem trung chuyen Cau Giay - Buoi - Vo Chi Cong - Nguyen Hoang Ton - Khu lien co quan So nganh Ha Noi
+
+@Tuyen buyt so 09B : Bo Ho ⇄ My Dinh
+
+Bo Ho - Le Thai To - Ba Trieu - Ho Xuan Huong - Nguyen Binh Khiem - Tran Nhan Tong - Le Duan - Kham Thien - Nguyen Luong Bang - Tay Son - Nga Tu So - Lang - Yen Lang - Thai Thinh - Lang Ha - Huynh Thuc Khang - Nguyen Chi Thanh - Chua Lang - Duong Lang – Cau Giay – Tran Thai Tong - Ton That Thuyet - Pham Hung – Ben xe My Dinh
+
+@Tuyen buyt so 10A : Long Bien ⇄ Tu Son
+
+Long Bien (doi dien Doi CSGT so 1 Ha Noi - so 3 Tran Nhat Duat) - Tran Nhat Duat - Yen Phu - Quay dau tai doi dien 92 Yen Phu - Diem trung chuyen Long Bien - Tran Nhat Duat - Cau Chuong Duong - Nguyen Van Cu - Ngo Gia Tu - Cau Duong - Ha Huy Tap – Dang Phuc Thong - Tran Phu (Tu Son) - Minh Khai (Tu Son) - Tu Son (Cong benh vien da khoa Tu Son)
+
+@Tuyen buyt so 10B : Long Bien ⇄ Trung Mau
+
+Long Bien (duong danh rieng cho xe buyt) - Yen Phu - Diem trung chuyen Long Bien - Tran Nhat Duat - Cau Chuong Duong - Nguyen Van Cu - Ngo Gia Tu - Cau Duong - Ha Huy Tap - Dang Phuc Thong - Doc La - Ninh Hiep - Phu Dong - Trung Mau (Gia Lam).
+
+@Tuyen buyt so 11 : Cong vien Thong Nhat ⇄ Hoc vien Nong Nghiep
+
+Cong vien Thong Nhat - Tran Nhan Tong - Quang Trung - Tran Hung Dao - Phan Chu Trinh - Ly Thai To - Ngo Quyen - Hang Voi - Hang Tre - Hang Muoi - Long Bien (Diem quay dau truoc pho Hang Khoai) - Tran Nhat Duat - Cau Chuong Duong - De Gia Thuong - Ngoc Lam - Nguyen Van Cu - Nguyen Van Linh - Nguyen Duc Thuan - Ngo Xuan Quang - Hoc vien Nong nghiep Viet Nam
+
+@Tuyen buyt so 12 : Cong vien Nghia Do ⇄ Khanh Ha (Thuong Tin)
+
+Cong vien Nghia Do - Nguyen Van Huyen - Nguyen Khanh Toan - Dao Tan - Lieu Giai - Nguyen Chi Thanh - Huynh Thuc Khang - Thai Ha - Chua Boc - Ton That Tung - Truong Chinh - quay dau tai diem mo doi dien 266 Truong Chinh - Truong Chinh - Le Trong Tan - Tran Dien - Dinh Cong - Giai Phong - Ngoc Hoi - Quoc lo 1 - Cau Ngoc Hoi - Xa Ngoc Hoi - Duong moi xa Dai Ang - Khanh Ha (Thuong Tin)
+
+@Tuyen buyt so 13 : Cong vien nuoc Ho Tay ⇄ Co Nhue
+
+Cong vien nuoc Ho Tay - Lac Long Quan - Hoang Quoc Viet - Nguyen Van Huyen - To Hieu - Tran Quoc Hoan - Pham Van Dong-quay dau tai diem mo doi dien 158 Pham Van Dong-Pham Van Dong - Ho Tung Mau - Cau Dien - Hoang Cong Chat - Phan Ba Vanh - Cau Noi- Co Nhue
+
+@Tuyen buyt so 14 : Bo Ho ⇄ Co Nhue
+
+Bo Ho - Cau Go - Hang Thung - Hang Tre - Hang Muoi - Tran Nhat Duat - Yen Phu (quay dau tai so nha 92 Yen Phu) - Diem trung chuyen Long Bien - Hang Dau - Quan Thanh - Thuy Khue – Lac Long Quan- Hoang Quoc Viet - Diem trung chuyen xe buyt Hoang Quoc Viet - Hoang Quoc Viet - Pham Van Dong-quay dau tai diem mo doi dien ciputra( gan chan cau Thang Long)-Ngo 12 Pham Van Dong -Tan Xuan - Co Nhue
+
+@Tuyen buyt so 15 : Gia Lam ⇄ Pho Ni
+
+Ben xe Gia Lam - Ngo Gia Kham - Ngoc Lam - Nguyen Van Cu - Ngo Gia Tu - Cau Duong - Quoc Lo 3 - Doc Van - Co Loa - Duong cai tranh Quoc lo 3 - Quoc lo 3 - Dong Anh - Nguyen Khe - Phu Lo - Da Phuc - Pho Ni
+
+@Tuyen buyt so 16 : Ben xe My Dinh ⇄ Ben xe Nuoc Ngam
+
+Ben xe My Dinh - Pham Hung - Quay dau tai Dinh Thon - Pham Hung - Xuan Thuy - Cau Giay - Duong Lang - Nga tu So - Truong Chinh - Nga tu Vong - Giai Phong - Ngoc Hoi - Quay dau tai doi dien cong ty ABB - Ngoc Hoi - Ben xe Nuoc Ngam
+
+@Tuyen buyt so 17 : Long Bien ⇄ Noi Bai
+
+Long Bien- Yen Phu - Diem trung chuyen Long Bien - Tran Nhat Duat - Cau Chuong Duong - Nguyen Van Cu - Ngo Gia Tu - Cau Duong - Thien Duc - Doc Van - Quoc lo 3 - Nguyen Khe - Phu Lo - Quoc lo 2 - Duong noi Quoc lo 2 va duong Vo Van Kiet, Vo Nguyen Giap - Vo Nguyen Giap - quay dau tai diem mo - Vo Nguyen Giap - Vo Van Kiet - San bay Noi Bai (San do P2, Nha ga T1)
+
+@Tuyen buyt so 18 : Dai hoc Kinh te Quoc dan ⇄ Dai hoc Kinh te Quoc dan
+
+Dai hoc Kinh te Quoc dan - Tran Dai Nghia - Dai La - Pho Vong - Giai Phong - Phuong Mai - Luong Dinh Cua - Dong Tac - Chua Boc - Tay Son - Thai Thinh - Lang Ha - Giang Vo - Giang Van Minh - Kim Ma - Nguyen Thai Hoc - Le Duan - Tran Phu - Phung Hung - Le Van Linh - Phung Hung (duong trong) - Phan Dinh Phung - Hang Dau - Tran Nhat Duat - Nguyen Huu Huan - Ly Thai To - Ngo Quyen - Hai Ba Trung - Le Thanh Tong - Tang Bat Ho - Nguyen Cong Tru - Lo Duc - Tran Khat Chan - Vo Thi Sau - Thanh Nhan - Le Thanh Nghi - Tran Dai Nghia - Dai hoc Kinh te Quoc dan
+
+@Tuyen buyt so 19 : Tran Khanh Du ⇄ Vinhomes Thang Long
+
+Tran Khanh Du - Nguyen Khoai - Doc cau Vinh Tuy - Vinh Tuy - Minh Khai - Dai La - Truong Chinh - Duong Lang - Quay dau doi dien so nha 124 Duong Lang - Duong Lang - Nguyen Trai - Tran Phu (Ha Dong) - Quang Trung (Ha Dong) - Chu Van An (Ha Dong) - Van Phuc (Ha Dong) - To Huu - Le Trong Tan - CV Thien Duong Bao Son - Le Trong Tan - duong noi bo KDT Sudico Nam An Khanh - Vinhomes Thang Long.
+
+@Tuyen buyt so 20A : Cau Giay ⇄ Ben xe Phung
+
+Bai do xe Cau Giay - Cau Giay - Diem trung chuyen Cau Giay (he truoc tuong rao Vuon thu Ha Noi) – Cau Giay – Xuan Thuy – Ho Tung Mau – Cau Dien – Nhon - Tram trung chuyen xe buyt Nhon – Troi – Phung (Ben xe Dan Phuong)
+
+@Tuyen buyt so 20B : Cau Giay ⇄ Ben xe Son Tay
+
+Bai do xe Cau Giay - Cau Giay - Diem trung chuyen Cau Giay (he truoc tuong rao Vuon thu Ha Noi) - Cau Giay - Xuan Thuy - Ho Tung Mau - Cau Dien - Nhon - Tram trung chuyen xe buyt Nhon - Troi - Phung - Phuc Tho - Pho Chua Thong (Son Tay) - Ben xe Son Tay
+
+@Tuyen buyt so 20C : Nhon ⇄ Vong Xuyen
+
+Nhon (diem trung chuyen Nhon) - Cau Dien - Tay Tuu - Thuong Cat - De Lien Tri - De Huu Hong (di qua cac xa Lien Trung, Lien Ha, Lien Hong, Hong Ha) - Tien Tan - Trung Chau - Hat Mon - Vong Xuyen (Trung tam thuong mai cum 11, xa vong Xuyen)
+
+@Tuyen buyt so 21A : Ben xe Giap Bat ⇄ Ben xe Yen Nghia
+
+Ben xe Giap Bat - Giai Phong - Pho Vong - Giai Phong - Xa Dan - Pham Ngoc Thach - Chua Boc - Tay Son - Nga tu So - Nguyen Trai - Tran Phu (Ha Dong) - Quang Trung (Ha Dong) - Ba La - Quoc Lo 6 - Ben xe Yen Nghia.
+
+@Tuyen buyt so 21B : Khu do thi Phap Van ⇄ Ben xe My Dinh
+
+Khu do thi Phap Van Tu Hiep - Ngo 15 Ngoc Hoi - BX Nuoc Ngam - Ngoc Hoi - Giai Phong - Quang truong Ben xe Giap Bat - Giai Phong - Pho Vong - Giai Phong - Xa Dan - Pham Ngoc Thach - Chua Boc - Tay Son - Nga tu So - Nguyen Trai - Khuat Duy Tien - Pham Hung - Ton That Thuyet - Pham Hung - BX My Dinh.
+
+@Tuyen buyt so 22A : Ben xe Gia Lam ⇄ Khu do thi Trung Van
+
+Ben xe Gia Lam - Ngo Gia Kham - Ngoc Lam - Nguyen Van Cu - Cau Chuong Duong - Tran Nhat Duat - Yen Phu (quay dau tai doi dien so nha 92 Yen Phu) - Diem trung chuyen Long Bien - Hang Dau - Quan Thanh - Nguyen Bieu - Hoang Dieu - Tran Phu - Kim Ma - Nguyen Chi Thanh - Tran Duy Hung – Pham Hung – Do Duc Duc – Mieu Dam – Cau vuot Me Tri – duong Cuong Kien – KDT Trung Van
+
+@Tuyen buyt so 22B : Khu do thi Kien Hung ⇄ Ben xe My Dinh
+
+Khu do thi Kien Hung (Canh toa nha 19T6) - Duong noi bo khu gian dan Mau Luong - Duong Mau Luong - Duong Phuc La, Van Phu (Khu do thi Xa La) - Phung Hung (Ha Dong) - Tran Phu (Ha Dong) - Nguyen Trai - Khuat Duy Tien - Pham Hung - quay dau tai nga tu Pham Hung, Ton That Thuyet- Pham Hung - Ben xe My Dinh
+
+@Tuyen buyt so 22C : Ben xe Giap Bat ⇄ Khu do thi Duong Noi
+
+Ben xe Giap Bat - Giai Phong - Kim Dong - Quay dau tai diem mo - Kim Dong - Giai Phong - Nguyen Huu Tho - Cau Dau - Nghiem Xuan Yem - Nguyen Xien - Nguyen Trai - Tran Phu (Ha Dong) - Quang Trung (Ha Dong) - Chu Van An (Ha Dong) - Van Phuc - To Huu - Duong truc Bac Ha Dong - Khu do thi Duong Noi (Chung cu The Sparks Nam Cuong).
+
+@Tuyen buyt so 23 : Nguyen Cong Tru ⇄ Nguyen Cong Tru
+
+Diem do xe buyt 32 Nguyen Cong Tru - Nguyen Cong Tru - Pho Hue - Tue Tinh - Ba Trieu - Le Dai Hanh - Hoa Lu - Dai Co Viet - Quay dau tai doi dien so nha 100 Dai Co Viet - Dai Co Viet - Ta Quang Buu - Le Thanh Nghi - Giai Phong - Phuong Mai - Luong Dinh Cua - Dong Tac - Chua Boc - Tay Son - Quay dau tai doi dien so nha 127 Tay Son - Tay Son - Dang Tien Dong - Tran Quang Dieu –Vo Van Dung - Hoang Cau - De La Thanh - Giang Vo - Nguyen Thai Hoc - Cua Nam – Hang Bong - Phung Hung - Le Van Linh - Phung Hung (duong trong) - Phan Dinh Phung - Hang Dau – Tran Nhat Duat - Nguyen Huu Huan - Ly Thai To - Ngo Quyen - Hai Ba Trung - Le Thanh Tong - Tran Hung Dao - Phan Huy Chu - Han Thuyen - Le Van Huu - Ngo Thi Nham - Diem do xe buyt 32 Nguyen Cong Tru
+
+@Tuyen buyt so 24 : Long Bien ⇄ Cau Giay
+
+Long Bien - Tran Nhat Duat - Tran Quang Khai - Tran Khanh Du - Trung chuyen xe buyt Tran Khanh Du - Nguyen Khoai - Minh Khai - Dai La - Truong Chinh - Nga tu So - Duong Lang - Cau Giay
+
+@Tuyen buyt so 25 : BV Nhiet doi TW CS2 ⇄ Ben xe Giap Bat
+
+BV Nhiet doi TW CS2 - duong noi bo KCN Bac Thang Long - Hoang Sa - Vo Nguyen Giap - cau Nhat Tan - Vo Chi Cong - Nguyen Hoang Ton - Lac Long Quan – Hoang Quoc Viet – Quay dau tai nga tu Phung Chi Kien – Hoang Quoc Viet - Buoi (duoi) - Dao Tan - Lieu Giai - Kim Ma – Nguyen Thai Hoc – Trinh Hoai Duc – Cat Linh - Ton Duc Thang - o Cho Dua - Quay dau tai diem mo dai phan cach - o Cho Dua - Xa Dan - Pham Ngoc Thach - Dao Duy Anh - Giai Phong – Quay dau tai nga 3 Duoi Ca - Giai Phong - Ben xe Giap Bat
+
+@Tuyen buyt so 26 : Mai Dong ⇄ San van dong Quoc Gia
+
+Mai Dong (Duong vao XN buyt Thang Long cu, qua cau Den Lu, gan bai do xe Den Lu 2) - Nguyen Tam Trinh - Cau Voi - Nguyen Tam Trinh- Kim Nguu - Thanh Nhan - Le Thanh Nghi - Giai Phong - Xa Dan - Pham Ngoc Thach - Chua Boc - Thai Ha - Huynh Thuc Khang - Nguyen Chi Thanh - De La Thanh - Cau Giay - Diem trung chuyen Cau Giay - Cau Giay - Xuan Thuy - Ho Tung Mau- Le Duc Tho - San van dong Quoc Gia.
+
+@Tuyen buyt so 27 : Ben xe Yen Nghia ⇄ Ben xe Nam Thang Long
+
+Ben xe Yen Nghia - Quoc Lo 6 - Ba La - Quang Trung (Ha Dong) - Tran Phu (Ha Dong) - Nguyen Trai - Duong Lang - Nguyen Chi Thanh - Kim Ma - Cau Giay - Tran Dang Ninh - Nguyen Phong Sac - Tran Quoc Hoan - Pham Van Dong - Do Nhuan - Nam Thang Long
+
+@Tuyen buyt so 28 : Ben xe Nuoc Ngam ⇄ Dai hoc Mo
+
+Ben xe Nuoc Ngam - Ngoc Hoi - Giai Phong - Quang truong ben xe Giap Bat - Giai Phong - Xa Dan - O Cho Dua - Hoang Cau - De La Thanh - Giang Vo - Quay dau tai doi dien so 215, 217 Giang Vo - Giang Vo - Ngoc Khanh - Kim Ma - Quay dau tai so nha 295 Kim Ma - Kim Ma - Kim Ma (duong duoi) - Lieu Giai – Nguyen Chi Thanh-Pho Chua Lang-Duong Lang - Diem trung chuyen Cau Giay –Quay dau tai nut giao duong La Thanh,Kim Ma- Cau Giay - Tran Dang Ninh - Nguyen Khanh Toan - duong moi (canh cong vien Nghia Do) - Chua Ha - To Hieu - Nguyen Phong Sac - Tran Cung - Pham Van Dong-quay dau tai diem mo doi dien Ciputra gan chan cau Thang Long-ngo 12 Pham Van Dong- Tan Xuan - Hoang Tang Bi – Duc Thang - Dai hoc Mo Dia Chat
+
+@Tuyen buyt so 29 : Ben xe Giap Bat ⇄ Tan Lap
+
+Ben xe Giap Bat - Giai Phong - Kim Dong - Truong Dinh - Giai Phong - Nguyen Huu Tho - Nghiem Xuan Yem - Nguyen Xien - Nguyen Trai - quay dau tai doi dien ngo 241 Nguyen Trai - Nguyen Trai - Nguyen Tuan - Hoang Minh Giam - Nguyen Chanh - vong xuyen Nguyen Chanh - Nguyen Chanh - Duong Dinh Nghe - Pham Hung - Ho Tung Mau - Duong Cau Dien - Pho Nhon - Quoc lo 32 - Nga 4 Tram Troi - Tan Lap - Tan Lap (San bong xa Tan Lap)
+
+@Tuyen buyt so 30 : Mai Dong ⇄ Ben xe My Dinh
+
+Mai Dong (Duong vao XN buyt Thang Long, qua cau tam Benley, gan bai do xe Den Lu 2) - Nguyen Tam Trinh-re phai duong Minh Khai-quay dau tai diem moi doi dien 400 Minh Khai-Minh Khai - Kim Nguu - Lo Duc - Tran Xuan Soan - Tran Nhan Tong - Le Duan - Kham Thien - O Cho Dua - Hoang Cau - Thai Ha - Lang Ha - Le Van Luong - Hoang Minh Giam - Nguyen Chanh - Vong xuyen Nguyen Chanh, Nam Trung Yen - Nguyen Chanh - Duong Dinh Nghe - Pham Hung - Quay dau truoc Ben xe My Dinh - Ben xe My Dinh
+
+@Tuyen buyt so 31 : Bach Khoa ⇄ Chem
+
+Dai hoc Bach Khoa - Tran Dai Nghia - Le Thanh Nghi - Ta Quang Buu - Dai Co Viet - Pho Hue - Hang Bai - Ly Thuong Kiet - Phan Chu Trinh - Ly Thai To - Ngo Quyen - Hang Voi - Hang Tre - Hang Muoi - Tran Nhat Duat - Diem trung chuyen Long Bien - Yen Phu - Nghi Tam - Au Co - Nhat Tan - An Duong Vuong - Duong Dong Ngac (69) – Thuy Phuong – Duc Thang,Co Nhue - Chem (Dai hoc Mo)
+
+@Tuyen buyt so 32 : Ben xe Giap Bat ⇄ Nhon
+
+Ben xe Giap Bat - Giai Phong - Le Duan - Tran Nhan Tong - Tran Binh Trong - Tran Hung Dao - Quan Su - Hai Ba Trung - Tho Nhuom - Trang Thi - Dien Bien Phu - Tran Phu - Kim Ma – Kim Ma( duong duoi)-Dao Tan- Duong Buoi( duong duoi)-Cau Giay( duong duoi)-Diem trung chuyen Cau Giay(he truoc tuong rao vuon thu Ha Noi)-Cau Giay - Xuan Thuy - Ho Tung Mau - duong Cau Dien - Quay dau tai nga 3 duong Cau Dien, Tinh lo 70A moi - Nhon (diem trung chuyen xe buyt Nhon).
+
+@Tuyen buyt so 33 : Ben xe Yen Nghia ⇄ Xuan Dinh
+
+Ben xe Yen Nghia - Quoc lo 6 – Quang Trung (Ha Dong) - Tran Phu (Ha Dong) - Nguyen Van Loc - Vu Trong Khanh - To Huu - Trung Van - duong Cuong Kien - cau vuot Me Tri - duong Mieu Dam - Do Duc Duc - Pham Hung - Pham Van Dong - Hoang Quoc Viet - Buoi - Lac Long Quan - Xuan La - Xuan Dinh (Truong Dai hoc Noi Vu Ha Noi)
+
+@Tuyen buyt so 34 : Ben xe My Dinh ⇄ Ben xe Gia Lam
+
+Ben xe My Dinh - Pham Hung - Xuan Thuy - Cau Giay - Cau Giay (duong duoi) - Diem trung chuyen Cau Giay (he truoc tuong rao Truong DHGTVT) - Cau Giay (duong duoi) - Kim Ma - Nguyen Thai Hoc - Phan Boi Chau - Ly Thuong Kiet - Quang Trung - Hai Ba Trung - Phan Chu Trinh - Ly Thai To - Ngo Quyen - Hang Voi - Hang Tre - Hang Muoi - Tran Nhat Duat - Long Bien (Diem quay dau truoc pho Hang Khoai) – Tran Nhat Duat – Cau Chuong Duong - Nguyen Van Cu - Nguyen Son - Ngoc Lam - Ngo Gia Kham - Ben xe Gia Lam.
+
+@Tuyen buyt so 35A : Tran Khanh Du ⇄ Nam Thang Long
+
+Tran Khanh Du - Tran Hung Dao - Ba Trieu - Dai Co Viet - Ham Kim Lien - Xa Dan - Pham Ngoc Thach - Chua Boc - Thai Ha - Huynh Thuc Khang - Nguyen Chi Thanh - Tran Duy Hung - Pham Hung - Pham Van Dong - Do Nhuan - Nam Thang Long.
+
+@Tuyen buyt so 35B : Nam Thang Long ⇄ Thanh Lam
+
+Nam Thang Long – Do Nhuan - Pham Van Dong - Cau Thang Long - Vo Van Kiet - Nga Tu Nam Hong - re phai vao QL23B - quay dau tai dao tron phia Dong Anh - cau vuot Nam Hong - Quoc Lo 23B - Thanh Lam ( Me Linh ).
+
+@Tuyen buyt so 36 : Yen Phu ⇄ Linh Dam
+
+Yen Phu (Diem trung chuyen Long Bien) - Hang Dau - Hang Cot - Hang Ga - Hang Dieu - Duong Thanh - Phu Doan - Trieu Quoc Dat - Hai Ba Trung - Ba Trieu - Le Dai Hanh - Dai Co Viet - Bach Mai - Truong Dinh - Giai Phong - Nguyen Huu Tho - Nguyen Duy Trinh - Khu do thi Linh Dam
+
+@Tuyen buyt so 37 : Ben xe Giap Bat ⇄ Chuong My
+
+Ben xe Giap Bat - Giai Phong - Kim Dong - Truong Dinh - Giai Phong - duong Hoang Liet - KDT Linh Dam - Nguyen Huu Tho - Cau Dau - Kim Giang - Phan Trong Tue - Phung Hung (Ha Dong) - To Huu- To Hieu - Quang Trung (Ha Dong) - Ba La - Quoc Lo 6 - Yen Nghia - Cau Mai Linh - Bien Giang - Chuong My
+
+@Tuyen buyt so 38 : Ben xe Nam Thang Long ⇄ Mai Dong
+
+Nam Thang Long - Do Nhuan - Pham Van Dong - quay dau tai nut quay so 158 Pham Van Dong - Pham Van Dong - Hoang Quoc Viet - Nguyen Van Huyen - Nguyen Khanh Toan - Buoi (duong duoi) - Cau Giay - Diem trung chuyen Cau Giay - Kim Ma - Nguyen Thai Hoc - Le Duan - Tran Hung Dao - Ba Trieu - Le Dai Hanh - Bach Mai - Minh Khai - Tam Trinh - Cau Voi - Nguyen Tam Trinh - Mai Dong
+
+@Tuyen buyt so 39 : Cong vien Nghia Do ⇄ Benh vien Noi tiet TW CS2
+
+Cong vien Nghia Do - Nguyen Van Huyen - Nguyen Khanh Toan - Tran Dang Ninh - Nguyen Phong Sac - Tran Thai Tong - Ton That Thuyet - Pham Hung - Khuat Duy Tien - Nguyen Trai - Tran Phu (Ha Dong) – Re tai diem mo BigC (Ha Dong) - Tran Phu (Ha Dong) - Nguyen Khuyen (Ha Dong) - Duong noi bo Khu Do thi Van Quan (Ha Dong) - Phung Hung (Ha Dong) - Duong Cau Buou - Duong 70 - Phan Trong Tue - Ngoc Hoi – Duong Nguyen Bo - Tu Hiep (doi dien cong Benh vien Noi Tiet trung uong co so Tu Hiep).
+
+@Tuyen buyt so 40 : Cong vien Thong Nhat ⇄ Van Lam
+
+Cong vien Thong Nhat - Quang Trung - Tran Hung Dao –Quan Su - Hai Ba Trung - Phan Chu Trinh – Trang Tien - Tran Khanh Du - Nguyen Khoai – Cau Vinh Tuy – Duong Co Linh - Thach Ban - Nguyen Van Linh – Nguyen Duc Thuan – Nguyen Binh - Nhu Quynh - Van Lam( Duong 5)
+
+@Tuyen buyt so 41 : Nghi Tam ⇄ Ben xe Giap Bat
+
+Nghi Tam (Doi dien cho Quang An) - Duong Au Co - Nghi Tam - Yen Phu - Yen Phu (duong rieng cho xe buyt) Trung chuyen Long Bien – Hang Dau – Quan Thanh – Cua Bac - Nguyen Tri Phuong - Dien Bien Phu - Chu Van An - Ton Duc Thang - Kham Thien - Le Duan - Giai Phong – Quay dau tai nga ba duoi ca, Giai Phong – Giai Phong - Ben xe Giap Bat.
+
+@Tuyen buyt so 42 : Giap Bat ⇄ Duc Giang
+
+Ben xe Giap Bat (Quang truong Ben xe Giap Bat) – Giai Phong – Kim Dong – Tan Mai - Nguyen Tam Trinh- Kim Nguu- Lo Duc- Yecxanh – Tran Thanh Tong - Tran Hung Dao- Tran Quang Khai - Cau Chuong Duong - Nguyen Van Cu - Ngo Gia Tu - Duc Giang (Doi dien Nha may Cap Dien)
+
+@Tuyen buyt so 43 : Cong vien Thong Nhat ⇄ Dong Anh
+
+Cong vien Thong Nhat - Tran Nhan Tong - Quang Trung - Tran Hung Dao - Tran Quang Khai - Cau Chuong Duong - Nguyen Van Cu - Ngo Gia Tu - Cau Duong - Duong Thien Duc - Quoc Lo 3 - Duong cai tranh Quoc lo 3 - Quoc lo 3 - Cao Lo - Thi tran Dong Anh (Nga ba xay xat Dong Quan)
+
+@Tuyen buyt so 44 : Tran Khanh Du ⇄ Ben xe My Dinh
+
+Tran Khanh Du - Tran Hung Dao - Tang Bat Ho - Nguyen Cong Tru - Lo Duc - Tran Khat Chan - Dai Co Viet - Dao Duy Anh - Pham Ngoc Thach - Chua Boc - Tay Son - Nguyen Trai - Nguyen Tuan - Hoang Minh Giam – Nguyen Chanh – Duong Dinh Nghe - Pham Hung - BX My Dinh
+
+@Tuyen buyt so 45 : Time City ⇄ Ben xe Nam Thang Long
+
+Times City (Benh vien Vinmec) - Minh Khai - Nguyen Khoai - Tran Khanh Du (duong duoi) - Tran Hung Dao - Le Thanh Tong - Ly Thuong Kiet - Quang Trung - Trang Thi - Dien Bien Phu - Hoang Dieu - Nguyen Bieu - Quan Thanh - Thuy Khue - Hoang Quoc Viet - Pham Van Dong - Do Nhuan - Bai do xe Nam Thang Long.
+
+@Tuyen buyt so 46 : Ben xe My Dinh ⇄ Thi tran Dong Anh
+
+Ben xe My Dinh - Pham Hung - quay dau tai lang Dinh Thon - Pham Hung - Pham Van Dong - Cau Thang Long - Duong 6 km (Vinh Ngoc) - Van Tri - Duong 5 keo dai - Duong 6 km (Vinh Ngoc) - Quoc lo 3 - Duong Co Loa - Thi tran Dong Anh (Nga ba xay sat Dong Quan).
+
+@Tuyen buyt so 47 : Long Bien ⇄ Bat Trang
+
+Long Bien - Yen Phu - Diem trung chuyen Long Bien - Tran Nhat Duat - Cau Chuong Duong - De Long Bien, Xuan Quan (Bo De - Tu Dinh - Cu Khoi - Dong Du) - Bat Trang (cach cong cho Gom Bat Trang 100m).
+
+@Tuyen buyt so 47B : DH Kinh te Quoc dan ⇄ Kieu Ky
+
+DH Kinh te Quoc dan - Dai La - Giai Phong - Le Thanh Nghi - Thanh Nhan – Kim Nguu – Minh Khai - Cau Vinh Tuy - Co Linh - Thach Ban - De Xuan Quan – Dong Du - Van Duc - duong DT378 - Van Giang - duong DT179 - Kieu Ky
+
+@Tuyen buyt so 48 : Ben xe Nuoc Ngam ⇄ Phuc Loi (Long Bien)
+
+BX Nuoc Ngam – duong dan Vanh dai 3 – Doc Yen So – De ta song Hong - Nguyen Khoai – Tran Quang Khai – Cau Chuong Duong - Nguyen Van Cu – Ngo Gia Tu - Truong Lam – Doan Khue – Van Hanh – Nguyen Cao Luyen – Luu Khanh Dam – Phuc Loi (truong tieu hoc Phuc Loi).
+
+@Tuyen buyt so 49 : Tran Khanh Du ⇄ Nhon
+
+Tran Khanh Du (Diem trung chuyen xe buyt Tran Khanh Du) - Tran Hung Dao - Le Thanh Tong - Ly Thuong Kiet - Le Duan - Kham Thien - O Cho Dua - La Thanh - Cau Giay – Xuan Thuy - Ho Tung Mau - Quay dau tai diem mo doi dien 143 Ho Tung Mau - Nguyen Co Thach - Tran Huu Duc - duong moi (doan gan toa nha Hateco Apollo) - Nhon (Diem trung chuyen xe buyt Nhon).
+
+@Tuyen buyt so 50 : Long Bien ⇄ San van dong Quoc Gia
+
+Long Bien - Yen Phu - Tran Nhat Duat - Quay dau tai nut giao pho Hang Khoai - Tran Nhat Duat - Yen Phu - Diem trung chuyen Long Bien - Yen Phu - Duong Thanh Nien - Hung Vuong - Phan Dinh Phung - Hoang Dieu - Tran Phu - Kim Ma (Toa nha PTA - so 1 Kim Ma) - Giang Vo - Quay dau tai diem mo doi dien 138 Giang Vo - Giang Vo - Hao Nam - Hoang Cau - Thai Ha - Lang Ha - Lang - Tran Duy Hung - Pham Hung - Quay dau tai doi dien toa nha CT5 KDT Song Da My Dinh - Pham Hung - Me Tri - quay dau tai nga 4 Me Tri,Le Quang Dao
+
+@Tuyen buyt so 51 : Tran Khanh Du ⇄ Hoc vien Tu Phap
+
+Tran Khanh Du (Diem trung chuyen xe buyt Tran Khanh Du) -Nguyen Khoai - Minh Khai - Lac Trung - Thanh Nhan - Vo Thi Sau - Tran Khat Chan - Dai Co Viet - Xa Dan - Pham Ngoc Thach - Chua Boc - Tay Son - Thai Thinh - Yen Lang - Duong Lang - Tran Duy Hung - Trung Hoa - Vu Pham Ham - Trung Kinh - Pham Van Bach - Tran Thai Tong - Xuan Thuy -Ho Tung Mau - Tran Vy - Tran Vy (Cong Hoc Vien Tu Phap).
+
+@Tuyen buyt so 52A : Cong vien Thong Nhat ⇄ Le Chi
+
+Cong vien Thong Nhat - Tran Nhan Tong - Ba Trieu - Le Dai Hanh - Bach Mai - Minh Khai - Cau Mai Dong - Minh Khai - Cau Vinh Tuy - Dam Quang Trung - Co Linh - Thach Ban - Nguyen Van Linh - Nguyen Duc Thuan - Cau vuot Phu Thuy - Duong Y Lan - Duong Xa - Nga 4 Sui - Duong 181 - Phu Thi - Keo - Kim Son - Le Chi
+
+@Tuyen buyt so 52B : Cong vien Thong Nhat ⇄ Dang Xa
+
+Cong vien Thong Nhat - Tran Nhan Tong - Ba Trieu - Le Dai Hanh - Bach Mai - Minh Khai - Co Linh - Thach Ban - Nguyen Duc Thuan - Kieu Ky - Duong Y Lan - Dang Xa
+
+@Tuyen buyt so 53A : Hoang Quoc Viet ⇄ Dong Anh
+
+Diem do xe buyt Hoang Quoc Viet - Hoang Quoc Viet - Quay dau tai nga ba Hoang Quoc Viet, Pham Tuan Tai - Hoang Quoc Viet - Diem trung chuyen xe buyt Hoang Quoc Viet - Hoang Quoc Viet - Pham Van Dong - Cau Thang Long - Vo Van Kiet - Quoc lo 23 - Cau tranh Van Tri - Quoc lo 23 - Duong Cao Lo - Thi tran Dong Anh (Nga 3 xay xat Dong Quan)
+
+@Tuyen buyt so 53B : Ben xe My Dinh ⇄ Thi tran Chi Dong
+
+Ben xe My Dinh - Pham Hung - Quay dau tai diem mo (giua tru T296-T297 duong vanh dai 3 tren cao) - Pham Hung - Pham Van Dong - cau Thang Long - Vo Van Kiet - Quay dau tai diem mo doi dien Me Linh Plaza - Vo Van Kiet - Khu cong nghiep Quang Minh - duong Chi Dong - Thi tran Chi Dong (truoc UBND thi tran Chi Dong, Me Linh)
+
+@Tuyen buyt so 54 : Long Bien ⇄ Bac Ninh
+
+Long Bien - Yen Phu - Diem trung chuyen Long Bien - Tran Nhat Duat - Cau Chuong Duong - Nguyen Van Cu - Ngo Gia Tu - Cau Duong - Ha Huy Tap – Dang Phuc Thong – Tran Phu ( Tu Son) – Minh Khai( Tu Son) –Hai Ba Trung( Tien Du) - Nguyen Van Cu (Bac Ninh) - Ngo Gia Tu (Bac Ninh) - Duong Kinh Duong Vuong - Thanh pho Bac Ninh
+
+@Tuyen buyt so 55A : Times City ⇄ Cau Giay
+
+Times City - Minh Khai - Nguyen Khoai - Tran Khanh Du - Tran Quang Khai - Tran Nhat Duat - DTC Long Bien - Yen Phu (lan danh rieng) - Nghi Tam - Au Co - Lac Long Quan - Buoi - Nut giao Lang, Cau Giay - DTC Cau Giay - BDX Cau Giay
+
+@Tuyen buyt so 55B : Aeon Mall ⇄ Cau Giay
+
+TTTM Aeon Mall - Co Linh - Cau Vinh Tuy - Nguyen Khoai - Tran Khanh Du - Tran Quang Khai - Tran Nhat Duat - DTC Long Bien - Yen Phu (lan danh rieng) - Nghi Tam - Au Co - Lac Long Quan - Buoi - Cau Giay - DTC Cau Giay - BDX Cau Giay
+
+@Tuyen buyt so 56A : Nam Thang Long ⇄ Nui Doi
+
+Nam Thang Long – Do Nhuan - Pham Van Dong - Cau Thang Long - Vo Van Kiet - Quoc lo 2 - duong moi doc ham chui QL2 - Tinh lo 131 - KCN Noi Bai - Thi tran Soc Son - Duong Nui Doi - Nui Doi (Dai hoc Dien Luc)
+
+@Tuyen buyt so 56B : Hoc vien Phat Giao ⇄ Hoc vien Phat Giao
+
+Hoc vien Phat Giao VN - duong vao den Soc - QL3 - Tinh lo 131 - duong Nui Doi - Tinh lo 131 (di qua cac xa Dan Tao, Xuan Giang, Tien Tao, Viet Long, Dong Xoai, Luong Phu) - De Luong Phuc - Thon Ngo Dao - Nga ba Tan Thanh - Tinh lo 296 - Bac Phu - Tan Minh - Nui Doi - duong Nui Doi - Tinh lo 131 - QL3 - Soc Son - duong vao den Soc - Hoc vien Phat Giao VN
+
+@Tuyen buyt so 57 : Nam Thang Long ⇄ KCN Phu Nghia
+
+Nam Thang Long (BDX Nam Thang Long) - Pham Van Dong - Tan Xuan - Chan Cau Thang Long - Hoang Tang Bi - Cau Lien Mac 2 - Tan Phong - Yen Noi - Van Tien Dung - Quoc lo 32 - Nhon(diem trung chuyen xe buyt Nhon) - Quoc lo 32 - Nga tu Nhon - Tinh lo 70 - Xuan Phuong - Tay Mo - Dai Mo - Van Phuc - Nga tu buu dien Ha Dong - Quang Trung (Ha Dong) – Ba La – Quoc Lo 6 – Yen Nghia - Dong Mai – Cau Mai Linh – Bien Giang – Chuc Son – KCN Phu Nghia (duong truc noi bo KCN Phu Nghia (vi tri doc duong Thanh Nien trong KCN Phu Nghia - canh toa nha "lang cong nhan")).
+
+@Tuyen buyt so 58 : Long Bien ⇄ Thach Da
+
+Yen Phu (doan tu Hang Than den Hoe Nhai) - Quay dau tai doi dien pho Hang Than - Yen Phu - Diem trung chuyen Long Bien - Tran Nhat Duat (Quay dau tai pho Hang Khoai) - Yen Phu - Nghi Tam - Au Co - An Duong Vuong - Tan Xuan - Cau Thang Long - Vo Van Kiet - Quoc Lo 2 - Tram thu phi so 1 QL 2 - Hai Ba Trung (Phuc Yen - Vinh Phuc) - Ly Nam De - Le Ngoc Han - Ly Thuong Kiet - Trieu Thi Khoan Hoa - Nguyen Trai (Phuc Yen - Vinh Phuc) - Quoc lo 23B - Duong 35 - Thach Da (Truoc cong benh vien Da khoa Me Linh moi).
+
+@Tuyen buyt so 59 : Thi tran Dong Anh ⇄ Hoc vien Nong Nghiep
+
+TT Dong Anh - Cao Lo - QL3 - Nut giao Van Loc - Truong Sa - cau Dong Tru - Ly Son - Ngo Gia Tu - Vu Duc Thuan - Viet Hung - duong BT08, BT07 KDT Viet Hung - Nguyen Cao Luyen - Luu Khanh Dam - Phuc Loi - De Vang - Co Bi - Ngo Xuan Quang - HV Nong Nghiep VN
+
+@Tuyen buyt so 60A : Khu do thi Phap Van ⇄ Cong vien nuoc Ho Tay
+
+KDT Phap Van Tu Hiep - Ngo 83 Ngoc Hoi - Ngoc Hoi - Nguyen Huu Tho - Cau Dau - Nghiem Xuan Yem - Nguyen Xien - Nguyen Trai - Nguyen Tuan - Le Van Luong - Hoang Dao Thuy - Tran Duy Hung - Pham Hung - Pham Van Dong - Nguyen Hoang Ton - Lac Long Quan - CV nuoc Ho Tay
+
+@Tuyen buyt so 60B : Ben xe Nuoc Ngam ⇄ Benh vien nhiet doi TW CS2
+
+Ben xe Nuoc Ngam - Giai Phong - Nguyen Huu Tho - Cau Dau - Kim Giang - Khuong Dinh - Nguyen Trai - Quay dau tai doi dien 160 Nguyen Trai - Nguyen Trai - Nguyen Tuan - Le Van Luong - Hoang Dao Thuy - Tran Duy Hung - Quay dau tai 92 Tran Duy Hung - Tran Duy Hung - Pham Hung - Pham Van Dong - Cau Thang Long - Vo Van Kiet - KCN Bac Thang Long - Khu cong nhan Kim Chung - BV Benh nhiet doi Trung uong co so II.
+
+@Tuyen buyt so 61 : Van Ha ⇄ Cau Giay
+
+Van Ha (Dong Anh) - Viet Hung - Cao Lo - Quoc lo 23 B - Vo Van Kiet - Cau Thang Long - Pham Van Dong - Pham Hung - Ton That Thuyet - Tran Thai Tong - Thanh Thai - CV Cau Giay
+
+@Tuyen buyt so 62 : Ben xe Yen Nghia ⇄ Ben xe Thuong Tin
+
+Ben xe Yen Nghia - Quoc lo 6 - Ba La - Quang Trung (Ha Dong) - To Hieu (Ha Dong) - Cau Den - Phung Hung (Ha Dong) - Duong Cau Buou - Duong 70 - Phan Trong Tue - Ngoc Hoi - Quoc Lo 1 - Lien Ninh - Quan Ganh - Ben xe Thuong Tin
+
+@Tuyen buyt so 63 : Khu cong nghiep Bac Thang Long ⇄ Tien Thinh
+
+KCN Bac Thang Long - Di Thang Quoc lo 2 - Dam Noi - Bach Tru - Re phai theo to chuc giao thong - Cau Soi - quay dau tai diem mo - Cau Soi - Bach Tru - Tu Lap - Lien Mac - Tien Thinh (Me Linh).
+
+@Tuyen buyt so 64 : My Dinh ⇄ Trung tam thuong mai Binh An
+
+BX My Dinh - Pham Van Dong - KCN Bac Thang Long - Cao toc Bac Thang Long Noi Bai - Quoc Lo 2 - Tinh Lo 35 - Quoc lo 3 - Pho Ni (TTTM Binh An)
+
+@Tuyen buyt so 65 : Thuy Lam ⇄ Long Bien
+
+Thuy Lam (truong tieu hoc Thuy Lam A) - Cao Lo - Viet Hung - Duc Noi - Duc Tu - Loc Ha - Quoc lo 3 - Dong Hoi - Duong 5 keo dai - Quay dau tai diem mo - Duong 5 keo dai - Cau Dong Tru - Duong 5 keo dai - Nguyen Van Cu - Cau Chuong Duong - Tran Nhat Duat - Long Bien (diem trung chuyen Long Bien)
+
+@Tuyen buyt so 66 : Ben xe Yen Nghia ⇄ Phung (Ben xe Dan Phuong)
+
+Ben xe Yen Nghia - Quang Trung (Ha Dong) - Le Trong Tan - Duong noi bo KDT Sudico Nam An Khanh - Duong qua thon An Tho, Van Lung (xa An Khanh) - Cau vuot An Khanh - Dai lo Thang Long - de Song Phuong - QL32 - Phung (Ben xe Dan Phuong)
+
+@Tuyen buyt so 67 : Phung (Ben xe Dan Phuong) ⇄ Ben xe Son Tay
+
+Phung (Ben xe Dan Phuong) - QL32 - Nguyen Thai Hoc - Duong de (di qua xa Phuong Dinh, Tho An) - Duong de (di qua cac xa Trung Chau, Van Nam, Van Phuc, Xuan Phu, Cam Dinh, Phuong Do) - Sen Chieu - Pho Cong O - Trung Vuong - Pho Duc Chinh - Phan Chu Trinh - Nguyen Thai Hoc - Quang Trung - Pho Cau Tri - Chua Thong - Ben xe Son Tay
+
+@Tuyen buyt so 68 : Ha Dong ⇄ Noi Bai
+
+Trung tam thuong mai Me Linh - Plaza Ha Dong - Buu dien Ha Dong - Hoc vien khoa hoc xa hoi - Bach hoa Thanh Xuan - Khu Do Thi Trung Hoa Nhan Chinh - Truong cao dang cong dong Ha Noi - UBND Phuong Dich Vong Hau, Quan Cau Giay- Bao tang dan toc hoc Viet Nam - Hoc vien Quoc Phong - KDT Nam Thang Long- Ga hang hoa Noi Bai - Ga T1 - San bay Noi Bai - Ga T2 - San bay Noi Bai.
+
+@Tuyen buyt so 69 : Bac Co ⇄ Duong Quang
+
+Bac Co (Diem trung chuyen xe buyt Tran Khanh du) – Tran Khanh Du – Nguyen Khoai – Cau Vinh Tuy – Co Linh – Quoc Lo 1A moi (duong duoi) – Duong 379 – Da Ton – Cau Ngoc Dong – Kieu ky - Duong Xa – Duong Quang (cho Yen My, Duong Quang, Gia Lam)
+
+@Tuyen buyt so 70A : Ben xe My Dinh ⇄ Trung Ha
+
+Pham Hung – Ho Tung Mau – Nhon – Quoc Lo 32 – Tay Son – Phan Dinh Phung – Quoc Lo 32 – Lac Tri – Quoc Lo 32 – Phung Khac Khoan – La Thanh – Phu Thinh – Quoc Lo 32.
+
+@Tuyen buyt so 70B : Ben xe My Dinh ⇄ Phu Cuong
+
+Pham Hung – Ho Tung Mau – Nhon – Quoc Lo 32 – Tay Son – Phan Dinh Phung – Quoc Lo 32 – Lac Tri – Quoc Lo 32 – Phung Khac Khoan – La Thanh – Phu Thinh – Quoc Lo 32 – Tinh Lo 93 – Tinh Lo 411B – De Song Hong.
+
+@Tuyen buyt so 72 : Ben xe Yen Nghia ⇄ Xuan Mai
+
+BX Yen Nghia - Quoc lo 6 - Cau Mai Linh - Bien Giang - Chuc Son - Phu Nghia - Xuan Mai (Cong ty thuc an chan nuoi)
+
+@Tuyen buyt so 74 : Ben xe My Dinh ⇄ Xuan Khanh
+
+Ben xe My Dinh - Pham Hung - Duong Me Tri - Le Quang Dao - Dai lo Thang Long - KCN cao Hoa Lac - Quoc lo 21 - Vien 105 - Duong 414 - Xuan Khanh - (Doi dien cong truong Dai hoc Lao dong xa hoi - Co so II)
+
+@Tuyen buyt so 78 : My Dinh ⇄ Te Tieu
+
+BX My Dinh - Pham Hung - Khuat Duy Tien - Nguyen Trai - Tran Phu – Quang Trung – Nga ba Ba La – QL 21B - Thach Bich – Binh Da – Kim Bai – Chuong – Vac – Quan Tron – Van Dinh – Hoa Xa - Thi tran Dai Nghia – BX Te Tieu
+
+@Tuyen buyt so 84 : Khu do thi My Dinh 1 ⇄ Khu do thi Linh Dam
+
+Khu do thi My Dinh I - Tran Huu Duc - Le Duc Tho - Nguyen Hoang - Pham Hung - Ben xe My Dinh - Pham Hung - Quay dau tai diem mo doi dien Landmark 72 - Pham Hung - Duong Dinh Nghe - Trung Kinh - Ha Yen - Tran Kim Xuyen - Trung Hoa - Tran Duy Hung - Quay dau tai diem mo doi dien ngo 83 Tran Duy Hung - Tran Duy Hung - Nguyen Thi Dinh - Le Van Luong - Quay dau tai nga 4 Le Van Luong, Hoang Dao Thuy - Le Van Luong - Lang - Yen Lang - Thai Ha - Tay Son - Truong Chinh - Vuong Thua Vu - Hoang Van Thai - Le Trong Tan - Duong ven song Lu - Nguyen Canh Di - Nguyen Huu Tho - Nguyen Duy Trinh - KDT Linh Dam
+
+@Tuyen buyt so 85 : Cong vien Nghia Do ⇄ Khu do thi Thanh Ha
+
+Cong vien Nghia Do - Nguyen Van Huyen - Nguyen Khanh Toan - Tran Dang Ninh - Cau Giay - Khuc Thua Du - Thanh Thai - duong ven Cong vien Cau Giay - Duong Dinh Nghe - Trung Kinh - Mac Thai To - Nguyen Chanh - Hoang Minh Giam - Le Van Luong - To Huu - Mo Lao - Nguyen Van Loc - Tran Phu (Ha Dong) - quay dau tai diem mo doi dien Big C Ha Dong - Tran Phu (Ha Dong) - Nguyen Khuyen (Ha Dong) - duong 19/5 - To Hieu (Ha Dong) - duong Ha Cau (Metro Ha Dong) - duong ven Khu do thi Van Phu - Le Trong Tan (Ha Dong) - duong Cienco5 - duong noi bo Khu do thi Thanh Ha - Khu do thi Thanh Ha (canh nha van hoa Khu do thi Thanh Ha)
+
+@Tuyen buyt so 86 : Ga Ha Noi ⇄ San bay Noi Bai
+
+Ga Ha Noi - Le Duan - Nguyen Du - Yet Kieu - Tran Hung Dao - Da Tuong - Ly Thuong Kiet - Hang Bai - Bo Ho - Tran Nguyen Han - Hang Voi - Hang Tre - Hang Muoi - Tran Nhat Duat - Diem trung chuyen Long Bien - Yen Phu (Danh rieng cho xe buyt) - Nghi Tam - Au Co - Cau Nhat Tan - Vo Nguyen Giap - Nha ga noi dia T1 (Sanh A, B, E - tang 2 ga di) - Vo Nguyen Giap - Nha ga quoc te T2 (Sanh A1, A2 - tang 2 ga di) - Cau vuot duong Vo Nguyen Giap - Vo Nguyen Giap - Quay dau tai diem mo truoc Cong ty Dich vu Hang hoa Hang khong - Cong vao BDX nha ga T1 - San bay Noi Bai (Tra khach va do tai bai do xe buyt nha ga T1 San bay Noi Bai).
+
+@Tuyen buyt so 87 : Ben xe My Dinh ⇄ Xuan Mai
+
+Ben xe My Dinh - Pham Hung - Dai lo Thang Long (duong gom) - Cau vuot Hoang Xa (thi tran Quoc Oai) - Quoc Oai - Thach Than - Tinh lo 421B - Quoc lo 6 - Thi tran Xuan Mai (Doi dien Nha may thuc an chan nuoi CP - diem cuoi tuyen 72).
+
+@Tuyen buyt so 88 : Ben xe My Dinh ⇄ Xuan Mai
+
+BX My Dinh - Pham Hung - Dai lo Thang Long (duong gom) - cau vuot Hoa Lac - Quoc lo 21B - duong Ho Chi Minh - Xuan Mai (Truong CD Cong dong Ha Tay).
+
+@Tuyen buyt so 89 : Ben xe Yen Nghia ⇄ Ben xe Son Tay
+
+Ben xe Yen Nghia - Quang Trung (Ha Dong)- Chu Van An (Ha Dong)- Van Phuc - Dai Mo - Tay Mo - Tinh Lo 72 - Thi tran Quoc Oai - Dai Lo Thang Long - Thach That - KCN Chang Son - duong tinh lo 419 (xa Dai Dong, Thach That) - Quoc lo 32 - Ben xe Son Tay
+
+@Tuyen buyt so 90 : Ben xe Kim Ma ⇄ Noi Bai
+
+Kim Ma (So 1 Kim Ma) - Giang Vo - Nui Truc - Kim Ma - Lieu Giai - Van Cao - Thuy Khue - Lac Long Quan - Nguyen Hoang Ton - Vo Chi Cong - Cau Nhat Tan - Vo Nguyen Giap - Bai do xe Nha ga noi dia T1 (tra khach tai Bai do xe T1)- Vo Nguyen Giap - Bai do xe Nha ga quoc te T2 (tra khach va do dau cuoi tai bai do xe Nha ga quoc te T2).
+
+@Tuyen buyt so 91 : Ben xe Yen Nghia ⇄ Phu Tuc
+
+Ben xe Yen Nghia - Quoc lo 6 - Ba La - Pho Xom - Quoc lo 21B (qua Thach Bich, Binh Da, thi tran Kim Bai - huyen Thanh Oai) - Tinh lo 429 (qua cac xa Quang Nguyen, Dao Tu, Phu Ha - huyen Phu Xuyen) - Phu Tuc (Phu Xuyen) - Phu Tuc (bai do xe xa Phu Tuc, huyen Phu Xuyen).
+
+@Tuyen buyt so 92 : Nhon ⇄ Tay Dang
+
+Nhon - duong Cau Dien - duong Cau Dien - Pho Nhon - Quoc lo 32 - thi tran Tay Dang (Ba Vi) - Duong 411 - Tay Dang.
+
+@Tuyen buyt so 93 : Nam Thang Long ⇄ Bac Son
+
+Nam Thang Long (diem do xe buyt tren duong do Nhuan, canh cong cong vien Hoa Binh) - Do Nhuan - quay dau tai diem mo - Do Nhuan - Pham Van Dong - cau Thang Long - Vo Van Kiet - Quoc lo 2 - Quoc lo 3 - Tinh lo 35 - duong noi xa Bac Son, Hong Ky - Bac Son (Bai do xe buyt thon Da Hoi, xa Bac Son, huyen Soc Son)
+
+@Tuyen buyt so 94 : Ben xe Giap Bat ⇄ Kim Bai
+
+Ben xe Giap Bat - Giai Phong - Kim Dong - Truong Dinh - Giai Phong - Ngoc Hoi - Cau Quan Ganh (Quoc lo 1A) - Thi tran Thuong Tin - Tinh lo 427B - Quoc lo 21B - Thi tran Kim Bai
+
+@Tuyen buyt so 95 : Nam Thang Long ⇄ Xuan Hoa
+
+Nam Thang Long – Do Nhuan - Pham Van Dong - Cau Thang Long - Vo Van Kiet - Quoc lo 2A - duong noi quoc lo 2, Duong lien thon xa Minh Tri- Cau Tre - Truong Chinh (Duong 301- Phuc Yen) - Nguyen Van Linh (Phuc Yen) - Xuan Hoa
+
+@Tuyen buyt so 96 : Cong vien Nghia Do ⇄ Dong Anh
+
+Cong vien Nghia Do - Nguyen Van Huyen - quay dau tai diem mo - Nguyen Van Huyen - Hoang Quoc Viet - vong xuyen Buoi - Buoi - Vo Chi Cong - cau Nhat Tan - Vo Nguyen Giap - Hoang Sa (QL5 keo dai) - Van Tri - Quoc lo 23 - Nam Hong - Duong 12 (qua truong THCS Bac Hong) - nga ba Bac Hong (canh cho Bac Hong) - Nguyen Khe - cau vuot Nguyen Khe (giao voi duong Vo Nguyen Giap) - duong Nguyen Khe - Le Huu Tuu - nga tu Quoc lo 3 (Nguyen Khe) - Quoc lo 3 - nga tu 1/5 (Quoc lo 3) - duong noi bo Thi tran Dong Anh (cong ty Co khi 1-5, nha may o to Co Loa, CTCP co khi Co Loa) - duong Uy No - Dong Anh (truong Cao dang Nghe Viet Nam - Han Quoc)
+
+@Tuyen buyt so 97 : Hoai Duc ⇄ Cong vien Nghia Do
+
+Hoai Duc (ben xe Hoai Duc) - Tinh lo 422 - Nga tu Son Dong - Tinh lo 422B - duong Van Canh - nga tu Canh - duong Xuan Phuong (Tinh lo 70) – Pho Trinh Van Bo - Tran Huu Duc keo dai - Tran Huu Duc - Le Duc Tho - Nguyen Hoang - Pham Hung - Duy Tan - Thanh Thai - Truong Cong Giai - Tran Quy Kien - Tran Dang Ninh - quay dau tai vong xuyen Tran Dang Ninh - Tran Dang Ninh - Nguyen Phong Sac - To Hieu - Nguyen Van Huyen - Cong Vien Nghia Do.
+
+@Tuyen buyt so 98 : Yen Phu ⇄ Aeon Mall Long Bien
+
+Yen Phu - Diem trung chuyen Long Bien - Yen Phu - Tran Nhat Duat - Cau Chuong Duong - De Xuan Quan - Ngoc Thuy - Duc Giang - Ngo Gia Tu - Nguyen Cao Luyen - Luu Khanh Dam - Hoi Xa - Vu Xuan Thieu - Thach Ban - Co Linh - Aeon Mall Long Bien.
+
+@Tuyen buyt so 99 : Kim Ma ⇄ Ngu Hiep
+
+Kim Ma (so 1 Kim Ma) - Giang Vo - Hao Nam - Hoang Cau - O Cho Dua - Xa Dan - Nam Dong - Dang Van Ngu - Pham Ngoc Thach - Dong Tac - Luong Dinh Cua - Phuong Mai - Giai Phong - Truong Chinh - Pho Vong - Nguyen An Ninh - Truong Dinh - Kim Dong - Giai Phong - Ngoc Hoi - Ngo 15 Ngoc Hoi - Tran Thu Do - Co Dien - Quang Lai - Tran Thu Do - Ngu Hiep (diem do xe buyt - UBND xa Ngu Hiep, Thanh Tri)
+
+@Tuyen buyt so 100 : Long Bien ⇄ Khu do thi Dang Xa
+
+Yen Phu - Diem trung chuyen Long Bien – Yen Phu - Tran Nhat Duat - Cau Chuong Duong - Nguyen Van Cu - Nguyen Son – Lam Ha - Ngo 200 Nguyen Son – Hoang Nhu Tiep - Co Linh – Cau vuot duong Co Linh – Co Linh - Thach Ban – Nguyen Van Linh – Nguyen Duc Thuan – Khu do thi Dang Xa – Duong noi bo DX2 - Duong vanh dai noi bo KDT Dang Xa ( Qua cac khu nha CT9B, D3, D13, D10) – KDT Dang xa (Canh San bong nha CT3 KDT Dang Xa
+
+@Tuyen buyt so 101A : Ben xe Giap Bat ⇄ Van Dinh
+
+Ben xe Giap Bat - Giai Phong - Kim Dong - Truong Dinh - Giai Phong - Ngoc Hoi - Lien Ninh - Quan Ganh - Thuong Tin - Tia - Do Xa - Nghe - Phu Xuyen - Guot - Quoc lo 1 - quay dau tai diem mo doi dien lang nghe Phu Yen - Quoc lo 1 - Hoang Quoc Viet (Tinh lo 428) - Tinh lo 428 - Cho Chay - Tran Dang Ninh (Van Dinh) - Quoc lo 21B - Van Dinh (Trung tam thuong mai thi tran Van Dinh).
+
+@Tuyen buyt so 101B : Ben xe Giap Bat ⇄ Dai Cuong
+
+BX Giap Bat -Giai Phong-Kim Dong-Truong Dinh-Ngoc Hoi-Lien Ninh-Thuong Tin-Tia-Do Xa-Phu Xuyen-Guot-QL1-Hoang Quoc Viet-Tinh lo 428-Dai Cuong
+
+@Tuyen buyt so 102 : Ben xe Yen Nghia ⇄ Van Dinh
+
+Ben xe Yen Nghia - Quang Trung (Ha Dong) - Cau Mai Linh - Bien Giang (Ha Dong) - Quoc lo 6 - Thi tran Chuc Son - Bac Son - Hoa Son - Yen Son - Tinh lo 419 - Tinh lo 429B - Quoc lo 21B - Le Loi (Van Dinh) - Van Dinh
+
+@Tuyen buyt so 103 : Ben xe My Dinh ⇄ Huong Son
+
+Ben xe My Dinh - Pham Hung - Khuat Duy Tien - To Huu - Mo Lao - Nguyen Van Loc - Nguyen Trai - Tran Phu (Ha Dong) - Phung Hung (Ha Dong) - Phuc La, Van Phu - Duong truc Nam tinh Ha Tay (Cienco 5) - duong noi truc Nam tinh Ha Tay va tinh lo 427 qua xa Tam Hung - Tinh lo 427B - Quoc lo 21B - Tinh lo 424 (DT 76) - Tinh lo 419 - Huong Son (Ben xe Duc Khe, xa Huong Son, huyen My Duc).
+
+@Tuyen buyt so 103B : Ben xe My Dinh ⇄ Hong Quang
+
+BX My Dinh – Pham Hung – Khuat Duy Tien – To Huu – Vu Trong Khanh – Nguyen Van Loc – Tran Phu – Phung Hung – duong Phuc La, Van Phu – Tinh lo 427B – QL21B – Tinh lo 425 – Hong Quang.
+
+@Tuyen buyt so 104 : My Dinh ⇄ Ben xe Nuoc Ngam
+
+My Dinh ( doi dien san van dong Quoc gia My Dinh, diem do xe buyt) – Le Duc Tho - duong vao truong Cao dang nghe Tran Hung Dao - My Dinh - Thien Hien - Pham Hung - quay dau tai doi dien Landmark 72 - Pham Hung - Duong Dinh Nghe - Trung Kinh - Vu Pham Ham - Nguyen Khang - Nguyen Ngoc Vu - Giap Nhat - Nguyen Trai - quay dau tai diem mo doi dien 144 Nguyen Trai - Nguyen Trai - Khuong Trung - Vu Tong Phan - Ngo 2 Dinh Cong Thuong - Dang Xuan Bang - Nguyen Huu Tho - Khu do thi Linh Dam - Hoang Liet - Ngoc Hoi - quay dau tai diem mo doi dien ngo 15 Ngoc Hoi - Ngoc Hoi - Ben xe Nuoc Ngam.
+
+@Tuyen buyt so 105 : Do Nghia ⇄ Cau Giay
+
+Do Nghia- Yen Lo - Le Trong Tan (Ha Dong) - Quang Trung (Ha Dong) - To Hieu (Ha Dong) - Le Hong Phong (Ha Dong) - Le Loi (Ha Dong) - Ha Tri - Da Sy - duong Phuc La, Van Phu - Phung Hung (Ha Dong) - Tran Phu (Ha Dong) - Nguyen Trai - Nguyen Tuan - Le Van Luong - Hoang Dao Thuy - Tran Duy Hung - Trung Hoa - Vu Pham Ham - Nguyen Khang - Cau Giay
+
+@Tuyen buyt so 106 : Mo Lao ⇄ Aeon Mall Long Bien
+
+KDT Mo Lao - Mo Lao - Tran Phu (Ha Dong) - Phung Hung (Ha Dong) - Cau Buou –Kim Giang( doan Thanh Liet) - Cau Quang - Bang Liet - Duong noi bo KDT Linh Dam - Hoang Liet - Ngoc Hoi - Quay dau tai diem mo doi dien ngo 83 Ngoc Hoi - Ngoc Hoi - Giai Phong - Ben xe Giap Bat - Giai Phong - Kim Dong - Tan Mai - Duong ven ho Den Lu - Duong Ho Den Lu - duong Hoang Mai - Tan Mai - Quay dau tai diem mo doi dien cho dau moi phia nam - Tan Mai - Duong noi bo KDT Vinh Hoang - Duong noi bo KCN Hoang Mai - Linh Nam - Vinh Hung - De Nguyen Khoai - Cau Vinh Tuy - Co Linh - quay dau tai diem mo nga 3 Huynh Tan Phat - Co Linh - TTTM Aeon mall Long Bien
+
+@Tuyen buyt so 107 : Kim Ma ⇄ Lang van hoa du lich cac dan toc Viet Nam
+
+Kim Ma (Toa nha PTA Kim Ma) - Giang Vo - Nui Truc - Kim Ma - Nguyen Chi Thanh - Tran Duy Hung - Dai lo Thang Long (duong gom) - Duong noi bo Khu cong nghe cao Lang Hoa Lac - Duong moi noi Khu cong nghe cao Lang Hoa Lac voi Quoc lo 21 - Quoc lo 21 - Nga 4 Hoa Lac - Duong lang van hoa ( xa Hoa Thach, xa Yen Binh huyen Thach That) - Lang van hoa du lich cac dan toc Viet Nam.
+
+@Tuyen buyt so 108 : Ben xe Thuong Tin ⇄ Minh Tan
+
+Ben xe Thuong Tin - Quoc lo 1A (Tia - Do Xa - Phu Xuyen) - Tinh lo 428 (Phia Dong) - Minh Tan (bai do xe buyt xa Minh Tan - doi dien cong lang Than Quy, huyen Phu Xuyen)
+
+@Tuyen buyt so 109 : My Dinh ⇄ Noi Bai
+
+Ben xe My Dinh – Pham Hung – quay dau tai diem mo duoi chan duong cao toc vanh dai 3 – Pham Hung - Pham Van Dong - Cau Thang Long - Vo Van Kiet - Quay dau tai diem mo (doi dien cong ty dich vu hang hoa hang khong - ACS) - Vo Van Kiet - San bay Noi Bai (San do P2, nha ga T1)
+
+@Tuyen buyt so 110 : Ben xe Son Tay ⇄ Da Chong
+
+Ben xe Son Tay - Chua Thong - Quay dau tai diem mo - Chua Thong - Tinh lo 414 (qua phuong Xuan Khanh, thi xa Son Tay; cac xa Van Hoa, Tan Linh huyen Ba Vi) - Tinh lo 414 - duong noi tinh lo 414, vuon Quoc gia Ba Vi - quay dau tai cong vao vuon Quoc gia Ba Vi - duong noi tinh lo 414, vuon Quoc gia Ba Vi - Tinh lo 414 (di qua cac xa Ba Trai, Minh Quang huyen Ba Vi) - Da Chong (Nga 3 Da Chong)
+
+@Tuyen buyt so 111 : Ben xe Son Tay ⇄ Bat Bat
+
+Ben xe Son Tay - Chua Thong - Quay dau tai diem mo - Chua Thong - nga 3 Vi Thuy - duong 423 (qua xa Thanh My, Xuan Son, Thuy An, Cam Linh, Son Da huyen Ba Vi)- Duong 91( tinh lo 413) - thi xa Son Tay - Bat Bat (diem do xe buyt - Agribank chi nhanh Son Da)
+
+@Tuyen buyt so 112 : Khu cong nghiep Bac Thang Long ⇄ Thach Da
+
+KCN Bac Thang Long - Dai Mach - De Ta Hong - Xa Thach Da - Thach Da
+
+@Tuyen buyt so 113 : Dai Thang ⇄ Ben do Vuon Chuoi
+
+Dai Thang (Phu Xuyen) - duong lien xa ( Van Hoang, Dai Thang)- QL1A - duong lien xa (Thuy Phu - Van Nhan - Nhan Vuc) - de Song Hong -Ben do Vuon Chuoi
+
+@Tuyen buyt so 115 : Thi tran Van Dinh ⇄ Xuan Mai
+
+Trung tam Thuong mai Thi tran Van Dinh - QL21B - DT429 (qua cac xa Dong Tam, Phuc Lam cua huyen My Duc; Vien An, Vien Noi, Cao Thanh, Son Cong, Dong Tien cua huyen Ung Hoa) - Duong Ho Chi Minh (qua cac xa Thuy Xuan Tien, Tan Tien, Nam Phuong Tien, Hoang Van Thu, Huu Van, My Luong, Tran Phu cua huyen Chuong My) - Xuan Mai (Truong Cao dang Cong dong Ha Tay)
+
+@Tuyen buyt so 116 : Yen Trung (Thach That) ⇄ Khu cong nghiep Phu Nghia
+
+Yen Trung (doi dien Truong THCS Yen Trung, Thach That) - DT446 (qua cac xa Yen Binh, Tien Xuan cua huyen Thach That; Dong Xuan cua huyen Quoc Oai) - Duong Vai Reo - Duong Nong Lam - Duong Phu Cat (qua cac xa Tuyet Nghia, Can Huu cua huyen Quoc Oai) - Duong Dong Son (xa Dong Son, Chuong My) - QL6 - Duong Thanh Nien (Khu cong nghiep Phu Nghia) - Duong Hanh Phuc (Khu cong nghiep Phu Nghia) - Khu cong nghiep Phu Nghia
+
+@Tuyen buyt so 117 : Hoa Lac ⇄ Nhon
+
+Hoa Lac (Truong TH School Hoa Lac) - duong noi bo khu CNC Hoa Lac - QL21A - TL419 (di qua cac xa Binh Yen, Kim Quan) - Cau Phu Thu - TL420 (di qua cac xa Phu Kim, Huong Ngai, Canh Nau, Di Nau, Lien Hiep) - TL421 (di qua cac xa Lien Hiep, Hiep Thuan) - QL32 - Phung - Troi - Nhon (Dai Hoc Cong Nghiep Ha Noi)
+
+@Tuyen buyt so 118 : Ben xe Son Tay ⇄ Tong Bat
+
+BX Son Tay - Chua Thong - QL 21A - QL 32 - Thi tran Tay Dang - tinh lo 412 (qua thi tran Tay Dang) - tinh lo 91 (xa Thuy An) - tinh lo 88 cu (qua cac thon Tam An, Vo Khuy, Dong Phuong - xa Cam Linh; thong Tong Lenh - xa Tong Bat) - tinh lo 92 - Tong Bat (cho trung tam Tong Bat)
+
+@Tuyen buyt so 119 : Hoa Lac ⇄ Bat Bat (Ba Vi)
+
+Hoa Lac (Truong TH School Hoa Lac) - Duong noi bo khu CNC Lang Hoa Lac - Quoc lo 21A - Nga tu Hoa Lac - Tien Xuan - Yen Binh - Yen Bai - Van Hoa - Tan Linh - Tinh lo 87A - Tinh lo 86 (di qua cac xa Ba Trai, Thuan My, Son Da) - Bat Bat (Ba Vi
+
+@Tuyen buyt so 122 : BX Gia Lam ⇄ KCN Bac Thang Long
+
+BX Gia Lam - Ngo Gia Kham - Ngoc Lam - Nguyen Van Cu - Ngo Gia Tu - cau Duong - Thien Duc - QL3 - De Phuong Trach - De song Hong (406) - Vong La - KCN Bac Thang Long
+
+@Tuyen buyt so 123 : BX Yen Nghia ⇄ Hong Duong (Thanh Oai)
+
+BX Yen Nghia - QL6 - Duong de qua phuong Dong Mai (Ha Dong) - Xa Cao Vien, Thanh Cao, Thanh Mai, TT Kim Bai (huyen Thanh Oai) - QL 21B - Hong Duong (Canh tram Y te xa Hong Duong)
+
+@Tuyen buyt so 124 : Ben xe Yen Nghia ⇄ Thi tran Kim Bai
+
+Ben xe Yen Nghia - Quoc lo 6 - Thi tran Chuc Son duong de (di qua cac xa Thuy Huong, Lam Dien, Hoang Dieu, Thuong Vuc, Van Vo, (Chuong My); cac xa Phuong Trung, Kim Thu (Thanh Oai) - Kim Bai (phia truoc Bach hoa tong hop thi tran Kim Bai)
+
+@Tuyen buyt so 125 : Ben xe Thuong Tin ⇄ Ben xe Te Tieu
+
+Ben xe Thuong Tin - Quoc lo 1A - Thi tran Thuong Tin - Tinh lo 427B (di qua cac xa Van Phu, Hoa Binh, Hien Giang, Thanh Thuy) - Tinh lo 429 (di qua cac xa Thanh Thuy, Thanh Van, Tan Uoc, Dan Hoa, Cao Duong, Xuan Duong, Vien An, Phuc Lam) - Tinh lo 419 (di qua cac xa Phuc Lam, My Thanh, Bot Xuyen, An My, Hong Son, Duy Thanh, Xuy Xa, Phu Luu Te) - Ben xe Te Tieu
+
+@Tuyen buyt so 126 : Ben xe Son Tay ⇄ Trung Ha (Ba Vi)
+
+BX Son Tay - Chua Thong - vong xuyen vuon hoa Quang Trung - La Thanh (Son Tay) - Le Loi (Son Tay) - De Huu Hong (qua cac xa Phu Thinh, Duong Lam, Cam Thuong, Dong Quang, Chu Minh, TT Tay Dang, Phu Chau, Phu Phuong, Chau Son, Tan Hong, Phu Cuong, Co Do, Phong Van, Thai Hoa) - Trung Ha.
+
+@Tuyen buyt so BRT01 : Ben xe Yen Nghia ⇄ Kim Ma
+
+Ben xe Yen Nghia (Quang truong ben xe Yen Nghia) - Quoc lo 6 - Ba La - Quang Trung (Ha Dong) - Le Trong Tan - To Huu - Le Van Luong - Lang Ha - Giang Vo - Giang Van Minh - Kim Ma (So 1 Kim Ma).
+
+@Tuyen buyt so CNG01 : Ben xe My Dinh ⇄ Ben xe Son Tay
+
+Ben xe My Dinh - Pham Hung - Me Tri - Chau Van Liem - Dai lo Thang Long (duong gom) - Phuong Cach - Tinh lo 421B - Tinh lo 420 - Tinh lo 419 - Quoc lo 32 - Chua Thong (Son Tay) - Ben xe Son Tay
+
+@Tuyen buyt so CNG02 : Ben xe Yen Nghia ⇄ Khu do thi Dang Xa
+
+Ben xe Yen Nghia - Quang Trung (Ha Dong) - Le Trong Tan (Ha Dong) - duong Phuc La, Van Phu - Cau Buou - Thanh Liet - Cau Dau - Nghiem Xuan Yem - Nguyen Huu Tho - Giai Phong - Ben xe Giap Bat - Giai Phong - Kim Dong - Tan Mai - Tam Trinh - Minh Khai - Cau Vinh Tuy - Dam Quang Trung - Chu Huy Man - Tran Danh Tuyen - Sai Dong - Nguyen Duc Thuan - Khu do thi Dang Xa - duong noi bo DX2 - duong vanh dai noi bo khu do thi Dang Xa (qua cac khu nha CT9B, D3, D13, D10) - Khu do thi Dang Xa (Doi dien nha CT3 Khu do thi Dang Xa)
+
+@Tuyen buyt so CNG03 : Benh vien Nhiet Doi TW ⇄ Times City
+
+Benh vien Benh nhiet doi Trung Uong co so II - Khu cong nghiep Bac Thang Long - Hoang Sa - Phuong Trach - Duong 6 km - Cau Nhat Tan - Vo Chi Cong - Buoi (duong duoi ben bo song To Lich) - Doi Can - Lieu Giai - Kim Ma - Nguyen Thai Hoc - Le Duan - Tran Hung Dao - Ba Trieu - Tran Khat Chan - Vo Thi Sau - Thanh Nhan - Kim Nguu - Cau Mai Dong - Minh Khai – Khu do thi Times City (Benh vien Vinmec)
+
+@Tuyen buyt so CNG04 : Kim Lu ⇄ Nam Thang Long
+
+Kim Lu (canh chan cau vuot duong Noi Bai - Ha Long, Soc Son) - de Luong Phuc - duong 16 (qua cac xa Xuan Duong, Xuan Ky, Phu Tho) - Quoc lo 3 - Quoc lo 23 - Van Tri - duong Hoang Sa - quay dau tai diem mo - duong Hoang Sa - Phuong Trach - Duong 6 km (Vinh Ngoc) - duong dan len cau Thang Long - cong B khu cong nghiep Bac Thang Long - cau Thang Long - Pham Van Dong - quay dau tai diem mo doi dien OCT3 khu do thi Handivesco - Pham Van Dong - Do Nhuan - Nam Thang Long (diem do xe buyt tren duong Do Nhuan, canh cong cong vien Hoa Binh)
+
+@Tuyen buyt so CNG05 : Cau Giay ⇄ Tam Hiep
+
+Cau Giay (Bai do xe Cau Giay) - Cau Giay (duong tren) - Diem trung chuyen Cau Giay (he truoc tuong rao vuon thu Ha Noi) - Cau Giay - Duong Lang - Nga Tu So - Nguyen Trai - Nguyen Xien - Nghiem Xuan Yem - Thanh Liet - Cau Buou - Phan Trong Tue - ngo 190 Phan Trong Tue - duong vao UBND xa Tam Hiep - Tam Hiep (truoc san bong Dinh Cung, xa Tam Hiep, Thanh Tri).
+
+@Tuyen buyt so CNG06 : Nhon ⇄ Tho An
+
+Nhon (Diem trung chuyen xe buyt Nhon) - Cau Dien - Tay Tuu - Ky Vu - Chau Dai - Tan Hoi - duong qua trung tam the thao Dan Phuong - Quoc lo 32 - Nguyen Thai Hoc (Dan Phuong) - duong 417 - de Huu Hong - duong vao ben pha Tho An - Tho An (Ben pha Tho An, xa Tho An, huyen Dan Phuong).
+
+@Tuyen buyt so CNG07 : Ben xe Yen Nghia ⇄ Hoai Duc
+
+Ben xe Yen Nghia - Quang Trung (Ha Dong) - Quoc lo 6 - cau Mai Linh - Bien Giang - Phuong Bai - chua Tram - duong 419 - chua Tram Gian - duong 419 - thi Tran Quoc Oai - cau Vuot Hoang Xa - duong ven khu do thi Sunny Garden - duong noi bo Tuan Chau Ecopark - duong vanh dai khu di tich Chua Thay - duong 421B - de Song Phuong - duong 422 - nga tu Son Dong - duong 422 - Quoc lo 32 - Hoai Duc (Ben xe Hoai Duc)
+
+@Tuyen buyt so 202 : Ha Noi ⇄ Hai Duong
+
+BX Gia Lam – Ngo Gia Kham – Ngoc Lam – Nguyen Van Cu – Cau Chui – Nguyen Van Linh – Nhu Quynh – Ban – Pho Noi – Quan Goi – nga ba Hoang Long – nga tu May Su – Le Thanh Nghi – Thong Nhat – Bach Dang – Tran Hung Dao – Hong Quang – BX Hai Duong.
+
+@Tuyen buyt so 203 : Ha Noi ⇄ Bac Giang
+
+BX Giap Bat – Giai Phong – Kim Dong – Giai Phong – Phap Van – Nguyen Khoai – Tran Khanh Du – Tran Quang Khai – Tran Nhat Duat – Nguyen Van Cu – Cau Chui – Ngo Gia Tu – Cau Duong – Ha Huy Tap – Yen Vien – Doc La – Tu Son – Lim – Thi xa Bac Ninh – Thi Cau – Tam Tang – Cho Nenh – Hong Thai – Thanh pho Bac Giang – Xuong Trach – BX Bac Giang
+
+@Tuyen buyt so 204 : Ha Noi ⇄ Bac Ninh
+
+Long Bien - Cau Chuong Duong - Nguyen Van Cu - Nguyen Van Linh - Quoc Lo 5 - Nga 4 Phu Thi - Duong 181 - Pho Sui - Keo - Kim Son - Chua Keo - Pho Toan Thang(KCN Hapro) - Duc Hiep - Xuan Lam - Ha Man - Chua Dau - Thanh Hoai (Thanh Khuong) - Tam A(Gia Dong) - Pho Kham(Gia Dong) - Thi tran Ho(Thuan Thanh).
+
+@Tuyen buyt so 205 : Ha Noi ⇄ Hung Yen
+
+BX Nuoc Ngam – Phap Van – Nguyen Khoai – Tran Khanh Du – Tran Quang Khai (de tren)- Cau Chuong Duong – Nguyen van Cu – Nguyen Van Linh- Quoc lo 5 – Nhu Quynh – Pho Noi – Duong 39 – Lieu Xa – Tan Lap – Yen My – Trung Hung – Minh Chau – Bo Thoi – Truong Xa – Luong Bang – Nguyen Van Linh(Hung Yen)- BX Hung Yen – Dien Bien (Hung Yen) – Bai Say – Bo ho Ban Nguyet (Thi xa Hung Yen).
+
+@Tuyen buyt so 206 : Ha Noi ⇄ Phu Ly
+
+BX Giap Bat – Giai Phong – Ngoc Hoi – Van Dien – Quoc lo 1 – Quan Ganh – Thuong Tin – Tia – Do Xa – Nghe – So – Phu Xuyen – Guot – Cau Gie – Dong Van – Ba Da – Noi Thi Phu Ly – BX Phu Ly.
+
+@Tuyen buyt so 207 : Ha Noi ⇄ Van Giang
+
+BX Giap Bat ➙ Giai Phong ➙ Phap Van ➙ Tam Trinh ➙ Minh Khai ➙ Vinh Tuy ➙ De Nguyen Khoai ➙ Tran Khanh Du ➙ Tran Quang Khai ➙ Tran Nhat Duat ➙ Nguyen Van Cu ➙ Nguyen Van Linh ➙ Phu Thi ➙ Kieu Ky ➙ Duong 179 ➙ Thi tran Van Giang
+
+@Tuyen buyt so 208 : Ben xe Giap Bat ⇄ Ben xe Hung Yen
+
+BX Giap Bat - Giai Phong - Kim Dong - Giai Phong - Ngoc Hoi - Phap Van - Yen So - Nguyen Tam Trinh - Minh Khai - Vinh Tuy - Nguyen Khoai - Tran Khanh Du - Tran Quang Khai - Cau Chuong Duong - Nguyen Van Cu - Nguyen Van Linh - Nguyen Duc Thuan - Quoc lo 5 - Ban - Khoai Chau - Duc Hop - Duong 195 - Ben xe Hung Yen
+
+@Tuyen buyt so 209 : Ben xe Trieu Duong ⇄ Ben xe Giap Bat
+
+Trieu Duong - TP Hung Yen - TT Hoa Mac - Dong Van - Cau Gie - BX Giap Bat
+
+@Tuyen buyt so 210 : Ben xe Gia Lam ⇄ Ben xe Hiep Hoa
+
+Ben xe Gia Lam - Nguyen Van Cu - Ha Huy Tap - Cau Duong - Yen Vien - Thi xa Tu Son - Cau Dong Xuyen - Tinh lo 295 - Ben xe Hiep Hoa
+
+@Tuyen buyt so 212 : Ben xe My Dinh ⇄ Ben xe Que Vo
+
+Ben xe My Dinh - Pham Hung - Pham Van Dong - cau Thang Long – duong Vo Van Kiet - quoc lo 18 - KCN Yen Phong - quoc lo 18 - quoc lo 1 - cau Bo Son - duong Nguyen Trai - duong Ly Thai To - duong Tran Hung Dao - cau Dai Phuc - quoc lo 18 diem cuoi la Ben xe Que Vo
+
+@Tuyen buyt so 213 : Ben xe Binh An ⇄ Ben xe Yen Nghia
+
+Ben xe khach Binh An (thanh pho Hoa Binh) – Cau Hoa Binh – Duong Cu Chinh Lan – Duong An Duong Vuong – Duong Tran Hung Dao – Ben xe khach Trung tam Hoa Binh – Duong Tran Hung Dao – Quoc lo 6 – Khu Cong nghiep Luong Son – Quoc lo 6 – Xuan Mai – Chuc Son – Ben xe Yen Nghia
+
+@Tuyen buyt so 214 : Ben xe Yen Nghia ⇄ Ben xe Ha Nam
+
+Ben Xe Yen Nghia - Quang Trung - Duong 70 - QL1A - Duong 427 Thuong Tin - Cao Toc Phap Van Cau Re - Nut Giao Vuc Vong - Nguyen Huu Tien - Dong Van - QL1A - Le Hoan - Dinh Tien Hoang - Le Duan - Benh Vien Bach Mai CS2 - Ben Xe Trung Tam Ha Nam

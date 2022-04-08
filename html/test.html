@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Day la tieu de</title>
+    <link rel="shortcut icon" href="./title.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="test.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+</head>
+<style>
+    button {
+        color: rgb(107, 46, 46);
+        background-color: #F0F8FF;
+        border: 2px solid rgb(226, 226, 226);
+    }
+
+    .class1 {
+        color: aquamarine;
+        background-color: rgb(30, 106, 168);
+    }
+
+    .class2 {
+        color: rgb(156, 34, 91);
+    }
+</style>
+
+<body>
+    <p>
+        <i><b>Live Server</b> </i>
+        là một tiện ích giúp biến máy tính của bạn thành một máy chủ web đơn giản.
+    </p>
+    <a href="#button1" id="top">Xuong duoi</a>
+    <p>
+    <ol type="I">
+        Bạn có thể xem kết quả hoặc test trang web của mình ngay trên trình duyệt hoặc từ một thiết bị khác cùng kết nối
+        chung mạng LAN, ví dụ như: <li><u>smartphone</u></li>
+        <li>stupidphone</li><br />Điểm đặc biệt của ứng dụng này là trang web trên trình duyệt sẽ tự động tải
+        lại khi
+        bạn lưu file *.html.
+        <li><a href="./image.jpg">Day la anh</a></li>
+        <img class="img1" src="./image.jpg" usemap="#image1" alt="image1">
+        <map name="image1">
+            <area shape="circle" coords="610,400,250" href="./image.jpg" />
+            <area shape="rect" coords=" 30,30,90,90" href="./tailieu.html" />
+        </map>
+        <li><a href="./tailieu.html">Day la tai lieu</a></li>
+        <li><a href="https://www.youtube.com/watch?v=aYKTd4EkR5I&list=PLLAJJPGNwNkghoNSB9xq22EJ_Z1rX7Ygs&index=3">Day la
+                len ket</a></li>
+    </ol>
+    </p>
+    <video controls="controls">
+        <source src="./video.mp4" type="video/mp4" />
+    </video>
+    <form>
+        <p>
+        <h1> Đây là TEXTBOX</h1><br />
+        <input type="text" />
+        </p>
+        <p>
+        <h2> Đây là CHECKBOX </h2>
+        <h3> Đây là CHECKBOX </h3>
+        <h2> Đây là CHECKBOX </h2><br />
+        <h2> Đây là CHECKBOX </h2><br />
+        <input type="checkbox" checked="checked" />
+        <p>
+            Đây là RADIOCHECKBOX <br />
+            <input type="radio" name="gioi tinh" checked="checked" />Nam<br />
+            <input type="radio" name="gioi tinh" />Nữ
+        </p>
+        Đây là nút chọn FILE <br />
+        <input type="file" />
+        </p>
+        <p>
+            Day la <abbr>DL</abbr>
+            <select>
+                <optgroup label="chose">
+                    <option> a</option>
+                    <option> b</option>
+                    <option> c</option>
+                    <option> c</option>
+                    <option> a</option>
+                </optgroup>
+            </select>
+        </p>
+        <p>
+            Đây là DropDown List <br />
+            <select>
+                <optgroup label="Nhóm 1">
+                    <option class="class1"> Giá trị 1</option>
+                    <option> Giá trị 2</option>
+                    <option> Giá trị 3</option>
+                </optgroup>
+            </select>
+        </p>
+        <p>
+            The <abbr title="World Health Organization">WHO</abbr> was founded in 1948.
+        </p>
+        <p>
+            <button title="Save file" ">
+                save
+            </button>
+        </p>
+        <p>
+        <article>
+            <h2 class=" class2">
+                Google Chrome
+                </h2>
+                <p onclick=" myFunction()" id="demo">
+                    Google Chrome is a web browser developed by Google, released in 2008.
+                    Chrome is
+                    the world's most popular
+                    web browser today!
+                </p>
+                </article>
+
+                <article>
+                    <h2 class="fonttest">Mozilla Firefox</h2>
+                    <p>Mozilla Firefox is an open-source web browser developed by Mozilla. Firefox has been the second
+                        most
+                        popular web browser since January, 2018.</p>
+                </article>
+
+                <article>
+                    <h2><i>Microsoft Edge</i></h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro culpa fugiat sit alias voluptas
+                        ratione
+                        ipsam inventore? Quibusdam, iure quos quaerat, distinctio itaque vitae unde dignissimos nisi
+                        eius omnis
+                        quas.</p>
+                </article>
+        </p>
+        <p>
+            <textarea class="class1" cols="100" rows="15"></textarea>
+        </p>
+        <table>
+            <tr>
+                <th>Month</th>
+                <th>Savings</th>
+            </tr>
+            <tr>
+                <td>January</td>
+                <td>$100 </td>
+            </tr>
+        </table><br \>
+        <form action="tailieu.html" method="get">
+            <label for="fname">First name:</label>
+            <input value="name" type="text" id="fname" name="fname"><br><br>
+            <label for="lname">Last name:</label>
+            <input type="text" id="lname" name="lname"><br><br>
+            <button onclick="testFunction()">Button</button><br>
+            <!-- <input type="submit" value="Submit"> -->
+        </form><br>
+        <form action="tailieu.html">
+            <input type="submit" value="Click here">
+        </form>
+    </form>
+    Field1: <input type="text" id="field1" value="Hello World!"><br>
+    Field2: <input type="text" id="field2"><br><br>
+    <button id="button1" onclick="myFunction1()">Copy Text</button><br>
+    <a href="#top">Len tren</a><br>
+    <e class="fa fa-address-book bigfont"> </e>
+    <e class="fa fa-address-book bigfont"> </e>
+    <e class="fa fa-address-book bigfont"> </e>
+    <e class="fa fa-address-book bigfont"> </e>
+    <e class="fa fa-address-book bigfont"> </e>
+    <e class="fa fa-address-book bigfont"> </e>
+    <e class="fa fa-address-book bigfont"> </e>
+    <e class="fa fa-address-book bigfont"> </e>
+    <e class="fa fa-address-book bigfont"> </e>
+    <e class="fa fa-address-book bigfont" onclick="testFunction()"> </e>
+    <p>A function is triggered when the button is clicked. The function copies the text from Field1 into Field2.</p>
+
+    <script>
+        function myFunction1() {
+            document.getElementById("field2").value = document.getElementById("field1").value;
+            alert(document.getElementById("field1").value + " was copied");
+        }
+        function myFunction() {
+            if (document.getElementById("demo").style.color == "red")
+                document.getElementById("demo").style.color = "white";
+            else
+                document.getElementById("demo").style.color = "red";
+        }
+        function testFunction() {
+            document.getElementById("lname").value = document.getElementById("fname").value;
+        }
+    </script>
+</body>
+
+</html>

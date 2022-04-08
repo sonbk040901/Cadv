@@ -1,0 +1,722 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 5. B Tree Test Harness</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="index.html" title="B Tree: Library for indexed file management" /><link rel="prev" href="ch04.html" title="Chapter 4. Error Messages" /><link rel="next" href="ch06.html" title="Chapter 6. B Tree Recovery" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 5. B Tree Test Harness</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch04.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch06.html">Next</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a id="TestHarness"></a>Chapter 5. B Tree Test Harness</h1></div></div></div><p>
+      The B Tree library is distributed with a test harness,
+      <span class="command"><strong>bt</strong></span>, which exercises all of the functions
+      supplied by the B Tree library.
+    </p><p>
+      Most <span class="command"><strong>bt</strong></span> commands correspond directly to a
+      matching B Tree library function call.  Additional commands are
+      available to automate testing scripts and manage concurrently
+      open files.  <span class="command"><strong>bt</strong></span> reads from stdin and writes
+      normal output to stdout.  Terminal error messages go to stderr.
+      A prompt of <span class="emphasis"><em>bt: </em></span>is issued prior to reading
+      from stdin.  Long running commands may be interrupted using
+      cntrl-c, which will return to the command prompt.
+    </p><p>
+      <span class="command"><strong>bt</strong></span> is built with GNU readline support, if
+      readline libraries and include files are detected when building
+      the BT library and supporting tools.  Readline enables
+      <span class="command"><strong>bt</strong></span> to offer command editing, command history
+      and file completion.  More information on the capabilities
+      provided by readline can be found in the <a class="ulink" href="http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html#Documentation" target="_top"><span class="command"><strong>full
+          GNU documentation</strong></span></a>.
+    </p><p>
+      A typical <span class="command"><strong>bt</strong></span> session might look like:
+    </p><pre class="programlisting">
+      $ bt
+      bt: c test
+      bt: d newkey 55
+      bt: f newkey
+      Key: 'newkey' = 55
+      bt: dd datakey some_text_string
+      bt: fd datakey
+      Data returned: 'some_text_string'
+      bt: fd datakey d
+      some_text_string
+      bt: b abuf 512
+      bt: dd bufkey *abuf
+      bt: fd bufkey
+      Data record: 
+      aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      aaaaaaaaaaaaaaaaaaaaaaaaa'
+      bt: sd bufkey
+      Key 'bufkey' record size: 512 bytes
+      bt: q
+      $ 
+    </pre><p>
+      <span class="command"><strong>bt</strong></span> commands have a both a full and
+      abbreviated versions.  The descriptions below show the full
+      command first, followed by the abbreviated version (comma
+      separated).  A command may optionally be followed by an argument
+      and a qualifier.  The following table lists the commands
+      supported by <span class="command"><strong>bt</strong></span>:
+    </p><div class="table"><a id="idm1261"></a><p class="title"><strong>Table 5.1. B Tree Commands</strong></p><div class="table-contents"><table class="table" summary="B Tree Commands" border="0"><colgroup><col align="left" class="c1" /><col align="left" class="c2" /><col align="left" class="c3" /></colgroup><tbody valign="top"><tr><td colspan="3" align="left" valign="top"><a id="b"></a> 
+              <div class="cmdsynopsis"><p><code class="command">buffer,b</code>   
+                  <em class="replaceable"><code>bufname</code></em>
+                  { 
+                    <em class="replaceable"><code>size</code></em>
+                    |   
+                    <em class="replaceable"><code>filename</code></em>
+                   }</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Buffer: Creates a data buffer called
+                <span class="emphasis"><em>bufname</em></span>.  If the numeric
+                <span class="emphasis"><em>size</em></span> argument is given, the
+                buffer is created with that number of bytes.  The
+                buffer is filled with the first character of the
+                <span class="emphasis"><em>bufname</em></span>.  If the
+                <span class="emphasis"><em>size</em></span> argument is non-numeric, it
+                is assumed to be a file name, and the contents of the
+                file are read into the buffer.  The data buffer can
+                subsequently be specified as data for a <a class="link" href="ch05.html#dd"><span class="command"><strong>define-data</strong></span></a> command.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="bd"></a> 
+              <div class="cmdsynopsis"><p><code class="command">buffer-delete,bd</code>   
+                  <em class="replaceable"><code>bufname</code></em>
+                 </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Buffer Delete: Deletes an existing data buffer
+                identified by <span class="emphasis"><em>bufname</em></span>.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="bl"></a> 
+              <div class="cmdsynopsis"><p><code class="command">buffer-list,bl</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Buffer List: Lists the names of the currently defined
+                data buffers on stdout.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="co"></a> 
+              <div class="cmdsynopsis"><p><code class="command">check-order,co</code>  [s] [c]</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Check Order: Checks the lexicographic order of keys in
+                the current root, starting from the current position
+                within the BTree.  If the s argument is given, the
+                check is performed from the first key of the BTree
+                index.
+              </p>
+              <p>
+                If a disordered index is discovered, the keys at fault
+                are displayed.  Otherwise,
+                <span class="command"><strong>check-order</strong></span> is silent, unless the c
+                argument is specified, which causes the number of keys
+                checked to be displayed.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="c"></a> 
+              <div class="cmdsynopsis"><p><code class="command">create,c</code>   
+                  <em class="replaceable"><code>filename</code></em>
+                  [s]</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Create file: Creates a new B Tree file.  If a file of
+                the same name already exists, it will be silently
+                overwritten.  If the <span class="emphasis"><em>s</em></span> qualifier
+                is given, the file will be created in shared mode.
+                The newly created B Tree file becomes the current
+                file; use the <a class="link" href="ch05.html#fl"><span class="command"><strong>file-list</strong></span></a> command to
+                view the list of open files.</p></td></tr><tr><td colspan="3" align="left" valign="top"><a id="cr"></a> 
+              <div class="cmdsynopsis"><p><code class="command">change-root,cr</code>   
+                  <em class="replaceable"><code>rootname</code></em>
+                 </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Change Root: Switches the current root to the root
+                named <span class="emphasis"><em>rootname</em></span> in the in-use B
+                Tree file.  If switch is successful,
+                <span class="emphasis"><em>rootname</em></span> becomes the current
+                root.  All subsequent key and/or data operations will
+                take place against <span class="emphasis"><em>rootname</em></span>.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="x"></a>
+              <div class="cmdsynopsis"><p><code class="command">close,x</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Close: Closes the in-use B Tree file.  The next
+                available open file, if one exists, is automatically
+                made the in-use B Tree file.  If there are no
+                candidate B Tree files, a warning message is
+                issued. 
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="d"></a> 
+              <div class="cmdsynopsis"><p><code class="command">define,d</code>   
+                  <em class="replaceable"><code>key</code></em>
+                  [
+                  <em class="replaceable"><code>value</code></em>
+                ]</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Define key: Defines a new key in the current root of
+                the in-use B Tree index file.  The new key name is
+                defined by <span class="emphasis"><em>key</em></span>, and is assigned
+                <span class="emphasis"><em>value</em></span>.  If
+                <span class="emphasis"><em>value</em></span> is omitted, zero is
+                assumed.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="da"></a> 
+              <div class="cmdsynopsis"><p><code class="command">data-address,da</code>   
+                  <em class="replaceable"><code>
+                    key
+                  </code></em>
+                  [
+                    i
+                ]</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Data Address: Prints, in a decoded form, the data
+                segment address associated with
+                <span class="emphasis"><em>key</em></span>.  If the
+                <span class="emphasis"><em>i</em></span> qualifier is given, the
+                <span class="emphasis"><em>key</em></span> is interpreted as data
+                segment address in integer form and decoded
+                immediately.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="dd"></a> 
+              <div class="cmdsynopsis"><p><code class="command">define-data,dd</code>   
+                  <em class="replaceable"><code>key</code></em>
+                  { 
+                    <em class="replaceable"><code>string</code></em>
+                    |   
+                    <em class="replaceable"><code>*bufname</code></em>
+                   }</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Define key with Data: Defines a new key with an
+                associated data record in the current root of the
+                in-use B Tree index file.  <span class="emphasis"><em>key</em></span>
+                defines the key name.  Data can be provided in one of
+                two ways: either a plain string or the name of a
+                previously defined buffer can be specified.  If the
+                latter, it should be indicated by a leading
+                <span class="emphasis"><em>*</em></span>. 
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="dr"></a> 
+              <div class="cmdsynopsis"><p><code class="command">define-root,dr</code>   
+                  <em class="replaceable"><code>rootname</code></em>
+                 </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Define Root: Creates a new B Tree index root, named
+                <span class="emphasis"><em>rootname</em></span> in the currently
+                selected B Tree file.  If creation is successful, the
+                current root becomes the new root.  All subsequent key
+                and/or data operations will take place against the new
+                root. 
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="dups"></a> 
+              <div class="cmdsynopsis"><p><code class="command">duplicates,dups</code>  { on  |   off }</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Duplicates: Sets or unsets support for duplicate keys
+                in the current root. When <span class="emphasis"><em>on</em></span> is
+                specified, duplicate keys are permitted.  When
+                <span class="emphasis"><em>off</em></span>, duplicate keys are not
+                permitted .
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="echo"></a> 
+              <div class="cmdsynopsis"><p><code class="command">echo,ec</code>  {[on] |  [off]}</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Echo: When <span class="command"><strong>echo</strong></span> is
+                <span class="emphasis"><em>on</em></span>, commands read from an <a class="link" href="ch05.html#e"><span class="command"><strong>execute</strong></span></a> file are
+                echoed to stdout.  If <span class="emphasis"><em>off</em></span>, no
+                echo is performed.
+              </p>
+              <p>
+                If no argument is given to <span class="command"><strong>echo</strong></span>,
+                the current status of the echo setting is displayed.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="error"></a> 
+              <div class="cmdsynopsis"><p><code class="command">error,er</code>  {[on] |  [off]}</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Error: When <span class="command"><strong>error</strong></span> is
+                <span class="emphasis"><em>on</em></span>, an execution error while
+                reading commands from an <a class="link" href="ch05.html#e"><span class="command"><strong>execute</strong></span></a> file
+                will cause termination of the execute file.  If
+                <span class="emphasis"><em>off</em></span>, command execution will
+                continue when errors are encountered.
+              </p>
+              <p>
+                If no argument is given to <span class="command"><strong>error</strong></span>,
+                the current status of the error setting is displayed.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="e"></a> 
+              <div class="cmdsynopsis"><p><code class="command">execute,e</code>   
+                  <em class="replaceable"><code>filename</code></em>
+                 </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Execute: Causes commands to be read and executed from
+                the file denoted by <span class="emphasis"><em>filename</em></span>.
+                <span class="command"><strong>execute</strong></span> commands can be nested,
+                currently up to five deep. No command prompts will be
+                issued while reading commands from a file.
+              </p>
+              <p>
+                See also the <a class="link" href="ch05.html#echo"><span class="command"><strong>echo</strong></span></a> and
+                  <a class="link" href="ch05.html#error"><span class="command"><strong>error</strong></span></a>
+                  command descriptions for more information on
+                  execution control when reading commands from a file.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="f"></a> 
+              <div class="cmdsynopsis"><p><code class="command">find,f</code>  [
+                  <em class="replaceable"><code>key</code></em>
+                ]</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Find: Attempts to locate <span class="emphasis"><em>key</em></span> in
+                the current root of the in-use B Tree index file.  If
+                found, the value associated with the key is
+                printed.
+              </p>
+              <p>
+                If <span class="emphasis"><em>key</em></span> is omitted, the index is
+                positioned prior to the first key (like <a class="link" href="ch05.html#pos"><span class="command"><strong>position</strong></span></a>
+                <span class="emphasis"><em>s</em></span>).
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="fd"></a>
+              <div class="cmdsynopsis"><p><code class="command">find-data,fd</code>   
+                  <em class="replaceable"><code>key</code></em>
+                  [d]</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Find Data: Attempts to locate <span class="emphasis"><em>key</em></span>
+                in the current root of the in-use B Tree index file.
+                If found, the first 80 bytes of the data record
+                associated with the key is displayed.  If the
+                <span class="emphasis"><em>d</em></span> qualifier is given, the whole
+                of the data record is displayed.  Note that the data
+                record is displayed as character data; control
+                characters or escape sequences in the data record
+                could cause strangenesses on
+                display.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="fl"></a>
+              <div class="cmdsynopsis"><p><code class="command">file-list,fl</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                File List: Lists the set of open B Tree index files.
+                To change the current file, issue a <a class="link" href="ch05.html#u"><span class="command"><strong>use</strong></span></a>
+                command.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="l"></a>
+              <div class="cmdsynopsis"><p><code class="command">list,l</code>  [c]</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                List: Displays all key and associated value, starting
+                from the current key in the current root of the in-use
+                B Tree index file.  The current key is set by the last
+                <a class="link" href="ch05.html#f"><span class="command"><strong>find</strong></span></a>,
+                <a class="link" href="ch05.html#fd"><span class="command"><strong>find-data</strong></span></a>,
+                <a class="link" href="ch05.html#n"><span class="command"><strong>next</strong></span></a>,
+                <a class="link" href="ch05.html#nd"><span class="command"><strong>next-data</strong></span></a>,
+                <a class="link" href="ch05.html#prv"><span class="command"><strong>previous</strong></span></a>
+                or <a class="link" href="ch05.html#pd"><span class="command"><strong>previous-data</strong></span></a>
+                command.
+              </p>
+              <p>
+                If the <span class="emphasis"><em>c</em></span> argument is given, the
+                count of keys listed will be displayed in addition.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="ld"></a>
+              <div class="cmdsynopsis"><p><code class="command">list-data,ld</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                List Data: Displays all keys, and associated data
+                records, starting from the current key in the current
+                root of the in-use B Tree index file.  The current key
+                is set by the last <a class="link" href="ch05.html#f"><span class="command"><strong>find</strong></span></a>, <a class="link" href="ch05.html#fd"><span class="command"><strong>find-data</strong></span></a>, <a class="link" href="ch05.html#n"><span class="command"><strong>next</strong></span></a>, <a class="link" href="ch05.html#nd"><span class="command"><strong>next-data</strong></span></a> <a class="link" href="ch05.html#prv"><span class="command"><strong>previous</strong></span></a> or <a class="link" href="ch05.html#pd"><span class="command"><strong>previous-data</strong></span></a> command.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="ldp"></a>
+              <div class="cmdsynopsis"><p><code class="command">list-data-prev,ldp</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                List Data Previous: Displays all keys, and associated data
+                records, prior to the current key in the current
+                root of the in-use B Tree index file.  The current key
+                is set by the last <a class="link" href="ch05.html#f"><span class="command"><strong>find</strong></span></a>, <a class="link" href="ch05.html#fd"><span class="command"><strong>find-data</strong></span></a>, <a class="link" href="ch05.html#n"><span class="command"><strong>next</strong></span></a>, <a class="link" href="ch05.html#nd"><span class="command"><strong>next-data</strong></span></a> <a class="link" href="ch05.html#prv"><span class="command"><strong>previous</strong></span></a> or <a class="link" href="ch05.html#pd"><span class="command"><strong>previous-data</strong></span></a> command.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="lp"></a>
+              <div class="cmdsynopsis"><p><code class="command">list-prev,lp</code>  [c]</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                List Previous: Displays all keys, and associated value,
+                prior to the current key in the current root of the
+                in-use B Tree index file.  The current key is set by
+                the last <a class="link" href="ch05.html#f"><span class="command"><strong>find</strong></span></a>, <a class="link" href="ch05.html#fd"><span class="command"><strong>find-data</strong></span></a>,
+                <a class="link" href="ch05.html#n"><span class="command"><strong>next</strong></span></a>,
+                <a class="link" href="ch05.html#nd"><span class="command"><strong>next-data</strong></span></a>, 
+                <a class="link" href="ch05.html#prv"><span class="command"><strong>previous</strong></span></a>
+                or <a class="link" href="ch05.html#pd"><span class="command"><strong>previous-data</strong></span></a>
+                command.
+              </p>
+              <p>
+                If the <span class="emphasis"><em>c</em></span> argument is given, the
+                count of keys listed will be displayed in addition.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="lko"></a>
+              <div class="cmdsynopsis"><p><code class="command">list-keys-only,lko</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                List Keys Only: Displays all keys, but not associated
+                value, starting from the current key in the current
+                root of the in-use B Tree index file.  The current key
+                is set by the last <a class="link" href="ch05.html#f"><span class="command"><strong>find</strong></span></a>, <a class="link" href="ch05.html#fd"><span class="command"><strong>find-data</strong></span></a>, <a class="link" href="ch05.html#n"><span class="command"><strong>next</strong></span></a>, <a class="link" href="ch05.html#nd"><span class="command"><strong>next-data</strong></span></a>, <a class="link" href="ch05.html#prv"><span class="command"><strong>previous</strong></span></a> or <a class="link" href="ch05.html#pd"><span class="command"><strong>previous-data</strong></span></a> command.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="lk"></a>
+              <div class="cmdsynopsis"><p><code class="command">lock,lk</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Lock: Acquires exclusive access to the in-use B Tree
+                file which was originally opened in shared mode.  If
+                the file was opened in exclusive mode (the default),
+                <span class="command"><strong>lock</strong></span> will have no
+                effect.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="n"></a>
+              <div class="cmdsynopsis"><p><code class="command">next,n</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Next: Displays the key following the current key in
+                the current root of the in-use B Tree index file.  The
+                current key is set by the last <a class="link" href="ch05.html#f"><span class="command"><strong>find</strong></span></a>, <a class="link" href="ch05.html#fd"><span class="command"><strong>find-data</strong></span></a>,
+                <a class="link" href="ch05.html#n"><span class="command"><strong>next</strong></span></a>,
+                <a class="link" href="ch05.html#nd"><span class="command"><strong>next-data</strong></span></a>,
+                <a class="link" href="ch05.html#prv"><span class="command"><strong>previous</strong></span></a>
+                or <a class="link" href="ch05.html#pd"><span class="command"><strong>previous-data</strong></span></a>
+                command.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="nd"></a>
+              <div class="cmdsynopsis"><p><code class="command">next-data,nd</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Next Data: Displays the key and associated data record
+                following the current key in the current root of the
+                in-use B Tree index file.  The current key is set by
+                the last <a class="link" href="ch05.html#f"><span class="command"><strong>find</strong></span></a>, <a class="link" href="ch05.html#fd"><span class="command"><strong>find-data</strong></span></a>,
+                <a class="link" href="ch05.html#n"><span class="command"><strong>next</strong></span></a>,
+                <a class="link" href="ch05.html#nd"><span class="command"><strong>next-data</strong></span></a>,
+                <a class="link" href="ch05.html#prv"><span class="command"><strong>previous</strong></span></a>
+                or <a class="link" href="ch05.html#pd"><span class="command"><strong>previous-data</strong></span></a>
+                command.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="o"></a>
+              <div class="cmdsynopsis"><p><code class="command">open,o</code>   
+                  <em class="replaceable"><code>filename</code></em>
+                  [s]</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Open: Opens the existing B Tree file identified by
+                <span class="emphasis"><em>filename</em></span>.  If the optional
+                <span class="emphasis"><em>s</em></span> qualifier is given, the file
+                will be opened in shared mode.  More than one B Tree
+                index file may be open currently; the newly opened
+                file is made the in-use B Tree file.  The in-use file
+                may be changed by the <a class="link" href="ch05.html#u"><span class="command"><strong>use</strong></span></a> command, while
+                the list of open files is displayed through the <a class="link" href="ch05.html#fl"><span class="command"><strong>file-list</strong></span></a>
+                command. 
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="or"></a>
+              <div class="cmdsynopsis"><p><code class="command">open-readonly,or</code>   
+                  <em class="replaceable"><code>filename</code></em>
+                  [s]</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Open Readonly: Opens the existing B Tree file identified by
+                <span class="emphasis"><em>filename</em></span> in read-only mode.  If
+                the optional <span class="emphasis"><em>s</em></span> qualifier is
+                given, the file will be opened in shared mode.  More
+                than one B Tree index file may be open currently; the
+                newly opened file is made the in-use B Tree file.  The
+                in-use file may be changed by the <a class="link" href="ch05.html#u"><span class="command"><strong>use</strong></span></a> command,
+                while the list of open files is displayed through the
+                <a class="link" href="ch05.html#fl"><span class="command"><strong>file-list</strong></span></a>
+                command.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="pos"></a>
+              <div class="cmdsynopsis"><p><code class="command">position,pos</code>  { s  |   e }</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Position: Sets the position in the current root.
+                <span class="emphasis"><em>s</em></span> will cause the position to
+                be set prior to the first key in the index,
+                <span class="emphasis"><em>e</em></span> will cause the position to be
+                set after the last key.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="p"></a>
+              <div class="cmdsynopsis"><p><code class="command">prompt,p</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Prompt: Toggles the display of a command prompt
+                when <span class="command"><strong>bt</strong></span> is ready for the next user
+                command. 
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="prv"></a>
+              <div class="cmdsynopsis"><p><code class="command">previous,prv</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Previous: Displays the key prior to the current key in
+                the current root of the in-use B Tree index file.  The
+                current key is set by the last <a class="link" href="ch05.html#f"><span class="command"><strong>find</strong></span></a>, <a class="link" href="ch05.html#fd"><span class="command"><strong>find-data</strong></span></a>,
+                <a class="link" href="ch05.html#n"><span class="command"><strong>next</strong></span></a>,
+                <a class="link" href="ch05.html#nd"><span class="command"><strong>next-data</strong></span></a>,
+                <a class="link" href="ch05.html#prv"><span class="command"><strong>previous</strong></span></a>
+                or <a class="link" href="ch05.html#pd"><span class="command"><strong>previous-data</strong></span></a>
+                command.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="pd"></a>
+              <div class="cmdsynopsis"><p><code class="command">previous-data,pd</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Previous Data: Displays the key and associated data record
+                prior to the current key in the current root of the
+                in-use B Tree index file.  The current key is set by
+                the last <a class="link" href="ch05.html#f"><span class="command"><strong>find</strong></span></a>, <a class="link" href="ch05.html#fd"><span class="command"><strong>find-data</strong></span></a>,
+                <a class="link" href="ch05.html#n"><span class="command"><strong>next</strong></span></a>,
+                <a class="link" href="ch05.html#nd"><span class="command"><strong>next-data</strong></span></a>,
+                <a class="link" href="ch05.html#prv"><span class="command"><strong>previous</strong></span></a>
+                or <a class="link" href="ch05.html#pd"><span class="command"><strong>previous-data</strong></span></a>
+                command.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="q"></a>
+              <div class="cmdsynopsis"><p><code class="command">quit,q</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Quit: Terminates <span class="command"><strong>bt</strong></span>.  Any open B
+                Tree files will be closed
+                automatically. 
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="r"></a> 
+              <div class="cmdsynopsis"><p><code class="command">remove,r</code>   
+                  <em class="replaceable"><code>key</code></em>
+                 </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Remove key: Removes a previously defined key in the
+                current root of the in-use B Tree index file.  The key
+                name is specified by <span class="emphasis"><em>key</em></span>.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="rc"></a> 
+              <div class="cmdsynopsis"><p><code class="command">remove-cur,rc</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Remove Current key: Removes the current key in the
+                current root of the in-use B Tree index file.  The
+                current key is set by the last <a class="link" href="ch05.html#f"><span class="command"><strong>find</strong></span></a>, <a class="link" href="ch05.html#fd"><span class="command"><strong>find-data</strong></span></a>,
+                <a class="link" href="ch05.html#n"><span class="command"><strong>next</strong></span></a>,
+                <a class="link" href="ch05.html#nd"><span class="command"><strong>next-data</strong></span></a>,
+                <a class="link" href="ch05.html#prv"><span class="command"><strong>previous</strong></span></a>
+                or <a class="link" href="ch05.html#pd"><span class="command"><strong>previous-data</strong></span></a>
+                command.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="rd"></a> 
+              <div class="cmdsynopsis"><p><code class="command">remove-data,rd</code>   
+                  <em class="replaceable"><code>key</code></em>
+                 </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Removes key with Data: Removes a previously defined
+                key and its associated data record in the current root
+                of the in-use B Tree index file.
+                <span class="emphasis"><em>key</em></span> defines the key
+                name. 
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="rdc"></a> 
+              <div class="cmdsynopsis"><p><code class="command">remove-data-cur,rdc</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Removes Current Data: Removes the current key and its
+                associated data record in the current root of the
+                in-use B Tree index file.  The current key is set by
+                the last <a class="link" href="ch05.html#f"><span class="command"><strong>find</strong></span></a>, <a class="link" href="ch05.html#fd"><span class="command"><strong>find-data</strong></span></a>,
+                <a class="link" href="ch05.html#n"><span class="command"><strong>next</strong></span></a>,
+                <a class="link" href="ch05.html#nd"><span class="command"><strong>next-data</strong></span></a>,
+                <a class="link" href="ch05.html#prv"><span class="command"><strong>previous</strong></span></a>
+                or <a class="link" href="ch05.html#pd"><span class="command"><strong>previous-data</strong></span></a>
+                command.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="rr"></a> 
+              <div class="cmdsynopsis"><p><code class="command">remove-root,rr</code>   
+                  <em class="replaceable"><code>rootname</code></em>
+                 </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Remove Root: Removes an existing B Tree index root,
+                named <span class="emphasis"><em>rootname</em></span> in the in-use B
+                Tree file.  If removal is successful, all blocks used
+                by the root (both index and data) will be returned to
+                the free list.  It is not permitted to remove the
+                current root. 
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="s"></a> 
+              <div class="cmdsynopsis"><p><code class="command">show,s</code>  { control  |   super  |   stats  |   space  |   stack  |   block <em class="replaceable"><code>n</code></em>
+                    structure   [v]
+                   }</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Show: Displays B Tree debug information.  The option
+                specified is passed directly to the
+                <code class="function">bdbug</code> function.  See the <a class="link" href="ch03s27.html" title="Debugging information"><code class="function">bdebug</code></a>
+                description for the information provided by each
+                option.  
+              </p>
+              <p>
+                For the <span class="emphasis"><em>structure</em></span> option,
+                specifying <span class="emphasis"><em>v</em></span> will cause a
+                detailed report on the structure to be displayed.
+                Otherwise, only a summary is displayed.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="sd"></a> 
+              <div class="cmdsynopsis"><p><code class="command">size-data,sd</code>  [
+                  <em class="replaceable"><code>key</code></em>
+                ]</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Size Data: Displays the number of bytes occupied by
+                the data record associated with
+                <span class="emphasis"><em>key</em></span>. If <span class="emphasis"><em>key</em></span>
+                is omitted, the size of the data record associated
+                with the current key is displayed.  The current key is
+                set by the last <a class="link" href="ch05.html#f"><span class="command"><strong>find</strong></span></a>, <a class="link" href="ch05.html#fd"><span class="command"><strong>find-data</strong></span></a>,
+                <a class="link" href="ch05.html#n"><span class="command"><strong>next</strong></span></a>,
+                <a class="link" href="ch05.html#nd"><span class="command"><strong>next-data</strong></span></a>,
+                <a class="link" href="ch05.html#prv"><span class="command"><strong>previous</strong></span></a>
+                or <a class="link" href="ch05.html#pd"><span class="command"><strong>previous-data</strong></span></a>
+                command.
+              </p>
+              <p>
+                If <span class="emphasis"><em>key</em></span> has no associated data
+                record, results are undefined.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="system"></a> 
+              <div class="cmdsynopsis"><p><code class="command">system,!</code>   
+                  <em class="replaceable"><code>command</code></em>
+                 </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                System: Passes the text following the system command
+                to the shell for execution.  
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="u"></a> 
+              <div class="cmdsynopsis"><p><code class="command">use,u</code>   
+                  <em class="replaceable"><code>filename</code></em>
+                 </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Use: Changes the in-use B Tree file to
+                <span class="emphasis"><em>filename</em></span>.  The file must have
+                already been opened or created, using the <a class="link" href="ch05.html#o"><span class="command"><strong>open</strong></span></a> or <a class="link" href="ch05.html#c"><span class="command"><strong>create</strong></span></a>
+                command.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="ud"></a> 
+              <div class="cmdsynopsis"><p><code class="command">update-data,ud</code>   
+                  <em class="replaceable"><code>key</code></em>
+                  { 
+                    <em class="replaceable"><code>string</code></em>
+                    |   
+                    <em class="replaceable"><code>*bufname</code></em>
+                   }</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Update Data: Updates an existing key with a
+                new associated data record in the current root of the
+                in-use B Tree index file.  <span class="emphasis"><em>key</em></span>
+                defines the key name.  Data can be provided in one of
+                two ways: either a plain string or the name of a
+                previously defined buffer can be specified.  If the
+                latter, it should be indicated by a leading
+                <span class="emphasis"><em>*</em></span>. 
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="udc"></a> 
+              <div class="cmdsynopsis"><p><code class="command">update-data-cur,udc</code>  { 
+                    <em class="replaceable"><code>string</code></em>
+                    |   
+                    <em class="replaceable"><code>*bufname</code></em>
+                   }</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Update Data Current: Updates the current key with a
+                new associated data record in the current root of the
+                in-use B Tree index file. The current key is set by
+                the last <a class="link" href="ch05.html#f"><span class="command"><strong>find</strong></span></a>, <a class="link" href="ch05.html#fd"><span class="command"><strong>find-data</strong></span></a>,
+                <a class="link" href="ch05.html#n"><span class="command"><strong>next</strong></span></a>,
+                <a class="link" href="ch05.html#nd"><span class="command"><strong>next-data</strong></span></a>,
+                <a class="link" href="ch05.html#prv"><span class="command"><strong>previous</strong></span></a>
+                or <a class="link" href="ch05.html#pd"><span class="command"><strong>previous-data</strong></span></a>
+                command. Data can be provided in one of two ways:
+                either a plain string or the name of a previously
+                defined buffer can be specified.  If the latter, it
+                should be indicated by a leading
+                <span class="emphasis"><em>*</em></span>.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="ulk"></a>
+              <div class="cmdsynopsis"><p><code class="command">unlock,ulk</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Unlock: Unlocks the in-use B Tree file, if it was
+                locked with the <span class="command"><strong>lk</strong></span> command.  If not
+                locked, or the file was originally opened in exclusive
+                mode, <span class="command"><strong>unlock</strong></span> has no
+                effect. 
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="uv"></a>
+              <div class="cmdsynopsis"><p><code class="command">update-value,uv</code>   
+                  <em class="replaceable"><code>key</code></em>
+                   
+                  <em class="replaceable"><code>value</code></em>
+                 </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Update Value: Modifies the value associated with
+                <span class="emphasis"><em>key</em></span> in the current root of the
+                in-use B Tree index file.  
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="uvc"></a>
+              <div class="cmdsynopsis"><p><code class="command">update-value,uv</code>   
+                  <em class="replaceable"><code>value</code></em>
+                 </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Update Value Current: Modifies the value associated
+                with current key <span class="emphasis"><em>key</em></span> in the
+                current root of the in-use B Tree index file. The
+                current key is set by the last <a class="link" href="ch05.html#f"><span class="command"><strong>find</strong></span></a>, <a class="link" href="ch05.html#fd"><span class="command"><strong>find-data</strong></span></a>,
+                <a class="link" href="ch05.html#n"><span class="command"><strong>next</strong></span></a>,
+                <a class="link" href="ch05.html#nd"><span class="command"><strong>next-data</strong></span></a>,
+                <a class="link" href="ch05.html#prv"><span class="command"><strong>previous</strong></span></a>
+                or <a class="link" href="ch05.html#pd"><span class="command"><strong>previous-data</strong></span></a>
+                command.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="wt"></a>
+              <div class="cmdsynopsis"><p><code class="command">write-threshold,wt</code>   
+                  <em class="replaceable"><code>threshold</code></em>
+                 </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Write Threshold: Sets the number of index block
+                updates beyond which the block contents must be
+                writtent to disk.  A <span class="emphasis"><em>threshold</em></span> of
+                zero means writes will not take place unless a block
+                must be flushed to disk.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="help"></a>
+              <div class="cmdsynopsis"><p><code class="command">help,?</code>  [cmd]</p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Help: Displays a list of <span class="command"><strong>bt</strong></span>
+                commands and a terse description of syntax and
+                usage. If <span class="emphasis"><em>cmd</em></span> is specified, only
+                help on that command will be displayed.
+              </p>
+            </td></tr><tr><td colspan="3" align="left" valign="top"><a id="comment"></a>
+              <div class="cmdsynopsis"><p><code class="command">comment,#</code> </p></div>
+            </td></tr><tr><td class="auto-generated"> </td><td class="auto-generated"> </td><td align="left" valign="top">
+              <p>
+                Comment: <span class="command"><strong>bt</strong></span> will ignore any line
+                starting with a <span class="command"><strong>#</strong></span>. Note that
+                <span class="command"><strong>bt</strong></span> will also ignore blank
+                lines. 
+              </p>
+            </td></tr></tbody></table></div></div><br class="table-break" /></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch04.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch06.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 4. Error Messages </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 6. B Tree Recovery</td></tr></table></div></body></html>

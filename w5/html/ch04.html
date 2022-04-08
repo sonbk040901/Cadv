@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 4. Error Messages</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="index.html" title="B Tree: Library for indexed file management" /><link rel="prev" href="ch03s28.html" title="Retrieving error message text" /><link rel="next" href="ch05.html" title="Chapter 5. B Tree Test Harness" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 4. Error Messages</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s28.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch05.html">Next</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a id="ErrorMessages"></a>Chapter 4. Error Messages</h1></div></div></div><p>
+      This section lists the errors that may be encountered when using
+      the B Tree system.  The occurrence of most of these errors
+      indicates a serious failure in the B Tree system, with the
+      following exceptions:
+    </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">QNOKEY</span></dt><dd><p>
+            The key given as a parameter to
+            <code class="function">bfndky</code> (or its brethren) does not
+            exist.
+          </p></dd><dt><span class="term">QDUP</span></dt><dd><p>
+            The key given as a parameter to
+            <code class="function">binsky</code> (or its brethren) already
+            exists in the index.  Duplicate keys are not
+            permitted.
+          </p></dd><dt><span class="term">QBUSY</span></dt><dd><p>
+            File busy, a normal hazard when using shared access mode
+            in a multiuser
+            environment.
+          </p></dd><dt><span class="term">QNOWRT</span></dt><dd><p>
+            The B Tree file was originally opened with read-only
+            permission, and a write has subsequently been attempted.
+            Probably an application program error.
+          </p></dd><dt><span class="term">QNOBTF</span></dt><dd><p>
+            Attempt to perform operation on B Tree file, but there is
+            no file attached to the context pointer provided, likely
+            an application error.
+          </p></dd><dt><span class="term">QINERR</span></dt><dd><p>
+            Attempt made to open the same file again, likely an
+            application error.
+          </p></dd><dt><span class="term">QDELCR</span></dt><dd><p>
+            An attempt has been made to delete the current root, or
+            worse, the super root.  This is forbidden by the BT library.
+          </p></dd><dt><span class="term">QBADOP</span></dt><dd><p>
+            Unknown debug option passed to bdbug, likely an
+            application error.
+          </p></dd><dt><span class="term">QNOACT</span></dt><dd><p>
+            Maximum number of concurrently open B Tree files reached -
+            may be an application
+            error.
+          </p></dd><dt><span class="term">QBADAP</span></dt><dd><p>
+            Illegal context pointer passed to a B Tree function - may
+            be an application error.
+          </p></dd><dt><span class="term">QDNEG</span></dt><dd><p>
+            A negative length data record has been passed to a B Tree
+            function.  
+          </p></dd><dt><span class="term">QBADVR</span></dt><dd><p>
+            The B Tree index file was created using an older version
+            of the B Tree library, and cannot be accessed safely with
+            this version.  Extract data using a program based on the
+            previous version of the B Tree library, and import into a
+            index file created with the new.  Alternatively, it may be
+            possible to use the <a class="link" href="re01.html" title="btr"><span class="command"><strong>btr</strong></span></a> recovery tool
+            to migrate an older BTree index file to the latest
+            version.
+          </p></dd><dt><span class="term">QDAOVR</span></dt><dd><p>
+            A new data record cannot be entered as the maximum value
+            of a data block pointer has been
+            exceeded.
+          </p></dd><dt><span class="term">QF2BIG</span></dt><dd><p>
+            The index file has reached its maximum size for this
+            implementation.
+          </p></dd><dt><span class="term">QBADAL</span></dt><dd><p>
+            Unable to set alarm for for file lock handling.  This may
+            be a problem with the underlying OS.
+          </p></dd><dt><span class="term">QBADCTXT</span></dt><dd><p>
+            Index context invalid for current key operation.  An
+            attempt was made to delete or update the current key, but
+            the context is not valid.  A valid context is set by
+            bfndky, bnxtky, bprvky, btsel, btseln, or btselp.
+          </p></dd><dt><span class="term">QNODUPS</span></dt><dd><p>
+            Duplicates are not permitted in the superroot.  Attempting to
+            permit duplicate keys in the superroot, via
+            btdups(..,TRUE), is prohibited.
+          </p></dd><dt><span class="term">QNOT64BIT</span></dt><dd><p>
+            Index file was created with a non-64 bit version (LFS=0) of
+            the library.  However, access is being attempted with a
+            64 bit version.
+          </p></dd><dt><span class="term">Q64BIT</span></dt><dd><p>
+            Index file was created with a 64 bit version (LFS=1) of
+            the library.  However, access is being attempted with a
+            non-64 bit version.
+          </p></dd></dl></div><div class="table"><a id="idm994"></a><p class="title"><strong>Table 4.1. B Tree Error Messages</strong></p><div class="table-contents"><table class="table" summary="B Tree Error Messages" border="0"><colgroup><col /><col /><col /></colgroup><tbody><tr><td align="left">1</td><td align="left">QBLKNR</td><td align="left">Block %s is not a root block</td></tr><tr><td align="left">2</td><td align="left">QCLSIO</td><td align="left">Unable to close index file: "file"</td></tr><tr><td align="left">3</td><td align="left">QCRTIO</td><td align="left">Unable to create index file: "file"</td></tr><tr><td align="left">4</td><td align="left">QCPBLK</td><td align="left">Unable to read source or destination block </td></tr><tr><td align="left">5</td><td align="left">QWRBLK</td><td align="left">I/O error writing block</td></tr><tr><td align="left">6</td><td align="left">QRDSUP</td><td align="left">I/O error reading super root</td></tr><tr><td align="left">7</td><td align="left">QWRSUP</td><td align="left">I/O error writing super root</td></tr><tr><td align="left">8</td><td align="left">QOPNIO</td><td align="left">I/O error opening index file: "file"</td></tr><tr><td align="left">9</td><td align="left">QRDBLK</td><td align="left">I/O error reading block</td></tr><tr><td align="left">10</td><td align="left">QIXOPN</td><td align="left">An index file is already open</td></tr><tr><td align="left">11</td><td align="left">QSPLIT</td><td align="left">Can't split full block</td></tr><tr><td align="left">12</td><td align="left">QINFER</td><td align="left">Bad info block index used</td></tr><tr><td align="left">13</td><td align="left">QNOMEM</td><td align="left">Unable to acquire a free memory block</td></tr><tr><td align="left">14</td><td align="left">QSTKUF</td><td align="left">Stack underflow</td></tr><tr><td align="left">15</td><td align="left">QSTKOF</td><td align="left">Stack overflow</td></tr><tr><td align="left">16</td><td align="left">QBLKFL</td><td align="left">Can't insert key at block: %s</td></tr><tr><td align="left">17</td><td align="left">QLOCTB</td><td align="left">Replace location out of range</td></tr><tr><td align="left">18</td><td align="left">QSPKEY</td><td align="left">Split: search for middle key failed</td></tr><tr><td align="left">19</td><td align="left">QWRMEM</td><td align="left">Requested write block not in memory</td></tr><tr><td align="left">20</td><td align="left">QBALSE</td><td align="left">Balance: search for key failed</td></tr><tr><td align="left">21</td><td align="left">QDELEX</td><td align="left">Exact flag not set for delete</td></tr><tr><td align="left">22</td><td align="left">QDELER</td><td align="left">Internal inconsistency in delete operation</td></tr><tr><td align="left">23</td><td align="left">QDELRP</td><td align="left">Search for
+            deleted key replacement failed (in block %s)</td></tr><tr><td align="left">24</td><td align="left">QDEMSE</td><td align="left">Demote search failed</td></tr><tr><td align="left">25</td><td align="left">QDEMSP</td><td align="left">Demote split failed</td></tr><tr><td align="left">26</td><td align="left">QJNSE</td><td align="left">Join search failed</td></tr><tr><td align="left">27</td><td align="left">QNODEF</td><td align="left">Cannot locate default root ($$default)</td></tr><tr><td align="left">28</td><td align="left">QDELCR</td><td align="left">Deletion of the current or super root is forbidden</td></tr><tr><td align="left">29</td><td align="left">QBADIX</td><td align="left">Negative in-memory index encountered</td></tr><tr><td align="left">30</td><td align="left">QNOBTF</td><td align="left">No index file open for this operation</td></tr><tr><td align="left">31</td><td align="left">QINERR</td><td align="left">Index file already in use</td></tr><tr><td align="left">32</td><td align="left">QBADOP</td><td align="left">Debug option not recognised</td></tr><tr><td align="left">33</td><td align="left">QNOACT</td><td align="left">No more index files may be opened (limit reached)</td></tr><tr><td align="left">34</td><td align="left">QBADAP</td><td align="left">Invalid index file context pointer</td></tr><tr><td align="left">35</td><td align="left">QBUSY</td><td align="left">File is busy</td></tr><tr><td align="left">37</td><td align="left">QNOBLK</td><td align="left">No block available for data storage</td></tr><tr><td align="left">38</td><td align="left">QNEGSZ</td><td align="left">Data block usage gone bad: %s</td></tr><tr><td align="left">39</td><td align="left">QNOTDA</td><td align="left">Data segment header references a non-data block: %s</td></tr><tr><td align="left">40</td><td align="left">QBADCTXT</td><td align="left">Index context invalid for current key operation</td></tr><tr><td align="left">41</td><td align="left">QDLOOP</td><td align="left">Circular data segment pointer encountered</td></tr><tr><td align="left">42</td><td align="left">QUNLCK</td><td align="left">Unlock operation failed</td></tr><tr><td align="left">43</td><td align="left">QLRUER</td><td align="left">LRU queue corrupt - index not in list</td></tr><tr><td align="left">44</td><td align="left">QDAERR</td><td align="left">Unable to insert data record</td></tr><tr><td align="left">45</td><td align="left">QDNEG</td><td align="left">Data record cannot be negative </td></tr><tr><td align="left">46</td><td align="left">QDUP</td><td align="left">Key "key" already exists in index</td></tr><tr><td align="left">47</td><td align="left">QNOKEY</td><td align="left">Key "key" does not exist in index</td></tr><tr><td align="left">48</td><td align="left">QNOWRT</td><td align="left">Write access to index prohibited</td></tr><tr><td align="left">49</td><td align="left">QNOTFR</td><td align="left">Block on free list is not marked as free</td></tr><tr><td align="left">50</td><td align="left">QBADVR</td><td align="left">Index file is incompatible with current version: "version"</td></tr><tr><td align="left">51</td><td align="left">QDAOVR</td><td align="left">Data capacity exceeded at block: "block"</td></tr><tr><td align="left">52</td><td align="left">QF2BIG</td><td align="left">Index file is at maximum size</td></tr><tr><td align="left">53</td><td align="left">QBADAL</td><td align="left">Unable to set alarm for locking</td></tr><tr><td align="left">54</td><td align="left">QDRANEG</td><td align="left">Data record address is negative: "address"</td></tr><tr><td align="left">55</td><td align="left">QBLKSZERR</td><td align="left">Defined block size is not a power of two: "size"</td></tr><tr><td align="left">56</td><td align="left">QNODUPS</td><td align="left">Duplicates keys are not allowed for the superroot</td></tr><tr><td align="left">57</td><td align="left">QPOSERR</td><td align="left">Location search exceeds key count at block: %s</td></tr><tr><td align="left">58</td><td align="left">QNOT64BIT</td><td align="left">
+              Index file likely not LFS (64bit) enabled; doesn't match library.
+            </td></tr><tr><td align="left">59</td><td align="left">Q64BIT</td><td align="left">
+              Index file likely LFS (64bit) enabled; doesn't match library.
+            </td></tr><tr><td align="left">60</td><td align="left">QNOTDUP</td><td align="left">
+              Duplicate key address does not reference a duplicate block: %s.
+            </td></tr><tr><td align="left">61</td><td align="left">QDUPSZ</td><td align="left">
+              Duplicate key entry has wrong size.
+            </td></tr><tr><td align="left">62</td><td align="left">QBADIR</td><td align="left">
+              Bad direction parameter.
+            </td></tr></tbody></table></div></div><br class="table-break" /></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s28.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch05.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Retrieving error message text </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 5. B Tree Test Harness</td></tr></table></div></body></html>

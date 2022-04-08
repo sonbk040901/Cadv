@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Updating data for an existing key</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="ch03.html" title="Chapter 3. Function Descriptions" /><link rel="prev" href="ch03s20.html" title="Inserting a key and data" /><link rel="next" href="ch03s22.html" title="Locating data for an existing key" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Updating data for an existing key</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s20.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Function Descriptions</th><td width="20%" align="right"> <a accesskey="n" href="ch03s22.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="btupd"></a>Updating data for an existing key</h2></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include "btree.h"</pre><p><code class="funcdef">int <strong class="fsfunc">btupd</strong>(</code>BTA* <var class="pdparam">btact</var>, char* <var class="pdparam">key</var>, char* <var class="pdparam">data</var>, int <var class="pdparam">dsize</var><code>)</code>;</p></div><p>
+        The <code class="function">btupd</code> function updates the data
+        record of an existing key in the file associated with the
+        <em class="parameter"><code>btact</code></em> context pointer.  Both
+        <em class="parameter"><code>key</code></em> and <em class="parameter"><code>data</code></em> are
+        character pointers.  Since the data may legitimately contain
+        null (x'00) characters, the length of the data, in bytes, must
+        be passed in <em class="parameter"><code>dsize</code></em>. If the replacement
+        data is successfully stored in the B Tree file,
+        <code class="function">btupd</code> returns zero.
+      </p><p>
+        If <code class="function">btupd</code> is called with a
+        <em class="parameter"><code>key</code></em> value of NULL, the update operation
+        will act against the current key, as selected by
+        <code class="function">btsel</code>, <code class="function">btseln</code> or
+        <code class="function">btselp</code> operations. This capability is
+        designed to allow update of a duplicate key, presumably based
+        on other, application managed, attributes.
+      </p><p>
+        A non-zero return from <code class="function">btupd</code> indicates an
+        error occurred.
+      </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s20.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s22.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Inserting a key and data </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Locating data for an existing key</td></tr></table></div></body></html>

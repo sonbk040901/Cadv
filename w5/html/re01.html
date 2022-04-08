@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>btr</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="ch06.html" title="Chapter 6. B Tree Recovery" /><link rel="prev" href="ch06.html" title="Chapter 6. B Tree Recovery" /><link rel="next" href="ch07.html" title="Chapter 7. Customisation" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">btr</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06.html">Prev</a> </td><th width="60%" align="center">Chapter 6. B Tree Recovery</th><td width="20%" align="right"> <a accesskey="n" href="ch07.html">Next</a></td></tr></table><hr /></div><div class="refentry"><a id="btr"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>btr — B Tree index recovery</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><div class="cmdsynopsis"><p><code class="command">btr</code>  [-a] [-d] [-f] [-k] [-n <em class="replaceable"><code>cnt</code></em>] [-r] [-v] [--]  <em class="replaceable"><code>old_file</code></em>   <em class="replaceable"><code>new_file</code></em> </p></div></div><div class="refsect1"><a id="idm2033"></a><h2>Description</h2><p>
+          <span class="command"><strong>btr</strong></span> will attempt to recover key (and
+          optionally data) information from the B Tree index file
+          identified by <em class="replaceable"><code>old_file</code></em>.  The
+          recovered contents are written to the B Tree index file
+          identified by
+          <em class="replaceable"><code>new_file</code></em>. <span class="command"><strong>btr</strong></span>
+          recovery is controlled by a number of arguments:
+        </p><div class="table"><a id="idm2040"></a><p class="title"><strong>Table 6.1. Command Arguments</strong></p><div class="table-contents"><table class="table" summary="Command Arguments" border="0"><colgroup><col width="50cm" align="left" class="c1" /><col width="100cm" align="left" class="c2" /><col align="left" class="c3" /></colgroup><tbody valign="top"><tr><td align="left" valign="top"> </td><td align="left" valign="top">
+                    <div class="cmdsynopsis"><p>[ -k  |   -d ]</p></div> 
+                  </td><td align="left" valign="top">
+                    <p>
+                      Specifies recovery mode; -k for keys, -d for keys and
+                      data.  Default if omitted is -k.
+                    </p>
+                  </td></tr><tr><td align="left" valign="top"> </td><td align="left" valign="top">
+                    <div class="cmdsynopsis"><p>[-n <em class="replaceable"><code>cnt</code></em>]</p></div> 
+                  </td><td align="left" valign="top">
+                    <p>
+                      Sets maximum number of io errors to ignore before
+                      terminating the recovery.  Default is 0.
+                    </p>
+                  </td></tr><tr><td align="left" valign="top"> </td><td align="left" valign="top">
+                    <div class="cmdsynopsis"><p>[-v]</p></div> 
+                  </td><td align="left" valign="top">
+                    <p>
+                      Causes <span class="command"><strong>btr</strong></span> to display information
+                      on the recovery process.  This flag may be repeated
+                      up to three times to increase the level of
+                      information.  For a large B Tree index this could
+                      lead to a significant amount of output.
+                    </p>
+                  </td></tr><tr><td align="left" valign="top"> </td><td align="left" valign="top">
+                    <div class="cmdsynopsis"><p>[-a]</p></div> 
+                  </td><td align="left" valign="top">
+                    <p>
+                      If specified, the B Tree index in
+                      <em class="replaceable"><code>new_file</code></em> will allow
+                      duplicate keys.  The default is not to allow duplicates.
+                    </p>
+                  </td></tr><tr><td align="left" valign="top"> </td><td align="left" valign="top">
+                    <div class="cmdsynopsis"><p>[-f]</p></div> 
+                  </td><td align="left" valign="top">
+                    <p>
+                      If specified, the B Tree index represented by
+                      <em class="replaceable"><code>new_file</code></em> will be
+                      overwritten.  Default is to preserve
+                      <em class="replaceable"><code>new_file</code></em>, should it exist.
+                    </p>
+                  </td></tr><tr><td align="left" valign="top"> </td><td align="left" valign="top">
+                    <div class="cmdsynopsis"><p>[-r]</p></div> 
+                  </td><td align="left" valign="top">
+                    <p>
+                      Requests <span class="command"><strong>btr</strong></span> to attempt full
+                      recovery mode even if the version of the
+                      <em class="replaceable"><code>old_file</code></em> does not support
+                      it.
+                    </p>
+                  </td></tr><tr><td align="left" valign="top"> </td><td align="left" valign="top">
+                    <div class="cmdsynopsis"><p>[--]</p></div> 
+                  </td><td align="left" valign="top">
+                    <p>
+                      Causes <span class="command"><strong>btr</strong></span> to stop processing
+                      command arguments.  Should be used if
+                      <em class="replaceable"><code>old_file</code></em> begins with a '-'.
+                    </p>
+                  </td></tr></tbody></table></div></div><br class="table-break" /><div class="refsect2"><a id="idm2107"></a><h3>Recovery Processing</h3><p>
+            <span class="command"><strong>btr</strong></span> will attempt to open the input btree
+            file using the btree library version of
+            <code class="function">btopn</code>.  If this fails, the
+            <span class="command"><strong>btr</strong></span> version of
+            <code class="function">btopn</code> is used instead, which bypasses
+            the consistency checks.
+          </p><p>
+            An attempt to read the superroot is made.  If successful,
+            the root names and root blocks are recorded.  Only the
+            roots present in the superroot are retained.  Root names
+            in any child blocks are ignored; the index structure may
+            be damaged and therefore no attempt to traverse it is made.
+          </p><p>
+            Each block, starting from 1, is read.  If marked as ZROOT,
+            ZINUSE or ZDUP the keys and values are extracted directly from
+            the in-memory array.  If -k specified, the key and value
+            are written to the <em class="replaceable"><code>new_btree</code></em>
+            index file.  If -d specified, and the value is a valid
+            disk record address, an attempt is made to read the data
+            record.  Data record addresses are stored in a supporting
+            bt index file (<code class="computeroutput">.bt_da.db</code>),
+            to enable detection of circular references.  If the data
+            record is read OK, the key and data record is written to
+            the <em class="replaceable"><code>new_file</code></em> btree file.  If
+            the data record cannot be read, only the key is written.
+          </p><p>
+            In version 4 (and later) of the BTree index, each ZINUSE
+            block contains the root block it belongs to.  This data
+            allows <span class="command"><strong>btr</strong></span> to partition keys by their
+            roots.  Only those roots recovered from the superroot will
+            be named as in the <em class="replaceable"><code>old_file</code></em>.
+            Keys from other roots will be copied to new roots, named after
+            their root block number (e.g. root_19834). 
+          </p><p>
+            <span class="command"><strong>btr</strong></span> will display summary statistics
+            about the recovery on stdout when complete.
+          </p></div><div class="refsect2"><a id="idm2124"></a><h3>Exit Status</h3><p>
+            0 if OK.
+          </p></div></div><div class="refsect1"><a id="idm2127"></a><h2>Notes</h2><p>
+            <span class="command"><strong>btr</strong></span> can be used to recover (or indeed
+            migrate) data from earlier (i.e. pre-version 4) versions
+            of a Btree index file.  Since the root block numbers are
+            not held in the ZINUSE blocks, keys can not be partitioned
+            by root.  Therefore, this facility is only really
+            applicable to single-rooted B Tree index files.
+          </p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch06.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch07.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 6. B Tree Recovery </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 7. Customisation</td></tr></table></div></body></html>

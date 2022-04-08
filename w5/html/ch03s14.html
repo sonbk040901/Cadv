@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Updating the value of a key</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="ch03.html" title="Chapter 3. Function Descriptions" /><link rel="prev" href="ch03s13.html" title="Deleting a key" /><link rel="next" href="ch03s15.html" title="Creating a root" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Updating the value of a key</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s13.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Function Descriptions</th><td width="20%" align="right"> <a accesskey="n" href="ch03s15.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="bupdky"></a>Updating the value of a key</h2></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include "btree.h"</pre><p><code class="funcdef">int <strong class="fsfunc">bupdky</strong>(</code>BTA* <var class="pdparam">btact</var>, char* <var class="pdparam">key</var>, BTint <var class="pdparam">value</var><code>)</code>;</p></div><p>
+        The <code class="function">bupdky</code> function updates the value of
+        an existing key in the current root of the file associated
+        with the <em class="parameter"><code>btact</code></em> context pointer.  The
+        key, a character string, is passed via the pointer in
+        <em class="parameter"><code>key</code></em>.  The new value is passed via
+        <em class="parameter"><code>value</code></em>.  <em class="parameter"><code>value</code></em> is
+        declared as a BTint, which is normally a typedef for
+        <span class="emphasis"><em>int</em></span>, but with Large File Support will be
+        a typedef for <span class="emphasis"><em>long long</em></span>.
+        </p><p>
+        If the key does not exist, <code class="function">bupdky</code> returns
+        the error code <code class="literal">QNOKEY</code>.
+      </p><p>
+        If <code class="function">bupdky</code> is called with a
+        <em class="parameter"><code>key</code></em> value of NULL, the update operation
+        will act against the current key, as selected by
+        <code class="function">bfndky</code>, <code class="function">bnxtky</code> or
+        <code class="function">bprvky</code> operations. This capability is
+        designed to allow update of a duplicate key, presumably based
+        on other, application managed, attributes.
+      </p><p>
+        <code class="function">bupdky</code> returns zero to indicate a
+        successful update, error code otherwise.
+      </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s13.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s15.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Deleting a key </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Creating a root</td></tr></table></div></body></html>

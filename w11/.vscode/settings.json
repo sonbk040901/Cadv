@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "dllist.h": "c",
+        "graph.h": "c"
+    }
+}

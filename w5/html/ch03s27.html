@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Debugging information</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="ch03.html" title="Chapter 3. Function Descriptions" /><link rel="prev" href="ch03s26.html" title="Determine size of data record for specific key" /><link rel="next" href="ch03s28.html" title="Retrieving error message text" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Debugging information</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s26.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Function Descriptions</th><td width="20%" align="right"> <a accesskey="n" href="ch03s28.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="bdbug"></a>Debugging information</h2></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include "btree.h"</pre><p><code class="funcdef">int <strong class="fsfunc">bdbug</strong>(</code>BTA* <var class="pdparam">btact</var>, char* <var class="pdparam">opt</var>, BTint <var class="pdparam">blk</var><code>)</code>;</p></div><p>
+        The <code class="function">bdbug</code> function provides a debug
+        capability for the B Tree package.  The following options can
+        be passed via the <em class="parameter"><code>opt</code></em> parameter:
+      </p><div class="table"><a id="idm842"></a><p class="title"><strong>Table 3.1. Debug Options</strong></p><div class="table-contents"><table class="table" summary="Debug Options" border="0"><colgroup><col /><col /><col /></colgroup><tbody><tr><td align="left">control</td><td align="left">-</td><td align="left">displays the in-memory block information,
+              together with the last key found details</td></tr><tr><td align="left">super</td><td align="left">-</td><td align="left">displays superroot information i.e. block usage,
+              free list etc.</td></tr><tr><td align="left">stack</td><td align="left">-</td><td align="left">displays the tree stack (i.e. key
+              context)</td></tr><tr><td align="left">space</td><td align="left">-</td><td align="left">displays occupancy statistics</td></tr><tr><td align="left">stats</td><td align="left">-</td><td align="left">displays B Tree operating statistics</td></tr><tr><td align="left">block</td><td align="left">-</td><td align="left">displays the
+              contents of the block identified by
+              <em class="parameter"><code>blk</code></em>.  <em class="parameter"><code>blk</code></em>
+              is declared as a BTint, which is normally a typedef for
+              <span class="emphasis"><em>int</em></span>, but with Large File Support
+              will be a typedef for <span class="emphasis"><em>long long</em></span>.
+              </td></tr><tr><td align="left">structure</td><td align="left">-</td><td align="left">Performs
+              a structure check of the currently active BTree file.
+              If <em class="parameter"><code>blk</code></em> is set to ZNULL,
+              information on the index structure, and problems (if
+              any), are displayed.  Otherwise, a simple statement of
+              structure condition is displayed.
+              </td></tr></tbody></table></div></div><br class="table-break" /><p>
+        A non-zero return from <code class="function">bdbug</code> indicates an
+        error occurred during the display of debugging
+        information.
+      </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s26.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s28.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Determine size of data record for specific key </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Retrieving error message text</td></tr></table></div></body></html>

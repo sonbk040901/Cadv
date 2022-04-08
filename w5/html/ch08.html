@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 8. Building and installing the BT Library</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="index.html" title="B Tree: Library for indexed file management" /><link rel="prev" href="ch07.html" title="Chapter 7. Customisation" /><link rel="next" href="co01.html" title="Colophon" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 8. Building and installing the BT Library</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch07.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="co01.html">Next</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a id="Building"></a>Chapter 8. Building and installing the BT Library</h1></div></div></div><p>
+      The BT library is distributed as a tar file, which contains
+      a set of C source and header files, a
+      <code class="filename">Makefile</code> and a set of testcases.
+    </p><p>
+      First, unpack the tar file into a convenient directory.  cd to
+      the directory containing the source files and issue the command
+      <span class="command"><strong>make clean;make</strong></span>.  This will compile each BT
+      library file, and create the UNIX static library
+      <code class="filename">libbt.a</code> in the <code class="filename">lib</code>
+      sub-directory.  <span class="command"><strong>make</strong></span> will also built the BT
+      test harness <span class="command"><strong>bt</strong></span>, a utility,
+      <span class="command"><strong>kcp</strong></span>, which performs intelligent copies of BT
+      index files, a BTree index recovery tool <span class="command"><strong>btr</strong></span>
+      and two additional testing utilities, <span class="command"><strong>bigt</strong></span>
+      and <span class="command"><strong>bigtdel</strong></span>, for large file handling.
+    </p><p>
+      The default BT library build will create a 32-bit version, in
+      which the maximum size of the index file is 2GiB.  A version of
+      BT with Large File Support can be built with the command
+      <span class="command"><strong>make clean;make LFS=1</strong></span>.
+    </p><p>
+      When compiling programs against a LFS version of BT, if you need
+      to manipulate the <span class="emphasis"><em>BTint</em></span> value associated
+      with a key, ensure you set the compile-time flag
+      _FILE_OFFSET_BITS=64, e.g:
+    </p><pre class="programlisting">
+      $ gcc -o yak yak.c -Iinc -Llib -lbt -D_FILE_OFFSET_BITS=64
+    </pre><p>
+      This is not necessary if you are just using the in-built data
+      record functions (<code class="function">btsel</code> etc).
+    </p><p>
+      In order to test the newly created BT library, you can use the
+      <span class="command"><strong>bt</strong></span> test harness for ad-hoc testing.
+      Alternatively, the <code class="filename">Makefile</code> provides a
+      means of automated testing.  <span class="command"><strong>make test_run</strong></span>
+      will run a set of testcases, held in the
+      <code class="filename">Testcases</code> sub-directory.  These testcases
+      use <span class="command"><strong>bt</strong></span> scripts to test key components of the
+      BT library, comparing the results against known, good, output
+      templates.  The output templates distributed with BT should
+      suffice for most standard Linux and FreeBSD builds.
+    </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch07.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="co01.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 7. Customisation </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Colophon</td></tr></table></div></body></html>

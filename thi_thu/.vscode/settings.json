@@ -1,0 +1,11 @@
+{
+    "files.associations": {
+        "gtk.h": "c",
+        "jval.h": "c",
+        "graph.h": "c",
+        "dllist.h": "c",
+        "fields.h": "c",
+        "jrb.h": "c",
+        "curses.h": "c"
+    }
+}

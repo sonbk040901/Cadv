@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 7. Customisation</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="index.html" title="B Tree: Library for indexed file management" /><link rel="prev" href="re01.html" title="btr" /><link rel="next" href="ch08.html" title="Chapter 8. Building and installing the BT Library" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 7. Customisation</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="re01.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch08.html">Next</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a id="Customisation"></a>Chapter 7. Customisation</h1></div></div></div><p>
+      All compile time constants are defined in the header file
+      <code class="filename">bc.h</code>.  The following constants may be altered
+      for different hardware environments.  The values used in the
+      example given are from the original UNIX implementation.
+    </p><div class="variablelist"><dl class="variablelist"><dt><span class="term">ZBPW</span></dt><dd><p>The number of bytes in a word.</p></dd><dt><span class="term">ZBYTEW</span></dt><dd><p>The number of bits in a byte.</p></dd><dt><span class="term">ZMXBLK</span></dt><dd><p>
+            Maximum number of in-memory disk blocks that can be
+            stored.  The minimum value for this parameter is 3; there
+            is no maximum.  The more in-memory blocks defined, the
+            lower the disk I/O requirements will be.
+          </p></dd><dt><span class="term">ZBLKSZ</span></dt><dd><p>
+            The number of
+            bytes allocated to a disk block.  This value should be set to
+            a multiple of the physical disk block size.  This must be
+            defined as a power of two.
+          </p></dd><dt><span class="term">ZKEYSZ</span></dt><dd><p>
+            The maximum size (in bytes) of a key.
+          </p></dd><dt><span class="term">ZTHRES</span></dt><dd><p>
+            Threshold for block joining.  This value determines the
+            number of free key slots that must exist before two blocks
+            are considered candidates for joining.
+          </p></dd><dt><span class="term">ZMXACT</span></dt><dd><p>
+            The maximum number of B Tree files that may be
+            open concurrently.
+          </p></dd><dt><span class="term">ZSLEEP</span></dt><dd><p>
+            The number of seconds to wait for a B Tree file to become
+            unlocked, when in shared mode.  
+          </p></dd><dt><span class="term">ZRNAMESZ</span></dt><dd><p>
+            The maximum number of bytes returned for the name of the
+            function reporting a BT error (via btcerr)/
+            </p></dd><dt><span class="term">ZMSGSZ</span></dt><dd><p>
+            The maximum number of bytes returned for the error message of the
+            corresponding to a BT library error (via btcerr).
+          </p></dd></dl></div><p>
+      These compile time constants are assigned the following values
+      in the distributed version:
+    </p><pre class="programlisting">
+      ZBPW = 4
+      ZBYTEW = 8
+      ZMXBLK = 3     (16 when LFS=1)
+      ZBLKSZ = 1024  (8192 when LFS=1)
+      ZKEYSZ = 32
+      ZTHRES = 3
+      ZMXACT = 5
+      ZSLEEP = 5
+      ZRNAMESZ = 16
+      ZMSGSZ = 123
+    </pre><p>
+      These values result in the minimum memory usage.  If memory is
+      not a constraint, increasing the values for ZMXBLK and ZBLKSZ
+      will make the B Tree implementation much faster, e.g try:
+    </p><pre class="programlisting">
+      ZMXBLK = 100
+      ZBLKSZ = 8192
+    </pre><p>
+      The number of keys that can be stored in a block is
+      determined at compile time, using the following definition:
+    </p><pre class="programlisting">
+      #define ZMXKEY ((ZBLKSZ-ZBPW-ZINFSZ*ZBPW)/(ZKYLEN+2*ZBPW)) 
+    </pre><p>
+      N.B. ZINFSZ is the number of information words that a block
+      must carry as overhead.  This value is six in this
+      implementation.
+    </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="re01.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch08.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">btr </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 8. Building and installing the BT Library</td></tr></table></div></body></html>

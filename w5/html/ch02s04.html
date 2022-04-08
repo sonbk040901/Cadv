@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Large File Support</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="ch02.html" title="Chapter 2. System Description" /><link rel="prev" href="ch02s03.html" title="Shared Access" /><link rel="next" href="ch02s05.html" title="Duplicate Keys" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Large File Support</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch02s03.html">Prev</a> </td><th width="60%" align="center">Chapter 2. System Description</th><td width="20%" align="right"> <a accesskey="n" href="ch02s05.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="LargeFileSupport"></a>Large File Support</h2></div></div></div><p>
+        In order to support large files (i.e. those &gt; 2GiB), a new
+        type has been introduced into the BT library,
+        <span class="emphasis"><em>BTint</em></span>, which can be 32 bits (i.e int)
+        when compiled without Large File Support, or 64 bits (i.e.
+        long long), when compiled with Large File Support.
+        <span class="emphasis"><em>BTint</em></span> is a typedef, which will be
+        declared as appropriate.  BT library function arguments which
+        must be declared as <span class="emphasis"><em>BTint</em></span> are described
+        in the API, but version 2.x users of <code class="function">bfndky</code>,
+        <code class="function">bdbug</code>, <code class="function">binsky</code>,
+        <code class="function">bnxtky</code> or <code class="function">bupdky</code>
+        should be aware of the need to change argument declarations
+        from int to BTint.
+      </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch02s03.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch02.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch02s05.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Shared Access </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Duplicate Keys</td></tr></table></div></body></html>

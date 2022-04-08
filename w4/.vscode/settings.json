@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "fields.h": "c",
+        "jval.h": "c",
+        "jrb.h": "c"
+    }
+}

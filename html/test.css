@@ -1,0 +1,82 @@
+b {
+    font-weight: normal;
+    font-style: italic;
+}
+
+a {
+    color: rgb(237, 13, 13);
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    text-decoration: blink;
+    /* border: px solid #ccc; */
+}
+
+table, th, td {
+    color: rgb(247, 6, 6);
+    border: 1px solid rgb(4, 71, 255);
+}
+
+div {
+    color: rgb(235, 8, 8);
+}
+
+body {
+    background-color: lightblue;
+    background-image: url(bkd.jpg);
+    background-size: 100%;
+    background-attachment:fixed;
+    color: rgb(46, 13, 13);
+    /* background-origin: center; */
+}
+
+h1 {
+    text-align: center;
+}
+
+p {
+    font-family: verdana;
+    font-size: 20px;
+    color: rgb(46, 16, 16);
+}
+
+.fonttest {
+    font-family: 'Cookie', cursive;
+    /* width: 300px;
+    height: 10px; */
+}
+
+.img1 {
+    width: 10%;
+    height: 10%;
+
+}
+
+.fonttest:hover {
+    /* width: 300px;
+    height: 10px; */
+
+    color: rgb(221, 24, 24);
+    /* margin-bottom: -30px; */
+    font-size: 30px;
+    /* border-bottom: 4px solid orange; */
+    position: relative;
+    /* top: 3px; */
+    /* left: 10px; */
+    background-color: violet;
+    display:inline-flex;
+    transition: 0.3s;
+}
+
+.bigfont {
+    color: chocolate;
+    transition: 0.1s;
+    border-width: 0pt;
+    border-style: solid;
+}
+
+.bigfont:hover {
+    font-size: 30px;
+    /* padding: 20px; */
+    transition: 0.2s;
+    /* border: 2px solid rgb(66, 29, 231); */
+}

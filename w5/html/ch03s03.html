@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Creating a B Tree File</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="ch03.html" title="Chapter 3. Function Descriptions" /><link rel="prev" href="ch03s02.html" title="Initialising the B Tree library" /><link rel="next" href="ch03s04.html" title="Opening a B Tree File" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Creating a B Tree File</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s02.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Function Descriptions</th><td width="20%" align="right"> <a accesskey="n" href="ch03s04.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="btcrt"></a>Creating a B Tree File</h2></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include "btree.h"</pre><p><code class="funcdef">BTA* <strong class="fsfunc">btcrt</strong>(</code>char* <var class="pdparam">fid</var>, int <var class="pdparam">nkeys</var>, int <var class="pdparam">shared</var><code>)</code>;</p></div><p>
+        The <code class="function">btcrt</code> function will create and
+        initialise a new B Tree file.  The parameter
+        <em class="parameter"><code>fid</code></em> must be set to the name of the file
+        to create.  The <em class="parameter"><code>nkeys</code></em> defines the
+        maximum number of keys that can be stored in the B Tree.  This
+        parameter should always be set to 0 for those operating
+        systems, such as UNIX, that support dynamic file growth.  The
+        parameter <em class="parameter"><code>shared</code></em> should be set to 0 to
+        disallow shared access to the newly created B Tree, or
+        non-zero to allow shared access.
+      </p><p>
+        <code class="function">btcrt</code> will return a pointer to the BT
+        activation context for the newly opened file (BTA*), or NULL
+        in the case of an error.  To determine the cause of an error,
+        invoke the<a class="link" href="ch03s28.html" title="Retrieving error message text">
+        <code class="function">btcerr</code></a> function. 
+      </p><p>
+        If the B Tree index file has been successfully created, the
+        default root is selected, the file becomes the in-use B Tree
+        file and is ready for further operations.
+      </p><p>
+        <span class="emphasis"><em>WARNING:</em></span> The <code class="function">btcrt</code>
+        function will <span class="emphasis"><em>unconditionally</em></span> create a
+        new file, even if a file of the same name already
+        exists.
+      </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s02.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s04.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Initialising the B Tree library </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Opening a B Tree File</td></tr></table></div></body></html>

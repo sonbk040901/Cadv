@@ -1,0 +1,3627 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.4//EN"
+"docbookx.dtd" >
+<book>
+  <bookinfo>
+    <date>1st July, 2020</date>
+    <title>B Tree: Library for indexed file management</title>
+    <subtitle>B Tree 5.0 API Reference Manual</subtitle>
+    <authorgroup>
+      <author>
+        <firstname>Mark</firstname>
+        <surname>Willson</surname>
+      </author>
+    </authorgroup>
+    <revhistory>
+      <revision>
+        <revnumber>5.0.1</revnumber>
+        <date>1st July, 2020</date>
+        <authorinitials>mpw</authorinitials>
+        <revremark>
+          Minor bug fixes.  Modifications to accomodate changes in the
+          toolchain since 2012 (GNU Make and C compilers).
+        </revremark>
+      </revision>
+      <revision>
+        <revnumber>5.0.0</revnumber>
+        <date>26th November, 2012</date>
+        <authorinitials>mpw</authorinitials>
+        <revremark>
+          Revised duplicate key handling to remove index navigation
+          restrictions when in shared mode.
+        </revremark>
+      </revision>
+      <revision>
+        <revnumber>4.0.0</revnumber>
+        <date>24th June, 2011</date>
+        <authorinitials>mpw</authorinitials>
+        <revremark>
+          Add support for btree index recovery.
+        </revremark>
+      </revision>
+      <revision>
+        <revnumber>3.1.2</revnumber>
+        <date>3rd January, 2011</date>
+        <authorinitials>mpw</authorinitials>
+        <revremark>
+          Document revised handling of duplicate keys in shared mode.
+        </revremark>
+      </revision>
+      <revision>
+        <revnumber>3.1.1</revnumber>
+        <date>21st December, 2010</date>
+        <authorinitials>mpw</authorinitials>
+        <revremark>
+          Bump rev to match library version.  No other changes.
+        </revremark>
+      </revision>
+      <revision>
+        <revnumber>3.1.0</revnumber>
+        <date>10th December, 2010</date>
+        <authorinitials>mpw</authorinitials>
+        <revremark>
+          Added support for previous key search, duplicate keys.
+          Programs that link against the 3.0.x library will operate
+          unchanged with 3.1.0.
+        </revremark>
+      </revision>
+      <revision>
+        <revnumber>3.0.1</revnumber>
+        <date>2nd July, 2010</date>
+        <authorinitials>mpw</authorinitials>
+        <revremark>
+          Enhanced BT test harness; bug fixes.
+        </revremark>
+      </revision>
+      <revision>
+        <revnumber>3.0.0</revnumber>
+        <date>4th June, 2010</date>
+        <authorinitials>mpw</authorinitials>
+        <revremark>
+          Added support for large files (> 2GiB)
+        </revremark>
+      </revision>
+      <revision>
+        <revnumber>2.0.4</revnumber>
+        <date>10th May, 2008</date>
+        <authorinitials>mpw</authorinitials>
+        <revremark>
+          Shared access sleep time added as implementation constant
+        </revremark>
+      </revision>
+      <revision>
+        <revnumber>2.0.3</revnumber>
+        <date>27th December, 2005</date>
+        <authorinitials>mpw</authorinitials>
+        <revremark>
+          Changes to reflect that zero-length data records are valid
+        </revremark>
+      </revision>
+      <revision>
+        <revnumber>2.0.2</revnumber>
+        <date>3rd October, 2004</date>
+        <authorinitials>mpw</authorinitials>
+        <revremark>
+          New text on implementation constants and file sizes
+        </revremark>
+      </revision>
+      <revision>
+        <revnumber>2.0</revnumber>
+        <date>1st June, 2004</date>
+        <authorinitials>mpw</authorinitials>
+        <revremark>
+          Reflect changes to API in version 2.0
+        </revremark>
+      </revision>
+      <revision>
+        <revnumber>1.0</revnumber>
+        <date>13th April, 2003</date>
+        <authorinitials>mpw</authorinitials>
+        <revremark>First release</revremark>
+      </revision>
+    </revhistory>
+  </bookinfo>
+  <toc></toc>
+  <preface id="preface">
+    <title>B Tree Library - A History</title> 
+    <para>
+      The B Tree routines in this library were originally written in
+      Fortran 77 during the late 1980's for use in a gazetteer.
+    </para>
+    <para>
+      The routines were ported to C over a number years (as time
+      permitted), but still very much organised as the original
+      Fortran.  This version was utilised in the anag and dict
+      programs, for anagram solving.
+    </para>
+    <para>
+      The source was re-organised in early 2001 to adopt more closely
+      a C organisation style (note the source code itself still has a
+      Fortran flavour).  This was known as "bt_new".
+    </para>
+    <para>
+      The original B Tree implementation was designed solely as an
+      index handler.  Data was expected to be managed by the client
+      application.  In addition, the routines were only able to manage
+      exclusive access to the index file - shared access would result
+      in corrupt index files.  Lastly, only one index file could be
+      open at a time - effectively preventing any application-mediated
+      copying capability.
+    </para>
+    <para>
+      "bt_shared" was derived to resolve these three issues: to
+      provide a combined index and data file (yes, something like
+      CP-V/CP-6 keyed files), to allow shared access to a B Tree file
+      by concurrent processes, and to permit a single process to open
+      multiple index files concurrently.
+    </para>
+    <para>
+      These capabilities were provided in a 32 bit implementation,
+      meaning the largest file that could be supported was 2GiB.
+      Version 3.0 was developed to add support for larger files, i.e
+      those requiring 64 bit addressing.  This is dependent on kernel
+      and gcc Large File Support.
+    </para>
+  </preface>
+  <chapter id="introduction">
+    <title>Introduction</title> 
+    <para>
+      The B Tree (BT) library offers a set of C language functions
+      which implement a generalised index file capability, based on
+      the B tree indexing scheme.  The B tree was originally described
+      by Bayer and McCraight.  A B tree is a multiway balanced tree:
+      i.e. there is more than one key per node, and all leaf nodes are
+      the same distance from the root node.
+    </para>
+    <para>
+      The BT functions implement a 'classical' B tree, not one of
+      the later variants (B* or B+ tree).
+    </para>
+    <para>
+      The B Tree is stored in a UNIX disk file.  The file can contain
+      many B Trees, each of which is referred to by a name assigned by
+      the user (or application).  The system allows many such files to
+      exist.
+    </para>
+    <para>
+      In order for BT to function efficiently on different hardware
+      platforms, the important constants relating to disk block size,
+      maximum number of keys per block, etc. are defined as constants,
+      and may be modified prior to compilation.
+    </para>
+  </chapter>
+  <chapter id="SystemDescription">
+    <title>System Description</title>
+    <section id="SysDescOverview">
+      <title>Overview</title> 
+      <para>
+        The B Tree is stored in a standard UNIX file.  To support
+        efficient processing, the size of a B Tree node should be the
+        same as the hardware's disk block size. In the following
+        description, the terms node and block are interchangeable.
+      </para>
+      <para>
+        A B Tree has a root, which acts as the starting point for all
+        insertions, deletions and searches.  A B Tree has a master
+        root stored at file address 0 (zero), which is termed the
+        "superroot".  The superroot holds the names and root block
+        addresses of all the B Trees in the file.  The superroot also
+        holds the free block list for the file and other
+        administrative information.
+      </para>
+      <para>
+        Each block contains a number of keys, an associated integer
+        value and pointers to other blocks.  The maximum number of
+        keys that can be stored in a block depends on the size of a
+        block and the maximum number of bytes permitted for a key.
+        The integer value associated with a key can be used as desired
+        by the application program.  If the record storage facilities
+        of the B Tree are used, it will contain the block address of
+        an associated data record.
+      </para>
+      <para>
+        Version 3.1 and above allows the definition of duplicate keys,
+        which is enabled on a per-root basis.  If not enabled, this
+        version with behave as previous versions, that is, duplicate
+        keys will be rejected.
+      </para>
+      <para>
+        When a B Tree file is created, the superroot is initialised
+        with two named roots: itself and the default root.  These are
+        defined as "$$super" and "$$default" respectively.  The
+        application may create more roots as required.  When a B Tree
+        file is first opened, the default root ($$default) is always
+        selected.
+      </para>
+      <para>
+        The maximum size of a B Tree file is governed by the
+        implementation.  For an implementation with a 32 bit word
+        length, the maximum file size supported is 2GiB.  If
+        the B Tree library is built with Large File Support, that
+        limit is removed.
+      </para>
+    </section>
+    <section id="MultipleBTrees">
+      <title>Opening multiple B Tree files</title>
+      <para>
+        An application program may have more than one B Tree file
+        opened at any one time.  When a B Tree file is created or
+        opened, a B Tree context pointer is returned to the
+        application.  All B Tree functions must be passed this context
+        pointer to indicate which open B Tree file is to be operated
+        on.  This parameter is identified as
+        <parameter>btact</parameter> in each function
+        description. 
+      </para>
+    </section>
+    <section id="SharedAccess">
+      <title>Shared Access</title>
+      <para>
+        B Tree files may be created/opened in exclusive or shared
+        mode.  Application programs that use shared access should be
+        prepared to handle a busy return from a read or update access
+        to the B Tree file.
+      </para>
+      <para>
+        An application can gain exclusive access to a B File after it
+        has been opened in shared mode.  This is achieved via the <link
+        linkend="btlock"><function>btlock</function></link> function.
+        The<link linkend="btunlock">
+        <function>btunlock</function></link> function relinquishes
+        exclusive access.
+      </para>
+    </section>
+    <section id="LargeFileSupport">
+      <title>Large File Support</title>
+      <para>
+        In order to support large files (i.e. those > 2GiB), a new
+        type has been introduced into the BT library,
+        <emphasis>BTint</emphasis>, which can be 32 bits (i.e int)
+        when compiled without Large File Support, or 64 bits (i.e.
+        long long), when compiled with Large File Support.
+        <emphasis>BTint</emphasis> is a typedef, which will be
+        declared as appropriate.  BT library function arguments which
+        must be declared as <emphasis>BTint</emphasis> are described
+        in the API, but version 2.x users of <function>bfndky</function>,
+        <function>bdbug</function>, <function>binsky</function>,
+        <function>bnxtky</function> or <function>bupdky</function>
+        should be aware of the need to change argument declarations
+        from int to BTint.
+      </para>
+      </section>
+    <section id="DuplicateKeys">
+      <title>Duplicate Keys</title>
+      <para>
+        Version 3.1 added support for duplicate keys.  By default,
+        duplicate keys are not permitted, so this (and later) versions
+        behaves as previous versions.  Duplicate key support is
+        enabled on a per-root basis, using the <link
+        linkend="btdups"><function>btdups</function></link> API
+        function.
+      </para>
+      <para>
+        Finding a duplicate key (via <link
+        linkend="bfndky"><function>bfndky</function></link>) will
+        leave the index at the first instance of the key.  <link
+        linkend="bnxtky"><function>bnxtky</function></link> may be
+        used to walk through the set of duplicate keys. The <link
+        linkend="bprvky"><function>bprvky</function></link> function
+        has been added to allow reverse key navigation.
+        </para>
+      <para>
+        To faciltate the management of duplicate keys, a number of
+        BTree functions have been modified to operate against the
+        current key, as selected by the <link
+        linkend="bfndky"><function>bfndky</function></link>, <link
+        linkend="bnxtky"><function>bnxtky</function></link> or <link
+        linkend="bprvky"><function>bprvky</function></link> functions.
+        These are: <link
+        linkend="bupdky"><function>bupdky</function></link>, <link
+        linkend="bdelky"><function>bdelky</function></link>, <link
+        linkend="btupd"><function>btupd</function></link>, <link
+        linkend="btdel"><function>btdel</function></link> and <link
+        linkend="btrecs"><function>btrecs</function></link>.  Passing
+        these functions a key pointer of NULL will invoke the desired
+        operation against the currently selected key.  See individual
+        function descriptions for further details.
+      </para>
+    </section>
+    <section id="SampleProgram">
+      <title>Sample Program</title> 
+      <para>
+        A very simple use of the BTree API is shown below.  This
+        program creates a BTree file and inserts one key ("akey") with
+        the value of 99.  Error checking has been omitted for clarity.
+      </para>
+      <programlisting>
+        #include "btree.h"
+        int main(int argc, char *argv[])
+        {
+            BTA *btfile;
+            btinit();
+            btfile = btcrt("test_db",0,FALSE);
+            binsky(btfile,"akey",99);
+            btcls(btfile);
+            return 0;
+        }
+      </programlisting>
+      <para>
+        If the program source resides in the bt directory, the command
+        to compile and link the program will be (assuming no Large
+        File Support):
+      </para>
+      <programlisting>
+        gcc -o simple simple.c -Iinc -Llib -lbt
+      </programlisting>
+      <para>
+        A couple of additional sample programs, using the BT Library
+        API, can be found the the
+        <computeroutput>samples</computeroutput> sub-directory.  A
+        <computeroutput>Makefile</computeroutput> is provided to build
+        the sample programs.  The makefile assumes it will be run in
+        the <computeroutput>samples</computeroutput> directory.
+      </para>
+    </section>
+  </chapter>
+  <chapter id="FunctionDescriptions">
+    <title>Function Descriptions</title> 
+    <section id="funcintro">
+      <title>Introduction</title> 
+      <para>
+        This chapter describes each of the functions offered by the BT
+        API.  Rather than present the functions in alphabetic order
+        (as any sensible document would), the functions are described in
+        order of probable usage by an application program.  To make it
+        even more difficult to use as a reference manual, the
+        functions are titled by their functionality, not their
+        names.
+      </para>
+    </section>
+    <section id="btinit">
+      <title>Initialising the B Tree library</title>
+    <funcsynopsis>
+      <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+        <funcdef>int <function>btinit</function></funcdef>
+          <paramdef><parameter>void</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btinit</function> function initialises the B
+        Tree library.  It must be invoked before any other B Tree
+        routine.  Failure to do so will result in strange
+        errors.
+      </para>
+      <para>
+        Calling <function>btinit</function> more than once in the
+        execution lifetime of the B Tree library will cause it to
+        return an error (QINERR).  btinit also checks that the block
+        size, in bytes, of the B Tree library is a power of two. An
+        error return will result for non-conformant block sizes.
+        Successful initialisation is indicated by a return value of
+        zero.
+      </para>
+    </section>
+    <section id="btcrt">
+      <title>Creating a B Tree File</title>
+    <funcsynopsis>
+      <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+      <funcprototype>
+        <funcdef>BTA* <function>btcrt</function></funcdef>
+          <paramdef>char* <parameter>fid</parameter></paramdef>
+          <paramdef>int <parameter>nkeys</parameter></paramdef>
+          <paramdef>int <parameter>shared</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btcrt</function> function will create and
+        initialise a new B Tree file.  The parameter
+        <parameter>fid</parameter> must be set to the name of the file
+        to create.  The <parameter>nkeys</parameter> defines the
+        maximum number of keys that can be stored in the B Tree.  This
+        parameter should always be set to 0 for those operating
+        systems, such as UNIX, that support dynamic file growth.  The
+        parameter <parameter>shared</parameter> should be set to 0 to
+        disallow shared access to the newly created B Tree, or
+        non-zero to allow shared access.
+      </para>
+      <para>
+        <function>btcrt</function> will return a pointer to the BT
+        activation context for the newly opened file (BTA*), or NULL
+        in the case of an error.  To determine the cause of an error,
+        invoke the<link linkend="btcerr">
+        <function>btcerr</function></link> function. 
+      </para>
+      <para>
+        If the B Tree index file has been successfully created, the
+        default root is selected, the file becomes the in-use B Tree
+        file and is ready for further operations.
+      </para>
+      <para>
+        <emphasis>WARNING:</emphasis> The <function>btcrt</function>
+        function will <emphasis>unconditionally</emphasis> create a
+        new file, even if a file of the same name already
+        exists.
+      </para>
+    </section>
+    <section id="btopn">
+      <title>Opening a B Tree File</title>
+    <funcsynopsis>
+      <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+      <funcprototype>
+        <funcdef>BTA* <function>btopn</function></funcdef>
+          <paramdef>char* <parameter>fid</parameter></paramdef>
+          <paramdef>int <parameter>mode</parameter></paramdef>
+          <paramdef>int <parameter>shared</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btopn</function> function will open an existing
+        B Tree file.  The parameter <parameter>fid</parameter> must be
+        set to the name of the file to open.  The
+        <parameter>mode</parameter> parameter determines if the B Tree
+        file can be updated.  A value of zero indicates that updates
+        are allowed, a non-zero value will prohibit updates.  The
+        parameter <parameter>shared</parameter> should be set to zero
+        to disallow shared access to the B Tree file, or non-zero to
+        allow shared access.
+      </para>
+      <para>
+        <function>btopn</function> will return a pointer to the BT
+        activation context for the newly opened file (BTA*), or NULL
+        in the case of an error.  To determine the cause of an error,
+        invoke the <link
+        linkend="btcerr"><function>btcerr</function></link>
+        function.
+      </para>
+      <para> If the B Tree index file has been successfully opened,
+        the default root is selected, and the file is ready for
+        further operations.
+      </para>
+    </section>
+    <section id="btcls">
+      <title>Closing a B Tree File</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>int <function>btcls</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btcls</function> function will close the file
+        associated with the <parameter>btact</parameter> context
+        pointer.
+      </para>
+      <para>
+        A non-zero return code indicates an error occurred in closing
+        the file.
+      </para>
+    </section>
+    <section id="btdups">
+      <title>Set/unset support for duplicate keys</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>int <function>btdups</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>int <parameter>dups</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btdups</function> controls support for duplicate
+        keys in the current root of the index file associated with
+        the <parameter>btact</parameter> context pointer.  Setting the
+        value of the <parameter>dups</parameter> to non-zero (TRUE)
+        will enable support for duplicate keys in the current root.  A
+        value of zero (FALSE) will disable duplicate key support for
+        the current root.  Enabling duplicate key support on the
+        superroot is not permitted.
+      </para>
+      <para>
+        Disabling duplicate key support on a root that previously
+        permitted them merely prevents further duplicate keys from
+        being inserted into the root BTree index.  Existing duplicates
+        will remain and must be managed by the application.
+      </para>
+      <para>
+        A non-zero return code indicates an error occurred.
+      </para>
+    </section>
+    <section id="btthresh">
+      <title>Set write through threshold for index file blocks</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>int <function>btthresh</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>int <parameter>threshold</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btthresh</function> function sets the write
+        threshold for the btree index file associated with the
+        <parameter>btact</parameter> context pointer. The
+        <parameter>threshold</parameter> defines the number of updates
+        on a block that will cause it to be written to disk.  A value
+        of zero (the default for a btree index) means that a block is
+        not written to disk until the memory it occupies is required
+        for a new block.
+      </para>
+      <para>
+        <function>btthresh</function> offers finer-grained control
+        over disk writes than in previous versions of Btree, which was
+        either only when necessary (in exclusive mode), or after every
+        API call (in shared mode).  The intention is to allow the
+        application program to reduce the chance of lost data in a
+        btree index should a hardware or software falure interrupt the
+        running program before the indexes are closed and dirty blocks
+        flushed to disk.
+      </para>
+      <para>
+        NB: If <parameter>threshold</parameter> is set to a small
+        value, it may reduce performance of the BTree application.
+      </para>
+      <para>
+        A non-zero return code indicates an error occurred.
+      </para>
+    </section>
+    <section id="binsky">
+      <title>Inserting a key</title>
+    <funcsynopsis>
+      <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+      <funcprototype>
+        <funcdef>int <function>binsky</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>key</parameter></paramdef>
+          <paramdef>BTint <parameter>value</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>binsky</function> function inserts a new key and
+        associated integer value into the current root of the file
+        associated with the <parameter>btact</parameter> context
+        pointer.  The key, a character string, is passed in
+        <parameter>key</parameter>, while <parameter>value</parameter>
+        holds the associated integer value.
+        <parameter>value</parameter> is declared as a BTint, which is
+        normally a typedef for <emphasis>int</emphasis>, but with
+        Large File Support will be a typedef for <emphasis>long
+        long</emphasis>.
+      </para>
+      <para>
+        If the key has been inserted successfully,
+        <function>binsky</function> returns zero, otherwise an error
+        code is returned.
+      </para>
+      <para>
+        Keys longer than the maximum key length (BT constant ZKYLEN)
+        will be silently truncated to the maximum key length.
+      </para>
+      <para>
+        A non-zero return from <function>binsky</function> indicates
+        an error occurred during the key insertion process.
+      </para>
+    </section>
+    <section id="bfndky">
+      <title>Finding a key</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>int <function>bfndky</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>key</parameter></paramdef>
+          <paramdef>BTint* <parameter>value</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>bfndky</function> function searches for a key in
+        the current root of the file associated with the
+        <parameter>btact</parameter> context pointer.  The key, a
+        character string, is passed as a pointer in
+        <parameter>key</parameter>.  If the key is found, the
+        associated value will be returned in the integer location
+        identified by <parameter>value</parameter>.
+        <parameter>value</parameter> is declared as a BTint, which is
+        normally a typedef for <emphasis>int</emphasis>, but with
+        Large File Support will be a typedef for <emphasis>long
+        long</emphasis>.
+        </para>
+      <para>
+        If the key is found, <function>bfndky</function> returns zero.
+        If the key is not found, <function>bfndky</function> will
+        return an error code of <literal>QNOKEY</literal>.
+      </para>
+      <para>
+        Whether or not the key is located, the B Tree context is left
+        at the next highest key within the B Tree file.  A call to
+        <link linkend="bnxtky"><function>bnxtky</function></link> will
+        return this key.  The function <link
+        linkend="bprvky"><function>bprvky</function></link> may be called
+        to return the previous key.
+      </para>
+      <para>
+        If the current root supports duplicate keys (enabled by a call
+        to <link linkend="btdups"><function>btdups</function></link>,
+        and the target of the <function>bfndky</function> function has
+        duplicates, the context of the B Tree index is positioned at
+        the start of the duplicate key set.
+      </para>
+      <para>
+        A non-zero return from <function>bfndky</function>
+        indicates an error occurred during the key location process.
+      </para>
+    </section>
+    <section id="bnxtky">
+      <title>Finding a sequence of keys</title>
+    <funcsynopsis>
+      <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+      <funcprototype>
+        <funcdef>int <function>bnxtky</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>key</parameter></paramdef>
+          <paramdef>BTint* <parameter>value</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>bnxtky</function> function returns the next key
+        from the current root in the file associated with the
+        <parameter>btact</parameter> context pointer.  The key, a
+        character string, is returned via the pointer in
+        <parameter>key</parameter>.  The value associated with the key
+        will be returned in the integer location identified by
+        <parameter>value</parameter>.  <parameter>value</parameter> is
+        declared as a BTint, which is normally a typedef for
+        <emphasis>int</emphasis>, but with Large File Support will be
+        a typedef for <emphasis>long long</emphasis>.
+      </para>
+      <para>
+        <function>bnxtky</function> returns zero to indicate the next
+        key has been located.  If no next key exists,
+        <function>bnxtky</function> returns the error code
+        <literal>QNOKEY</literal>.
+      </para>
+      <para>
+        To initialise the B Tree position, a call to <link
+        linkend="bfndky"><function>bfndky</function></link> or <link
+        linkend="btpos"><function>btpos</function></link> must be
+        made before the first call to <function>bnxtky</function>.
+        Thereafter, repeated calls to <function>bnxtky</function> may
+        be made.  Calls to <link
+        linkend="bprvky"><function>bprvky</function></link> may be
+        freely intermingled with calls to <function>bnxtky</function>.
+      </para>
+      <para>
+        A non-zero return from <function>bnxtky</function>
+        indicates an error occurred during the key location process.
+      </para>
+    </section>
+    <section id="bprvky">
+      <title>Finding a reverse sequence of keys</title>
+    <funcsynopsis>
+      <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+      <funcprototype>
+        <funcdef>int <function>bprvky</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>key</parameter></paramdef>
+          <paramdef>BTint* <parameter>value</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>bprvky</function> function returns the previous key
+        from the current root in the file associated with the
+        <parameter>btact</parameter> context pointer.  The key, a
+        character string, is returned via the pointer in
+        <parameter>key</parameter>.  The value associated with the key
+        will be returned in the integer location identified by
+        <parameter>value</parameter>.  <parameter>value</parameter> is
+        declared as a BTint, which is normally a typedef for
+        <emphasis>int</emphasis>, but with Large File Support will be
+        a typedef for <emphasis>long long</emphasis>.
+      </para>
+      <para>
+        <function>bprvky</function> returns zero to indicate the previous
+        key has been located.  If no previous key exists,
+        <function>bnxtky</function> returns the error code
+        <literal>QNOKEY</literal>.
+      </para>
+      <para>
+        To initialise the B Tree position, a call to <link
+        linkend="bfndky"><function>bfndky</function></link> or <link
+        linkend="btpos"><function>btpos</function></link> must be
+        made before the first call to <function>bprvky</function>.
+        Thereafter, repeated calls to <function>bprvky</function> may
+        be made. Calls to <link
+        linkend="bnxtky"><function>bnxtky</function></link> may be
+        freely intermingled with calls to <function>bprvky</function>.
+      </para>
+      <para>
+        A non-zero return from <function>bprvky</function>
+        indicates an error occurred during the key location process.
+      </para>
+    </section>
+    <section id="btpos">
+      <title>Setting the position within a B Tree index</title>
+    <funcsynopsis>
+      <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+      <funcprototype>
+        <funcdef>int <function>btpos</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>int <parameter>pos</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btpos</function> function sets the position in
+        the current root in the file associated with the
+        <parameter>btact</parameter> context pointer.  The desired
+        position is indicated by the <parameter>pos</parameter>; a
+        value of 1 positions before the first key in the index, a
+        value of 2 will position after the last key in the
+        index. These values correspond to the B Tree constants ZSTART
+        and ZEND, respectively.
+      </para>
+      <para>
+        Following a call to <function>btpos</function>, calls to <link
+        linkend="bnxtky"><function>bnxtky</function></link> and <link
+        linkend="bprvky"><function>bprvky</function></link> may be
+        made to return successive or previous keys.
+      </para>
+      <para>
+        <function>btpos</function> returns zero to indicate success,
+        otherwise the error code if an error was encountered.
+      </para>
+    </section>
+    <section id="bdelky">
+      <title>Deleting a key</title>
+    <funcsynopsis>
+      <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+      <funcprototype>
+        <funcdef>int <function>bdelky</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>key</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>bdelky</function> function deletes a key from
+        the current root in the file associated with the
+        <parameter>btact</parameter> context pointer.  The key, a
+        character string, is passed via the pointer in
+        <parameter>key</parameter>.  If the key does not exist,
+        <function>bdelky</function> returns the error code
+        <literal>QNOKEY</literal>.  <function>bdelky</function>
+        returns zero on successful deletion of a key.
+      </para>
+      <para>
+        If <function>bdelky</function> is called with a
+        <parameter>key</parameter> value of NULL, the delete operation
+        will act against the current key, as selected by
+        <function>bfndky</function>, <function>bnxtky</function> or
+        <function>bprvky</function> operations. This capability is
+        designed to allow deletion of a duplicate key, presumably
+        based on other, application managed, attributes.  
+      </para>
+      <para>
+        A non-zero return from <function>bdelky</function> indicates
+        an error occurred during the key deletion process.
+      </para>
+    </section>
+    <section id="bupdky">
+      <title>Updating the value of a key</title>
+    <funcsynopsis>
+      <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+      <funcprototype>
+        <funcdef>int <function>bupdky</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>key</parameter></paramdef>
+          <paramdef>BTint <parameter>value</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>bupdky</function> function updates the value of
+        an existing key in the current root of the file associated
+        with the <parameter>btact</parameter> context pointer.  The
+        key, a character string, is passed via the pointer in
+        <parameter>key</parameter>.  The new value is passed via
+        <parameter>value</parameter>.  <parameter>value</parameter> is
+        declared as a BTint, which is normally a typedef for
+        <emphasis>int</emphasis>, but with Large File Support will be
+        a typedef for <emphasis>long long</emphasis>.
+        </para>
+      <para>
+        If the key does not exist, <function>bupdky</function> returns
+        the error code <literal>QNOKEY</literal>.
+      </para>
+      <para>
+        If <function>bupdky</function> is called with a
+        <parameter>key</parameter> value of NULL, the update operation
+        will act against the current key, as selected by
+        <function>bfndky</function>, <function>bnxtky</function> or
+        <function>bprvky</function> operations. This capability is
+        designed to allow update of a duplicate key, presumably based
+        on other, application managed, attributes.
+      </para>
+      <para>
+        <function>bupdky</function> returns zero to indicate a
+        successful update, error code otherwise.
+      </para>
+    </section>
+    <section id="btcrtr">
+      <title>Creating a root</title>
+    <funcsynopsis>
+      <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+      <funcprototype>
+        <funcdef>int <function>btcrtr</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>root</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btcrtr</function> function creates a new root
+        within the file associated with the
+        <parameter>btact</parameter> context pointer.  The root name,
+        a character string, is passed via the pointer in
+        <parameter>root</parameter>.  If the new root is created
+        successfully, <function>btcrtr</function> returns zero.
+      </para>
+      <para>
+        On successful creation of a new root, on return from
+        <function>btcrtr</function>, the new root will have been made
+        current.  If the root could not be created, the current root
+        is unchanged.
+      </para>
+      <para>
+        A non-zero return from <function>btcrtr</function> indicates
+        an error occurred during the root creation process.
+      </para>
+    </section>
+    <section id="btchgr">
+      <title>Changing the current root</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>int <function>btchgr</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>root</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btchgr</function> function changes the current
+        root within the file associated with the
+        <parameter>btact</parameter> context pointer.  The target root
+        name, a character string, is passed via the pointer in
+        <parameter>root</parameter>.  If the switch to the target root
+        is successful, <function>btchgr</function> returns zero.
+      </para>
+      <para>
+        On successful change to the target root, on return from
+        <function>btchgr</function>, the target root will have been
+        made current.  If the root could not be switched, the current
+        root is unchanged.
+      </para>
+      <para>
+        A non-zero return from <function>btchgr</function> indicates
+        an error occurred during the root change process.
+      </para>
+    </section>
+    <section id="btdelr">
+      <title>Deleting a root</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>int <function>btdelr</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>root</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btdelr</function> function deletes the named
+        root within the file associated with the
+        <parameter>btact</parameter> context pointer.  The target root
+        name for deletion, a character string, is passed via the
+        pointer in <parameter>root</parameter>.  If the deletion of
+        the target root is successful, <function>btdelr</function>
+        returns zero.
+      </para>
+      <para>
+        All blocks owned by the target root are deleted, and returned
+        to the free list.  Whether or not the target root is deleted,
+        the current root is left unchanged.
+      </para>
+      <para>
+        A non-zero return from <function>btdelr</function> indicates
+        an error occurred during the root delete process.  It is
+        considered an error to attempt to delete the current
+        root.
+      </para>
+    </section>
+    <section id="btlock">
+      <title>Gaining exclusive access to a B Tree file</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>int <function>btlock</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btlock</function> function enables a process to
+        gain exclusive access to a B Tree file, originally opened in
+        shared mode.  <function>btlock</function> is passed
+        <parameter>btact</parameter>, which holds the context pointer
+        of the file for which exclusive access is required.
+      </para>
+      <para>
+        <function>btlock</function> will return zero on success, error
+        code otherwise.  Applications should be ready to handle a
+        QBUSY error return, indicating that exclusive access could not
+        be gained.  <function>btlock</function> waits for ZSLEEP
+        seconds before giving up the attempt to gain exclusive access.
+        ZSLEEP is an implementation defined constant.  The default is
+        five seconds.
+      </para>
+    </section>
+    <section id="btunlock">
+      <title>Releasing exclusive access on a B Tree file</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>int <function>btunlock</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btunlock</function> function enables a process
+        to relinquish exclusive access to a file, originally gained
+        from a call to <function>btlock</function>.
+        <function>btunlock</function> is passed
+        <parameter>btact</parameter>, which holds the context pointer
+        of the B Tree file for which exclusive access is no longer
+        required.
+      </para>
+      <para>
+        If the B Tree file is not locked, or has been opened for
+        exclusive access, <function>btunlock</function> has no
+        effect.
+      </para>
+      <para>
+        A non-zero return from <function>btunlock</function> indicates
+        an error occurred.
+      </para>
+    </section>
+    <section id="btins">
+      <title>Inserting a key and data</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>int <function>btins</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>key</parameter></paramdef>
+          <paramdef>char* <parameter>data</parameter></paramdef>
+          <paramdef>int <parameter>dsize</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btins</function> function inserts a key and data
+        record into a file associated with the
+        <parameter>btact</parameter> context pointer.  Both
+        <parameter>key</parameter> and <parameter>data</parameter> are
+        character pointers.  Since the data may legitimately contain
+        null (x'00') characters, the length of the data, in bytes, is
+        passed in
+        <parameter>dsize</parameter>. <parameter>dsize</parameter>
+        must be zero or greater. If the key and data is successfully
+        stored in the B Tree file, <function>btins</function> returns
+        zero.
+      </para>
+      <para>
+        A non-zero return from <function>btins</function> indicates an
+        error occurred.
+      </para>
+    </section>
+    <section id="btupd">
+      <title>Updating data for an existing key</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>int <function>btupd</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>key</parameter></paramdef>
+          <paramdef>char* <parameter>data</parameter></paramdef>
+          <paramdef>int <parameter>dsize</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btupd</function> function updates the data
+        record of an existing key in the file associated with the
+        <parameter>btact</parameter> context pointer.  Both
+        <parameter>key</parameter> and <parameter>data</parameter> are
+        character pointers.  Since the data may legitimately contain
+        null (x'00) characters, the length of the data, in bytes, must
+        be passed in <parameter>dsize</parameter>. If the replacement
+        data is successfully stored in the B Tree file,
+        <function>btupd</function> returns zero.
+      </para>
+      <para>
+        If <function>btupd</function> is called with a
+        <parameter>key</parameter> value of NULL, the update operation
+        will act against the current key, as selected by
+        <function>btsel</function>, <function>btseln</function> or
+        <function>btselp</function> operations. This capability is
+        designed to allow update of a duplicate key, presumably based
+        on other, application managed, attributes.
+      </para>
+      <para>
+        A non-zero return from <function>btupd</function> indicates an
+        error occurred.
+      </para>
+    </section>
+    <section id="btsel">
+      <title>Locating data for an existing key</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>int <function>btsel</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>key</parameter></paramdef>
+          <paramdef>char* <parameter>data</parameter></paramdef>
+          <paramdef>int <parameter>dsize</parameter></paramdef>
+          <paramdef>int* <parameter>rsize</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btsel</function> function locates and returns
+        the data record of an existing key in the file associated with
+        the <parameter>btact</parameter> context pointer.  Both
+        <parameter>key</parameter> and <parameter>data</parameter> are
+        character pointers.  The <parameter>dsize</parameter>
+        parameter must contain the maximum number of bytes to be
+        returned.  The caller should ensure that the
+        <parameter>data</parameter> pointer refers to an area of
+        memory of at least <parameter>dsize</parameter> bytes.  The
+        actual number of bytes returned is returned in
+        <parameter>rsize</parameter>.  Even if the data record
+        contains more than <parameter>dsize</parameter> bytes, only
+        <parameter>dsize</parameter> bytes will be returned.  If the
+        data record is successfully retrieved (even partially),
+        <function>btsel</function> returns zero.
+      </para>
+      <para>
+        An application program can determine the number of bytes
+        occupied by a data record through the <link
+        linkend="btrecs"><function>btrecs</function></link> function.
+      </para>
+      <para>
+        A non-zero return from <function>btsel</function> indicates an
+        error occurred.
+      </para>
+    </section>
+    <section id="btdel">
+      <title>Deleting a key and associated data</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>int <function>btdel</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>key</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btdel</function> function deletes a key and data
+        record in the file associated with the
+        <parameter>btact</parameter> context pointer.
+        <parameter>key</parameter> is a character pointer, identifying
+        the key to delete.  If deletion of the key and data is
+        successful, <function>btdel</function> returns zero.
+      </para>
+      <para>
+        If <function>btdel</function> is called with a
+        <parameter>key</parameter> value of NULL, the delete operation
+        will act against the current key, as selected by
+        <function>btsel</function>, <function>btseln</function> or
+        <function>btselp</function> operations. This capability is
+        designed to allow deletion of a duplicate key, presumably
+        based on other, application managed, attributes.
+      </para>
+      <para>
+        A non-zero return from <function>btdel</function> indicates an
+        error occurred.
+      </para>
+    </section>
+    <section id="btseln">
+      <title>Locating data for the next key in sequence</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>int <function>btseln</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>key</parameter></paramdef>
+          <paramdef>char* <parameter>data</parameter></paramdef>
+          <paramdef>int <parameter>dsize</parameter></paramdef>
+          <paramdef>int* <parameter>rsize</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btseln</function> function locates and returns
+        the next key and data record in the file associated with the
+        <parameter>btact</parameter> context pointer.  Before using
+        <function>btseln</function>, a call to <link
+        linkend="btsel"><function>btsel</function></link> or <link
+        linkend="btpos"><function>btpos</function></link> must be made
+        to initialise the position within the B Tree.  Calls to <link
+        linkend="btselp"><function>btselp</function></link> may be
+        freely intermingled with calls to <function>btseln</function>.
+      </para>
+      <para>
+        Both <parameter>key</parameter> and
+        <parameter>data</parameter> are character pointers.  The
+        <parameter>dsize</parameter> parameter must contain the
+        maximum number of bytes to be returned.  The caller should
+        ensure that the <parameter>data</parameter> pointer refers to
+        an area of memory of at least <parameter>dsize</parameter>
+        bytes.  The actual number of bytes returned is returned in
+        <parameter>rsize</parameter>.  Even if the data record
+        contains more than <parameter>dsize</parameter> bytes, only
+        <parameter>dsize</parameter> bytes will be returned.  If the
+        data record is successfully retrieved (even partially),
+        <function>btseln</function> returns zero.
+      </para>
+      <para>
+        If no next key exists, <function>btseln</function> will return
+        the error code <literal>QNOKEY</literal>.
+      </para>
+      <para>
+        An application program can determine the number of bytes
+        occupied by a data record through the <link
+        linkend="btrecs"><function>btrecs</function></link> function.
+      </para>
+         <para>
+        A non-zero return from <function>btseln</function> indicates
+        an error occurred.
+      </para>
+    </section>
+    <section id="btselp">
+      <title>Locating data for the previous key in sequence</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>int <function>btselp</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>key</parameter></paramdef>
+          <paramdef>char* <parameter>data</parameter></paramdef>
+          <paramdef>int <parameter>dsize</parameter></paramdef>
+          <paramdef>int* <parameter>rsize</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btselp</function> function locates and returns
+        the previous key and data record in the file associated with
+        the <parameter>btact</parameter> context pointer.  Before
+        using <function>btselp</function>, a call to <link
+        linkend="btsel"><function>btsel</function></link> or <link
+        linkend="btpos"><function>btpos</function></link> must be made
+        to initialise the position within the B Tree.  Calls to <link
+        linkend="btseln"><function>btseln</function></link> may be
+        freely intermingled with calls to <function>btselp</function>.
+      </para>
+      <para>
+        Both <parameter>key</parameter> and
+        <parameter>data</parameter> are character pointers.  The
+        <parameter>dsize</parameter> parameter must contain the
+        maximum number of bytes to be returned.  The caller should
+        ensure that the <parameter>data</parameter> pointer refers to
+        an area of memory of at least <parameter>dsize</parameter>
+        bytes.  The actual number of bytes returned is returned in
+        <parameter>rsize</parameter>.  Even if the data record
+        contains more than <parameter>dsize</parameter> bytes, only
+        <parameter>dsize</parameter> bytes will be returned.  If the
+        data record is successfully retrieved (even partially),
+        <function>btselp</function> returns zero.
+      </para>
+      <para>
+        If no previous key exists, <function>btselp</function> will return
+        the error code <literal>QNOKEY</literal>.
+      </para>
+      <para>
+        An application program can determine the number of bytes
+        occupied by a data record through the <link
+        linkend="btrecs"><function>btrecs</function></link> function.
+      </para>
+      <para>
+        A non-zero return from <function>btseln</function> indicates
+        an error occurred.
+      </para>
+    </section>
+    <section id="btrecs">
+      <title>Determine size of data record for specific key</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>int <function>btrecs</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>key</parameter></paramdef>
+          <paramdef>int* <parameter>rsize</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btrecs</function> function returns the number of
+        bytes occupied by the data record of a key in the file
+        associated with the <parameter>btact</parameter> context
+        pointer.  The <parameter>key</parameter> parameter is a
+        character pointer, identifying the key to query.  The number
+        of bytes occupied by the data record is returned in
+        <parameter>rsize</parameter>. If the key is located and the
+        data size of the record returned successfully,
+        <function>btrecs</function> returns zero.
+      </para>
+      <para>
+        If <function>btrecs</function> is called with a
+        <parameter>key</parameter> value of NULL, the size operation
+        will act against the current key, as selected by
+        <function>btsel</function>, <function>btseln</function> or
+        <function>btselp</function> operations. This capability is
+        designed to allow the determination of the size of the data
+        record of a duplicate key, presumably based on other,
+        application managed, attributes.
+      </para>
+      <para>
+        If <function>btrecs</function> is invoked for a
+        <emphasis>key</emphasis> without an associated data record,
+        the results are undefined.
+      </para>
+      <para>
+        A non-zero return from <function>btrecs</function>
+        indicates an error occurred.
+      </para>
+    </section>
+    <section id="bdbug">
+      <title>Debugging information</title>
+    <funcsynopsis>
+      <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+      <funcprototype>
+        <funcdef>int <function>bdbug</function></funcdef>
+          <paramdef>BTA* <parameter>btact</parameter></paramdef>
+          <paramdef>char* <parameter>opt</parameter></paramdef>
+          <paramdef>BTint <parameter>blk</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>bdbug</function> function provides a debug
+        capability for the B Tree package.  The following options can
+        be passed via the <parameter>opt</parameter> parameter:
+      </para>
+      <table frame="none">
+        <title>Debug Options</title>
+        <tgroup align="left" cols="3" colsep="0" rowsep="0">
+          <tbody>
+            <row>
+              <entry>control</entry><entry>-</entry>
+              <entry>displays the in-memory block information,
+              together with the last key found details</entry>
+            </row>
+            <row>
+              <entry>super</entry><entry>-</entry>
+              <entry>displays superroot information i.e. block usage,
+              free list etc.</entry>
+            </row>
+            <row>
+              <entry>stack</entry><entry>-</entry>
+              <entry>displays the tree stack (i.e. key
+              context)</entry>
+            </row>
+            <row>
+              <entry>space</entry><entry>-</entry>
+              <entry>displays occupancy statistics</entry>
+            </row>
+            <row>
+              <entry>stats</entry><entry>-</entry>
+              <entry>displays B Tree operating statistics</entry>
+            </row>
+            <row>
+              <entry>block</entry><entry>-</entry> <entry>displays the
+              contents of the block identified by
+              <parameter>blk</parameter>.  <parameter>blk</parameter>
+              is declared as a BTint, which is normally a typedef for
+              <emphasis>int</emphasis>, but with Large File Support
+              will be a typedef for <emphasis>long long</emphasis>.
+              </entry>
+            </row>
+            <row>
+              <entry>structure</entry><entry>-</entry> <entry>Performs
+              a structure check of the currently active BTree file.
+              If <parameter>blk</parameter> is set to ZNULL,
+              information on the index structure, and problems (if
+              any), are displayed.  Otherwise, a simple statement of
+              structure condition is displayed.
+              </entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+      <para>
+        A non-zero return from <function>bdbug</function> indicates an
+        error occurred during the display of debugging
+        information.
+      </para>
+    </section>
+    <section id="btcerr">
+      <title>Retrieving error message text</title>
+      <funcsynopsis>
+        <funcsynopsisinfo>#include "btree.h"</funcsynopsisinfo>
+        <funcprototype>
+          <funcdef>void <function>btcerr</function></funcdef>
+          <paramdef>int* <parameter>ierr</parameter></paramdef>
+          <paramdef>int* <parameter>ioerr</parameter></paramdef>
+          <paramdef>char* <parameter>srname</parameter></paramdef>
+          <paramdef>char* <parameter>msg</parameter></paramdef>
+        </funcprototype>
+      </funcsynopsis>
+      <para>
+        The <function>btcerr</function> function returns the error
+        code (in <parameter>ierr</parameter>) and (if relevant) the
+        I/O error code (in <parameter>ioerr</parameter>) of the last
+        error encountered by the B Tree system.  In addition, it will
+        return the name of the function which detected the error (in
+        <parameter>srname</parameter>) and an error message in
+        <parameter>msg</parameter>.
+      </para>
+      <para>
+        The maximum number of chars returned in
+        <parameter>srname</parameter> is BT constant
+        <emphasis>ZRNAMESZ</emphasis>.  The maximum number of chars
+        returned in <parameter>msg</parameter> is BT constant
+        <emphasis>ZMSGSZ</emphasis>.  Both char arrays will be
+        zero-padded to <emphasis>ZRNAMESZ</emphasis> and
+        <emphasis>ZMSGSZ</emphasis> respectively.  Declaring these
+        arrays to be smaller than the BT constants will ensure
+        <function>btcerr</function> acts as a very effective stack
+        smasher.
+      </para>
+    </section>
+  </chapter>
+  <chapter id="ErrorMessages">
+    <title>Error Messages</title> 
+    <para>
+      This section lists the errors that may be encountered when using
+      the B Tree system.  The occurrence of most of these errors
+      indicates a serious failure in the B Tree system, with the
+      following exceptions:
+    </para>
+    <variablelist>
+      <varlistentry>
+        <term>QNOKEY</term> 
+        <listitem>
+          <para>
+            The key given as a parameter to
+            <function>bfndky</function> (or its brethren) does not
+            exist.
+          </para>
+        </listitem>
+      </varlistentry>
+    <varlistentry>
+        <term>QDUP</term> 
+        <listitem>
+          <para>
+            The key given as a parameter to
+            <function>binsky</function> (or its brethren) already
+            exists in the index.  Duplicate keys are not
+            permitted.
+          </para>
+        </listitem>
+      </varlistentry>
+    <varlistentry>
+        <term>QBUSY</term> 
+        <listitem>
+          <para>
+            File busy, a normal hazard when using shared access mode
+            in a multiuser
+            environment.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>QNOWRT</term> 
+        <listitem>
+          <para>
+            The B Tree file was originally opened with read-only
+            permission, and a write has subsequently been attempted.
+            Probably an application program error.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>QNOBTF</term> 
+        <listitem>
+          <para>
+            Attempt to perform operation on B Tree file, but there is
+            no file attached to the context pointer provided, likely
+            an application error.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>QINERR</term> 
+        <listitem>
+          <para>
+            Attempt made to open the same file again, likely an
+            application error.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>QDELCR</term> 
+        <listitem>
+          <para>
+            An attempt has been made to delete the current root, or
+            worse, the super root.  This is forbidden by the BT library.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>QBADOP</term> 
+        <listitem>
+          <para>
+            Unknown debug option passed to bdbug, likely an
+            application error.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>QNOACT</term> 
+        <listitem>
+          <para>
+            Maximum number of concurrently open B Tree files reached -
+            may be an application
+            error.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>QBADAP</term> 
+        <listitem>
+          <para>
+            Illegal context pointer passed to a B Tree function - may
+            be an application error.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>QDNEG</term> 
+        <listitem>
+          <para>
+            A negative length data record has been passed to a B Tree
+            function.  
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>QBADVR</term> 
+        <listitem>
+          <para>
+            The B Tree index file was created using an older version
+            of the B Tree library, and cannot be accessed safely with
+            this version.  Extract data using a program based on the
+            previous version of the B Tree library, and import into a
+            index file created with the new.  Alternatively, it may be
+            possible to use the <link
+            linkend="btr"><command>btr</command></link> recovery tool
+            to migrate an older BTree index file to the latest
+            version.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>QDAOVR</term> 
+        <listitem>
+          <para>
+            A new data record cannot be entered as the maximum value
+            of a data block pointer has been
+            exceeded.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>QF2BIG</term> 
+        <listitem>
+          <para>
+            The index file has reached its maximum size for this
+            implementation.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>QBADAL</term> 
+        <listitem>
+          <para>
+            Unable to set alarm for for file lock handling.  This may
+            be a problem with the underlying OS.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>QBADCTXT</term> 
+        <listitem>
+          <para>
+            Index context invalid for current key operation.  An
+            attempt was made to delete or update the current key, but
+            the context is not valid.  A valid context is set by
+            bfndky, bnxtky, bprvky, btsel, btseln, or btselp.
+          </para>
+        </listitem>
+      </varlistentry>
+     <varlistentry>
+        <term>QNODUPS</term> 
+        <listitem>
+          <para>
+            Duplicates are not permitted in the superroot.  Attempting to
+            permit duplicate keys in the superroot, via
+            btdups(..,TRUE), is prohibited.
+          </para>
+        </listitem>
+      </varlistentry>
+     <varlistentry>
+        <term>QNOT64BIT</term> 
+        <listitem>
+          <para>
+            Index file was created with a non-64 bit version (LFS=0) of
+            the library.  However, access is being attempted with a
+            64 bit version.
+          </para>
+        </listitem>
+      </varlistentry>
+     <varlistentry>
+        <term>Q64BIT</term> 
+        <listitem>
+          <para>
+            Index file was created with a 64 bit version (LFS=1) of
+            the library.  However, access is being attempted with a
+            non-64 bit version.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+    <table frame="none"><title>B Tree Error Messages</title>
+      <tgroup align="left" cols="3" colsep="0" rowsep="0">
+        <tbody>
+          <row>
+            <entry>1</entry>
+            <entry>QBLKNR</entry>
+            <entry>Block %s is not a root block</entry>
+          </row>
+          <row>
+            <entry>2</entry>
+            <entry>QCLSIO</entry>
+            <entry>Unable to close index file: "file"</entry>
+          </row>
+          <row>
+            <entry>3</entry>
+            <entry>QCRTIO</entry>
+            <entry>Unable to create index file: "file"</entry>
+          </row>
+          <row>
+            <entry>4</entry>
+            <entry>QCPBLK</entry>
+            <entry>Unable to read source or destination block </entry>
+          </row>
+          <row>
+            <entry>5</entry>
+            <entry>QWRBLK</entry>
+            <entry>I/O error writing block</entry>
+          </row>
+          <row>
+            <entry>6</entry>
+            <entry>QRDSUP</entry>
+            <entry>I/O error reading super root</entry>
+          </row>
+          <row>
+            <entry>7</entry>
+            <entry>QWRSUP</entry>
+            <entry>I/O error writing super root</entry>
+          </row>
+          <row>
+            <entry>8</entry>
+            <entry>QOPNIO</entry>
+            <entry>I/O error opening index file: "file"</entry>
+          </row>
+          <row>
+            <entry>9</entry>
+            <entry>QRDBLK</entry>
+            <entry>I/O error reading block</entry>
+          </row>
+          <row>
+            <entry>10</entry>
+            <entry>QIXOPN</entry>
+            <entry>An index file is already open</entry>
+          </row>
+          <row>
+            <entry>11</entry>
+            <entry>QSPLIT</entry>
+            <entry>Can't split full block</entry>
+          </row>
+          <row>
+            <entry>12</entry>
+            <entry>QINFER</entry>
+            <entry>Bad info block index used</entry>
+          </row>
+          <row>
+            <entry>13</entry>
+            <entry>QNOMEM</entry>
+            <entry>Unable to acquire a free memory block</entry>
+          </row>
+          <row>
+            <entry>14</entry>
+            <entry>QSTKUF</entry>
+            <entry>Stack underflow</entry>
+          </row>
+          <row>
+            <entry>15</entry>
+            <entry>QSTKOF</entry>
+            <entry>Stack overflow</entry>
+          </row>
+          <row>
+            <entry>16</entry>
+            <entry>QBLKFL</entry>
+            <entry>Can't insert key at block: %s</entry>
+          </row>
+          <row>
+            <entry>17</entry>
+            <entry>QLOCTB</entry>
+            <entry>Replace location out of range</entry>
+          </row>
+          <row>
+            <entry>18</entry>
+            <entry>QSPKEY</entry>
+            <entry>Split: search for middle key failed</entry>
+          </row>
+          <row>
+            <entry>19</entry>
+            <entry>QWRMEM</entry>
+            <entry>Requested write block not in memory</entry>
+          </row>
+          <row>
+            <entry>20</entry>
+            <entry>QBALSE</entry>
+            <entry>Balance: search for key failed</entry>
+          </row>
+          <row>
+            <entry>21</entry>
+            <entry>QDELEX</entry>
+            <entry>Exact flag not set for delete</entry>
+          </row>
+          <row>
+            <entry>22</entry>
+            <entry>QDELER</entry>
+            <entry>Internal inconsistency in delete operation</entry>
+          </row>
+          <row>
+            <entry>23</entry> <entry>QDELRP</entry> <entry>Search for
+            deleted key replacement failed (in block %s)</entry>
+          </row>
+          <row>
+            <entry>24</entry>
+            <entry>QDEMSE</entry>
+            <entry>Demote search failed</entry>
+          </row>
+          <row>
+            <entry>25</entry>
+            <entry>QDEMSP</entry>
+            <entry>Demote split failed</entry>
+          </row>
+          <row>
+            <entry>26</entry>
+            <entry>QJNSE</entry>
+            <entry>Join search failed</entry>
+          </row>
+          <row>
+            <entry>27</entry>
+            <entry>QNODEF</entry>
+            <entry>Cannot locate default root ($$default)</entry>
+          </row>
+          <row>
+            <entry>28</entry>
+            <entry>QDELCR</entry>
+            <entry>Deletion of the current or super root is forbidden</entry>
+          </row>
+          <row>
+            <entry>29</entry>
+            <entry>QBADIX</entry>
+            <entry>Negative in-memory index encountered</entry>
+          </row>
+          <row>
+            <entry>30</entry>
+            <entry>QNOBTF</entry>
+            <entry>No index file open for this operation</entry>
+          </row>
+          <row>
+            <entry>31</entry>
+            <entry>QINERR</entry>
+            <entry>Index file already in use</entry>
+          </row>
+          <row>
+            <entry>32</entry>
+            <entry>QBADOP</entry>
+            <entry>Debug option not recognised</entry>
+          </row>
+          <row>
+            <entry>33</entry>
+            <entry>QNOACT</entry>
+            <entry>No more index files may be opened (limit reached)</entry>
+          </row>
+          <row>
+            <entry>34</entry>
+            <entry>QBADAP</entry>
+            <entry>Invalid index file context pointer</entry>
+          </row>
+          <row>
+            <entry>35</entry>
+            <entry>QBUSY</entry>
+            <entry>File is busy</entry>
+          </row>
+          <row>
+            <entry>37</entry>
+            <entry>QNOBLK</entry>
+            <entry>No block available for data storage</entry>
+          </row>
+          <row>
+            <entry>38</entry>
+            <entry>QNEGSZ</entry>
+            <entry>Data block usage gone bad: %s</entry>
+          </row>
+          <row>
+            <entry>39</entry>
+            <entry>QNOTDA</entry>
+            <entry>Data segment header references a non-data block: %s</entry>
+          </row>
+          <row>
+            <entry>40</entry>
+            <entry>QBADCTXT</entry>
+            <entry>Index context invalid for current key operation</entry>
+          </row>
+          <row>
+            <entry>41</entry>
+            <entry>QDLOOP</entry>
+            <entry>Circular data segment pointer encountered</entry>
+          </row>
+          <row>
+            <entry>42</entry>
+            <entry>QUNLCK</entry>
+            <entry>Unlock operation failed</entry>
+          </row>
+          <row>
+            <entry>43</entry>
+            <entry>QLRUER</entry>
+            <entry>LRU queue corrupt - index not in list</entry>
+          </row>
+          <row>
+            <entry>44</entry>
+            <entry>QDAERR</entry>
+            <entry>Unable to insert data record</entry>
+          </row>
+          <row>
+            <entry>45</entry>
+            <entry>QDNEG</entry>
+            <entry>Data record cannot be negative </entry>
+          </row>
+          <row>
+            <entry>46</entry>
+            <entry>QDUP</entry>
+            <entry>Key "key" already exists in index</entry>
+          </row>
+          <row>
+            <entry>47</entry>
+            <entry>QNOKEY</entry>
+            <entry>Key "key" does not exist in index</entry>
+          </row>
+          <row>
+            <entry>48</entry>
+            <entry>QNOWRT</entry>
+            <entry>Write access to index prohibited</entry>
+          </row>
+          <row>
+            <entry>49</entry>
+            <entry>QNOTFR</entry>
+            <entry>Block on free list is not marked as free</entry>
+          </row>
+          <row>
+            <entry>50</entry>
+            <entry>QBADVR</entry>
+            <entry>Index file is incompatible with current version: "version"</entry>
+          </row>
+          <row>
+            <entry>51</entry>
+            <entry>QDAOVR</entry>
+            <entry>Data capacity exceeded at block: "block"</entry>
+          </row>
+          <row>
+            <entry>52</entry>
+            <entry>QF2BIG</entry>
+            <entry>Index file is at maximum size</entry>
+          </row>
+          <row>
+            <entry>53</entry>
+            <entry>QBADAL</entry>
+            <entry>Unable to set alarm for locking</entry>
+          </row>
+          <row>
+            <entry>54</entry>
+            <entry>QDRANEG</entry>
+            <entry>Data record address is negative: "address"</entry>
+          </row>
+          <row>
+            <entry>55</entry>
+            <entry>QBLKSZERR</entry>
+            <entry>Defined block size is not a power of two: "size"</entry>
+          </row>
+          <row>
+            <entry>56</entry>
+            <entry>QNODUPS</entry>
+            <entry>Duplicates keys are not allowed for the superroot</entry>
+          </row>
+          <row>
+            <entry>57</entry>
+            <entry>QPOSERR</entry>
+            <entry>Location search exceeds key count at block: %s</entry>
+          </row>
+          <row>
+            <entry>58</entry>
+            <entry>QNOT64BIT</entry>
+            <entry>
+              Index file likely not LFS (64bit) enabled; doesn't match library.
+            </entry>
+          </row>
+          <row>
+            <entry>59</entry>
+            <entry>Q64BIT</entry>
+            <entry>
+              Index file likely LFS (64bit) enabled; doesn't match library.
+            </entry>
+          </row>
+          <row>
+            <entry>60</entry>
+            <entry>QNOTDUP</entry>
+            <entry>
+              Duplicate key address does not reference a duplicate block: %s.
+            </entry>
+          </row>
+          <row>
+            <entry>61</entry>
+            <entry>QDUPSZ</entry>
+            <entry>
+              Duplicate key entry has wrong size.
+            </entry>
+          </row>
+          <row>
+            <entry>62</entry>
+            <entry>QBADIR</entry>
+            <entry>
+              Bad direction parameter.
+            </entry>
+          </row>
+       </tbody>
+      </tgroup>
+    </table>
+  </chapter>
+  <chapter id="TestHarness">
+    <title>B Tree Test Harness</title> 
+    <para>
+      The B Tree library is distributed with a test harness,
+      <command>bt</command>, which exercises all of the functions
+      supplied by the B Tree library.
+    </para>
+    <para>
+      Most <command>bt</command> commands correspond directly to a
+      matching B Tree library function call.  Additional commands are
+      available to automate testing scripts and manage concurrently
+      open files.  <command>bt</command> reads from stdin and writes
+      normal output to stdout.  Terminal error messages go to stderr.
+      A prompt of <emphasis>bt: </emphasis>is issued prior to reading
+      from stdin.  Long running commands may be interrupted using
+      cntrl-c, which will return to the command prompt.
+    </para>
+    <para>
+      <command>bt</command> is built with GNU readline support, if
+      readline libraries and include files are detected when building
+      the BT library and supporting tools.  Readline enables
+      <command>bt</command> to offer command editing, command history
+      and file completion.  More information on the capabilities
+      provided by readline can be found in the <ulink
+        url="http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html#Documentation"><command>full
+          GNU documentation</command></ulink>.
+    </para>
+    <para>
+      A typical <command>bt</command> session might look like:
+    </para>
+    
+    <programlisting>
+      $ bt
+      bt: c test
+      bt: d newkey 55
+      bt: f newkey
+      Key: 'newkey' = 55
+      bt: dd datakey some_text_string
+      bt: fd datakey
+      Data returned: 'some_text_string'
+      bt: fd datakey d
+      some_text_string
+      bt: b abuf 512
+      bt: dd bufkey *abuf
+      bt: fd bufkey
+      Data record: 
+      aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+      aaaaaaaaaaaaaaaaaaaaaaaaa'
+      bt: sd bufkey
+      Key 'bufkey' record size: 512 bytes
+      bt: q
+      $ 
+    </programlisting>
+    <para>
+      <command>bt</command> commands have a both a full and
+      abbreviated versions.  The descriptions below show the full
+      command first, followed by the abbreviated version (comma
+      separated).  A command may optionally be followed by an argument
+      and a qualifier.  The following table lists the commands
+      supported by <command>bt</command>:
+    </para>
+    <table frame="none">
+      <title>B Tree Commands</title>
+      <tgroup align="left" cols="3" colsep="0" rowsep="0">
+        <colspec colname="c1"/>
+        <colspec colname="c2"/>
+        <colspec colname="c3"/>
+        <spanspec spanname="cmd" namest="c1" nameend="c3"/>
+        <spanspec spanname="desc" namest="c3" nameend="c3"/>
+        <tbody valign="top">
+          <row id="b"><entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>buffer,b</command> 
+                <arg choice="plain">
+                  <replaceable>bufname</replaceable>
+                </arg> 
+                <group choice="req">
+                  <arg choice="plain">
+                    <replaceable>size</replaceable>
+                  </arg>
+                  <arg choice="plain">
+                    <replaceable>filename</replaceable>
+                  </arg>
+                </group>
+              </cmdsynopsis>
+            </entry>
+          </row><row> 
+            <entry spanname="desc">
+              <para>
+                Buffer: Creates a data buffer called
+                <emphasis>bufname</emphasis>.  If the numeric
+                <emphasis>size</emphasis> argument is given, the
+                buffer is created with that number of bytes.  The
+                buffer is filled with the first character of the
+                <emphasis>bufname</emphasis>.  If the
+                <emphasis>size</emphasis> argument is non-numeric, it
+                is assumed to be a file name, and the contents of the
+                file are read into the buffer.  The data buffer can
+                subsequently be specified as data for a <link
+                  linkend="dd"><command>define-data</command></link> command.
+              </para>
+            </entry>
+          </row>
+          <row id="bd">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>buffer-delete,bd</command> 
+                <arg choice="plain">
+                  <replaceable>bufname</replaceable>
+                </arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Buffer Delete: Deletes an existing data buffer
+                identified by <emphasis>bufname</emphasis>.
+              </para>
+            </entry>
+          </row>
+          <row id="bl">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>buffer-list,bl</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Buffer List: Lists the names of the currently defined
+                data buffers on stdout.
+              </para>
+            </entry>
+          </row>
+          <row id="co">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>check-order,co</command> 
+                <arg choice="opt">s</arg>
+                <arg choice="opt">c</arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Check Order: Checks the lexicographic order of keys in
+                the current root, starting from the current position
+                within the BTree.  If the s argument is given, the
+                check is performed from the first key of the BTree
+                index.
+              </para>
+              <para>
+                If a disordered index is discovered, the keys at fault
+                are displayed.  Otherwise,
+                <command>check-order</command> is silent, unless the c
+                argument is specified, which causes the number of keys
+                checked to be displayed.
+              </para>
+            </entry>
+          </row>
+          <row id="c">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>create,c</command> 
+                <arg choice="plain">
+                  <replaceable>filename</replaceable>
+                </arg>
+                <arg>s</arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Create file: Creates a new B Tree file.  If a file of
+                the same name already exists, it will be silently
+                overwritten.  If the <emphasis>s</emphasis> qualifier
+                is given, the file will be created in shared mode.
+                The newly created B Tree file becomes the current
+                file; use the <link
+                linkend="fl"><command>file-list</command></link> command to
+                view the list of open files.</para></entry></row>
+          <row id="cr">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>change-root,cr</command> 
+                <arg choice="plain">
+                  <replaceable>rootname</replaceable>
+                </arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Change Root: Switches the current root to the root
+                named <emphasis>rootname</emphasis> in the in-use B
+                Tree file.  If switch is successful,
+                <emphasis>rootname</emphasis> becomes the current
+                root.  All subsequent key and/or data operations will
+                take place against <emphasis>rootname</emphasis>.
+              </para>
+            </entry>
+          </row>
+          <row id="x">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>close,x</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Close: Closes the in-use B Tree file.  The next
+                available open file, if one exists, is automatically
+                made the in-use B Tree file.  If there are no
+                candidate B Tree files, a warning message is
+                issued. 
+              </para>
+            </entry>
+          </row>
+          <row id="d">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>define,d</command> 
+                <arg choice="plain">
+                  <replaceable>key</replaceable>
+                </arg>
+                <arg choice="opt">
+                  <replaceable>value</replaceable>
+                </arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Define key: Defines a new key in the current root of
+                the in-use B Tree index file.  The new key name is
+                defined by <emphasis>key</emphasis>, and is assigned
+                <emphasis>value</emphasis>.  If
+                <emphasis>value</emphasis> is omitted, zero is
+                assumed.
+              </para>
+            </entry>
+          </row>
+          <row id="da">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>data-address,da</command> 
+                <arg choice="plain">
+                  <replaceable>
+                    key
+                  </replaceable>
+                </arg>
+                <arg choice="opt">
+                    i
+                </arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Data Address: Prints, in a decoded form, the data
+                segment address associated with
+                <emphasis>key</emphasis>.  If the
+                <emphasis>i</emphasis> qualifier is given, the
+                <emphasis>key</emphasis> is interpreted as data
+                segment address in integer form and decoded
+                immediately.
+              </para>
+            </entry>
+          </row>
+          <row id="dd">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>define-data,dd</command> 
+                <arg choice="plain">
+                  <replaceable>key</replaceable>
+                </arg> 
+                <group choice="req">
+                  <arg choice="plain">
+                    <replaceable>string</replaceable>
+                  </arg>
+                  <arg choice="plain">
+                    <replaceable>*bufname</replaceable>
+                  </arg>
+                </group>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row> 
+            <entry spanname="desc">
+              <para>
+                Define key with Data: Defines a new key with an
+                associated data record in the current root of the
+                in-use B Tree index file.  <emphasis>key</emphasis>
+                defines the key name.  Data can be provided in one of
+                two ways: either a plain string or the name of a
+                previously defined buffer can be specified.  If the
+                latter, it should be indicated by a leading
+                <emphasis>*</emphasis>. 
+              </para>
+            </entry>
+          </row>
+          <row id="dr">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>define-root,dr</command> 
+                <arg choice="plain">
+                  <replaceable>rootname</replaceable>
+                </arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Define Root: Creates a new B Tree index root, named
+                <emphasis>rootname</emphasis> in the currently
+                selected B Tree file.  If creation is successful, the
+                current root becomes the new root.  All subsequent key
+                and/or data operations will take place against the new
+                root. 
+              </para>
+            </entry>
+          </row>
+          <row id="dups">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>duplicates,dups</command> 
+                <group choice="req">
+                  <arg choice="plain">on</arg>
+                  <arg choice="plain">off</arg>
+                </group>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Duplicates: Sets or unsets support for duplicate keys
+                in the current root. When <emphasis>on</emphasis> is
+                specified, duplicate keys are permitted.  When
+                <emphasis>off</emphasis>, duplicate keys are not
+                permitted .
+              </para>
+            </entry>
+          </row>
+          <row id="echo">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>echo,ec</command> 
+                <group choice="req">
+                  <arg>on</arg>
+                  <arg>off</arg>
+                </group>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Echo: When <command>echo</command> is
+                <emphasis>on</emphasis>, commands read from an <link
+                linkend="e"><command>execute</command></link> file are
+                echoed to stdout.  If <emphasis>off</emphasis>, no
+                echo is performed.
+              </para>
+              <para>
+                If no argument is given to <command>echo</command>,
+                the current status of the echo setting is displayed.
+              </para>
+            </entry>
+          </row>
+          <row id="error">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>error,er</command> 
+                <group choice="req">
+                  <arg>on</arg>
+                  <arg>off</arg>
+                </group>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Error: When <command>error</command> is
+                <emphasis>on</emphasis>, an execution error while
+                reading commands from an <link
+                linkend="e"><command>execute</command></link> file
+                will cause termination of the execute file.  If
+                <emphasis>off</emphasis>, command execution will
+                continue when errors are encountered.
+              </para>
+              <para>
+                If no argument is given to <command>error</command>,
+                the current status of the error setting is displayed.
+              </para>
+            </entry>
+          </row>
+          <row id="e">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>execute,e</command> 
+                <arg choice="plain">
+                  <replaceable>filename</replaceable>
+                </arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Execute: Causes commands to be read and executed from
+                the file denoted by <emphasis>filename</emphasis>.
+                <command>execute</command> commands can be nested,
+                currently up to five deep. No command prompts will be
+                issued while reading commands from a file.
+              </para>
+              <para>
+                See also the <link
+                  linkend="echo"><command>echo</command></link> and
+                  <link
+                  linkend="error"><command>error</command></link>
+                  command descriptions for more information on
+                  execution control when reading commands from a file.
+              </para>
+            </entry>
+          </row>
+          <row id="f">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>find,f</command> 
+                <arg choice="opt">
+                  <replaceable>key</replaceable>
+                </arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Find: Attempts to locate <emphasis>key</emphasis> in
+                the current root of the in-use B Tree index file.  If
+                found, the value associated with the key is
+                printed.
+              </para>
+              <para>
+                If <emphasis>key</emphasis> is omitted, the index is
+                positioned prior to the first key (like <link
+                linkend="pos"><command>position</command></link>
+                <emphasis>s</emphasis>).
+              </para>
+            </entry>
+          </row>
+          <row id="fd">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>find-data,fd</command> 
+                <arg choice="plain">
+                  <replaceable>key</replaceable>
+                </arg>
+                <arg choice="opt">d</arg> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Find Data: Attempts to locate <emphasis>key</emphasis>
+                in the current root of the in-use B Tree index file.
+                If found, the first 80 bytes of the data record
+                associated with the key is displayed.  If the
+                <emphasis>d</emphasis> qualifier is given, the whole
+                of the data record is displayed.  Note that the data
+                record is displayed as character data; control
+                characters or escape sequences in the data record
+                could cause strangenesses on
+                display.
+              </para>
+            </entry>
+          </row>
+          <row id="fl">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>file-list,fl</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                File List: Lists the set of open B Tree index files.
+                To change the current file, issue a <link
+                linkend="u"><command>use</command></link>
+                command.
+              </para>
+            </entry>
+          </row>
+          <row id="l">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>list,l</command> 
+                <arg choice="opt">c</arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                List: Displays all key and associated value, starting
+                from the current key in the current root of the in-use
+                B Tree index file.  The current key is set by the last
+                <link linkend="f"><command>find</command></link>,
+                <link
+                linkend="fd"><command>find-data</command></link>,
+                <link linkend="n"><command>next</command></link>,
+                <link
+                linkend="nd"><command>next-data</command></link>,
+                <link linkend="prv"><command>previous</command></link>
+                or <link
+                linkend="pd"><command>previous-data</command></link>
+                command.
+              </para>
+              <para>
+                If the <emphasis>c</emphasis> argument is given, the
+                count of keys listed will be displayed in addition.
+              </para>
+            </entry>
+          </row>
+          <row id="ld">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>list-data,ld</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                List Data: Displays all keys, and associated data
+                records, starting from the current key in the current
+                root of the in-use B Tree index file.  The current key
+                is set by the last <link
+                  linkend="f"><command>find</command></link>, <link
+                  linkend="fd"><command>find-data</command></link>, <link
+                  linkend="n"><command>next</command></link>, <link
+                  linkend="nd"><command>next-data</command></link> <link
+                  linkend="prv"><command>previous</command></link> or <link
+                  linkend="pd"><command>previous-data</command></link> command.
+              </para>
+            </entry>
+          </row>
+          <row id="ldp">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>list-data-prev,ldp</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                List Data Previous: Displays all keys, and associated data
+                records, prior to the current key in the current
+                root of the in-use B Tree index file.  The current key
+                is set by the last <link
+                  linkend="f"><command>find</command></link>, <link
+                  linkend="fd"><command>find-data</command></link>, <link
+                  linkend="n"><command>next</command></link>, <link
+                  linkend="nd"><command>next-data</command></link> <link
+                  linkend="prv"><command>previous</command></link> or <link
+                  linkend="pd"><command>previous-data</command></link> command.
+              </para>
+            </entry>
+          </row>
+          <row id="lp">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>list-prev,lp</command> 
+                <arg choice="opt">c</arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                List Previous: Displays all keys, and associated value,
+                prior to the current key in the current root of the
+                in-use B Tree index file.  The current key is set by
+                the last <link
+                linkend="f"><command>find</command></link>, <link
+                linkend="fd"><command>find-data</command></link>,
+                <link linkend="n"><command>next</command></link>,
+                <link linkend="nd"><command>next-data</command></link>, 
+                <link linkend="prv"><command>previous</command></link>
+                or <link
+                linkend="pd"><command>previous-data</command></link>
+                command.
+              </para>
+              <para>
+                If the <emphasis>c</emphasis> argument is given, the
+                count of keys listed will be displayed in addition.
+              </para>
+            </entry>
+          </row>
+          <row id="lko">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>list-keys-only,lko</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                List Keys Only: Displays all keys, but not associated
+                value, starting from the current key in the current
+                root of the in-use B Tree index file.  The current key
+                is set by the last <link
+                  linkend="f"><command>find</command></link>, <link
+                  linkend="fd"><command>find-data</command></link>, <link
+                  linkend="n"><command>next</command></link>, <link
+                  linkend="nd"><command>next-data</command></link>, <link
+                  linkend="prv"><command>previous</command></link> or <link
+                  linkend="pd"><command>previous-data</command></link> command.
+              </para>
+            </entry>
+          </row>
+          <row id="lk">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>lock,lk</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Lock: Acquires exclusive access to the in-use B Tree
+                file which was originally opened in shared mode.  If
+                the file was opened in exclusive mode (the default),
+                <command>lock</command> will have no
+                effect.
+              </para>
+            </entry>
+          </row>
+          <row id="n">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>next,n</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Next: Displays the key following the current key in
+                the current root of the in-use B Tree index file.  The
+                current key is set by the last <link
+                linkend="f"><command>find</command></link>, <link
+                linkend="fd"><command>find-data</command></link>,
+                <link linkend="n"><command>next</command></link>,
+                <link
+                linkend="nd"><command>next-data</command></link>,
+                <link linkend="prv"><command>previous</command></link>
+                or <link
+                linkend="pd"><command>previous-data</command></link>
+                command.
+              </para>
+            </entry>
+          </row>
+          <row id="nd">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>next-data,nd</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Next Data: Displays the key and associated data record
+                following the current key in the current root of the
+                in-use B Tree index file.  The current key is set by
+                the last <link
+                linkend="f"><command>find</command></link>, <link
+                linkend="fd"><command>find-data</command></link>,
+                <link linkend="n"><command>next</command></link>,
+                <link
+                linkend="nd"><command>next-data</command></link>,
+                <link linkend="prv"><command>previous</command></link>
+                or <link
+                linkend="pd"><command>previous-data</command></link>
+                command.
+              </para>
+            </entry>
+          </row>
+          <row id="o">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>open,o</command> 
+                <arg choice="plain">
+                  <replaceable>filename</replaceable>
+                </arg>
+                <arg choice="opt">s</arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Open: Opens the existing B Tree file identified by
+                <emphasis>filename</emphasis>.  If the optional
+                <emphasis>s</emphasis> qualifier is given, the file
+                will be opened in shared mode.  More than one B Tree
+                index file may be open currently; the newly opened
+                file is made the in-use B Tree file.  The in-use file
+                may be changed by the <link
+                linkend="u"><command>use</command></link> command, while
+                the list of open files is displayed through the <link
+                linkend="fl"><command>file-list</command></link>
+                command. 
+              </para>
+            </entry>
+          </row>
+          <row id="or">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>open-readonly,or</command> 
+                <arg choice="plain">
+                  <replaceable>filename</replaceable>
+                </arg>
+                <arg choice="opt">s</arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Open Readonly: Opens the existing B Tree file identified by
+                <emphasis>filename</emphasis> in read-only mode.  If
+                the optional <emphasis>s</emphasis> qualifier is
+                given, the file will be opened in shared mode.  More
+                than one B Tree index file may be open currently; the
+                newly opened file is made the in-use B Tree file.  The
+                in-use file may be changed by the <link
+                linkend="u"><command>use</command></link> command,
+                while the list of open files is displayed through the
+                <link linkend="fl"><command>file-list</command></link>
+                command.
+              </para>
+            </entry>
+          </row>
+          <row id="pos">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>position,pos</command> 
+                <group choice="req">
+                  <arg choice="plain">s</arg>
+                  <arg choice="plain">e</arg> 
+                </group>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Position: Sets the position in the current root.
+                <emphasis>s</emphasis> will cause the position to
+                be set prior to the first key in the index,
+                <emphasis>e</emphasis> will cause the position to be
+                set after the last key.
+              </para>
+            </entry>
+          </row>
+          <row id="p">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>prompt,p</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Prompt: Toggles the display of a command prompt
+                when <command>bt</command> is ready for the next user
+                command. 
+              </para>
+            </entry>
+          </row>
+          <row id="prv">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>previous,prv</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Previous: Displays the key prior to the current key in
+                the current root of the in-use B Tree index file.  The
+                current key is set by the last <link
+                linkend="f"><command>find</command></link>, <link
+                linkend="fd"><command>find-data</command></link>,
+                <link linkend="n"><command>next</command></link>,
+                <link
+                linkend="nd"><command>next-data</command></link>,
+                <link linkend="prv"><command>previous</command></link>
+                or <link
+                linkend="pd"><command>previous-data</command></link>
+                command.
+              </para>
+            </entry>
+          </row>
+          <row id="pd">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>previous-data,pd</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Previous Data: Displays the key and associated data record
+                prior to the current key in the current root of the
+                in-use B Tree index file.  The current key is set by
+                the last <link
+                linkend="f"><command>find</command></link>, <link
+                linkend="fd"><command>find-data</command></link>,
+                <link linkend="n"><command>next</command></link>,
+                <link
+                linkend="nd"><command>next-data</command></link>,
+                <link linkend="prv"><command>previous</command></link>
+                or <link
+                linkend="pd"><command>previous-data</command></link>
+                command.
+              </para>
+            </entry>
+          </row>
+          <row id="q"><entry spanname="cmd">
+              <cmdsynopsis>
+                <command>quit,q</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Quit: Terminates <command>bt</command>.  Any open B
+                Tree files will be closed
+                automatically. 
+              </para>
+            </entry>
+          </row>
+          <row id="r"><entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>remove,r</command> 
+                <arg choice="plain">
+                  <replaceable>key</replaceable>
+                </arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Remove key: Removes a previously defined key in the
+                current root of the in-use B Tree index file.  The key
+                name is specified by <emphasis>key</emphasis>.
+              </para>
+            </entry>
+          </row>
+          <row id="rc"><entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>remove-cur,rc</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Remove Current key: Removes the current key in the
+                current root of the in-use B Tree index file.  The
+                current key is set by the last <link
+                linkend="f"><command>find</command></link>, <link
+                linkend="fd"><command>find-data</command></link>,
+                <link linkend="n"><command>next</command></link>,
+                <link
+                linkend="nd"><command>next-data</command></link>,
+                <link linkend="prv"><command>previous</command></link>
+                or <link
+                linkend="pd"><command>previous-data</command></link>
+                command.
+              </para>
+            </entry>
+          </row>
+          <row id="rd">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>remove-data,rd</command> 
+                <arg choice="plain">
+                  <replaceable>key</replaceable>
+                </arg> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row> 
+            <entry spanname="desc">
+              <para>
+                Removes key with Data: Removes a previously defined
+                key and its associated data record in the current root
+                of the in-use B Tree index file.
+                <emphasis>key</emphasis> defines the key
+                name. 
+              </para>
+            </entry>
+          </row>
+          <row id="rdc">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>remove-data-cur,rdc</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row> 
+            <entry spanname="desc">
+              <para>
+                Removes Current Data: Removes the current key and its
+                associated data record in the current root of the
+                in-use B Tree index file.  The current key is set by
+                the last <link
+                linkend="f"><command>find</command></link>, <link
+                linkend="fd"><command>find-data</command></link>,
+                <link linkend="n"><command>next</command></link>,
+                <link
+                linkend="nd"><command>next-data</command></link>,
+                <link linkend="prv"><command>previous</command></link>
+                or <link
+                linkend="pd"><command>previous-data</command></link>
+                command.
+              </para>
+            </entry>
+          </row>
+          <row id="rr">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>remove-root,rr</command> 
+                <arg choice="plain">
+                  <replaceable>rootname</replaceable>
+                </arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Remove Root: Removes an existing B Tree index root,
+                named <emphasis>rootname</emphasis> in the in-use B
+                Tree file.  If removal is successful, all blocks used
+                by the root (both index and data) will be returned to
+                the free list.  It is not permitted to remove the
+                current root. 
+              </para>
+            </entry>
+          </row>
+          <row id="s">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>show,s</command>
+                <group choice="req">
+                  <arg choice="plain">control</arg>
+                  <arg choice="plain">super</arg> 
+                  <arg choice="plain">stats</arg>
+                  <arg choice="plain">space</arg>
+                  <arg choice="plain">stack</arg>
+                  <arg choice="plain">block <replaceable>n</replaceable>
+                  <arg choice="plain">structure </arg><arg choice="opt">v</arg>
+                  </arg>
+                </group>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Show: Displays B Tree debug information.  The option
+                specified is passed directly to the
+                <function>bdbug</function> function.  See the <link
+                  linkend="bdbug"><function>bdebug</function></link>
+                description for the information provided by each
+                option.  
+              </para>
+              <para>
+                For the <emphasis>structure</emphasis> option,
+                specifying <emphasis>v</emphasis> will cause a
+                detailed report on the structure to be displayed.
+                Otherwise, only a summary is displayed.
+              </para>
+            </entry>
+          </row>
+          <row id="sd">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>size-data,sd</command> 
+                <arg choice="opt">
+                  <replaceable>key</replaceable>
+                </arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Size Data: Displays the number of bytes occupied by
+                the data record associated with
+                <emphasis>key</emphasis>. If <emphasis>key</emphasis>
+                is omitted, the size of the data record associated
+                with the current key is displayed.  The current key is
+                set by the last <link
+                linkend="f"><command>find</command></link>, <link
+                linkend="fd"><command>find-data</command></link>,
+                <link linkend="n"><command>next</command></link>,
+                <link
+                linkend="nd"><command>next-data</command></link>,
+                <link linkend="prv"><command>previous</command></link>
+                or <link
+                linkend="pd"><command>previous-data</command></link>
+                command.
+              </para>
+              <para>
+                If <emphasis>key</emphasis> has no associated data
+                record, results are undefined.
+              </para>
+            </entry>
+          </row>
+          <row id="system">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>system,!</command> 
+                <arg choice="plain">
+                  <replaceable>command</replaceable>
+                </arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                System: Passes the text following the system command
+                to the shell for execution.  
+              </para>
+            </entry>
+          </row>
+          <row id="u">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>use,u</command> 
+                <arg choice="plain">
+                  <replaceable>filename</replaceable>
+                </arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Use: Changes the in-use B Tree file to
+                <emphasis>filename</emphasis>.  The file must have
+                already been opened or created, using the <link
+                  linkend="o"><command>open</command></link> or <link
+                  linkend="c"><command>create</command></link>
+                command.
+              </para>
+            </entry>
+          </row>
+          <row id="ud">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>update-data,ud</command> 
+                <arg choice="plain">
+                  <replaceable>key</replaceable>
+                </arg> 
+                <group choice="req">
+                  <arg choice="plain">
+                    <replaceable>string</replaceable>
+                  </arg>
+                  <arg choice="plain">
+                    <replaceable>*bufname</replaceable>
+                  </arg>
+                </group>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row> 
+            <entry spanname="desc">
+              <para>
+                Update Data: Updates an existing key with a
+                new associated data record in the current root of the
+                in-use B Tree index file.  <emphasis>key</emphasis>
+                defines the key name.  Data can be provided in one of
+                two ways: either a plain string or the name of a
+                previously defined buffer can be specified.  If the
+                latter, it should be indicated by a leading
+                <emphasis>*</emphasis>. 
+              </para>
+            </entry>
+          </row>
+          <row id="udc">
+            <entry spanname="cmd"> 
+              <cmdsynopsis>
+                <command>update-data-cur,udc</command> 
+                <group choice="req">
+                  <arg choice="plain">
+                    <replaceable>string</replaceable>
+                  </arg>
+                  <arg choice="plain">
+                    <replaceable>*bufname</replaceable>
+                  </arg>
+                </group>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row> 
+            <entry spanname="desc">
+              <para>
+                Update Data Current: Updates the current key with a
+                new associated data record in the current root of the
+                in-use B Tree index file. The current key is set by
+                the last <link
+                linkend="f"><command>find</command></link>, <link
+                linkend="fd"><command>find-data</command></link>,
+                <link linkend="n"><command>next</command></link>,
+                <link
+                linkend="nd"><command>next-data</command></link>,
+                <link linkend="prv"><command>previous</command></link>
+                or <link
+                linkend="pd"><command>previous-data</command></link>
+                command. Data can be provided in one of two ways:
+                either a plain string or the name of a previously
+                defined buffer can be specified.  If the latter, it
+                should be indicated by a leading
+                <emphasis>*</emphasis>.
+              </para>
+            </entry>
+          </row>
+          <row id="ulk">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>unlock,ulk</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Unlock: Unlocks the in-use B Tree file, if it was
+                locked with the <command>lk</command> command.  If not
+                locked, or the file was originally opened in exclusive
+                mode, <command>unlock</command> has no
+                effect. 
+              </para>
+            </entry>
+          </row>
+          <row id="uv">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>update-value,uv</command> 
+                <arg choice="plain">
+                  <replaceable>key</replaceable>
+                </arg> 
+                <arg choice="plain">
+                  <replaceable>value</replaceable>
+                </arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Update Value: Modifies the value associated with
+                <emphasis>key</emphasis> in the current root of the
+                in-use B Tree index file.  
+              </para>
+            </entry>
+          </row>
+          <row id="uvc">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>update-value,uv</command> 
+                <arg choice="plain">
+                  <replaceable>value</replaceable>
+                </arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Update Value Current: Modifies the value associated
+                with current key <emphasis>key</emphasis> in the
+                current root of the in-use B Tree index file. The
+                current key is set by the last <link
+                linkend="f"><command>find</command></link>, <link
+                linkend="fd"><command>find-data</command></link>,
+                <link linkend="n"><command>next</command></link>,
+                <link
+                linkend="nd"><command>next-data</command></link>,
+                <link linkend="prv"><command>previous</command></link>
+                or <link
+                linkend="pd"><command>previous-data</command></link>
+                command.
+              </para>
+            </entry>
+          </row>
+          <row id="wt">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>write-threshold,wt</command> 
+                <arg choice="plain">
+                  <replaceable>threshold</replaceable>
+                </arg> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Write Threshold: Sets the number of index block
+                updates beyond which the block contents must be
+                writtent to disk.  A <emphasis>threshold</emphasis> of
+                zero means writes will not take place unless a block
+                must be flushed to disk.
+              </para>
+            </entry>
+          </row>
+          <row id="help">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>help,?</command> 
+                <arg choice="opt">cmd</arg>
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Help: Displays a list of <command>bt</command>
+                commands and a terse description of syntax and
+                usage. If <emphasis>cmd</emphasis> is specified, only
+                help on that command will be displayed.
+              </para>
+            </entry>
+          </row>
+          <row id="comment">
+            <entry spanname="cmd">
+              <cmdsynopsis>
+                <command>comment,#</command> 
+              </cmdsynopsis>
+            </entry>
+          </row>
+          <row>
+            <entry spanname="desc">
+              <para>
+                Comment: <command>bt</command> will ignore any line
+                starting with a <command>#</command>. Note that
+                <command>bt</command> will also ignore blank
+                lines. 
+              </para>
+            </entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </chapter>
+  <chapter id="Recovery">
+    <title>B Tree Recovery</title>
+    <para>
+      <command>btr</command> provides a B Tree recovery facility.
+      Recovery of a B Tree index file may be required if it is left in
+      an inconsistent state due to a hardware or software failure
+      during update processing.
+    </para>
+    <para>
+      <command>btr</command> may also be used to migrate a Btree index
+      file created with an earlier version of the Btree library to
+      current version.  Due to limited recovery information in earlier
+      versions of the Btree index file, such migration is really
+      only applicable to single-rooted B Tree index files.
+    </para>
+    <refentry id="btr">
+      <refentryinfo>
+        <date>24th June, 2011</date>
+        <productname>btr</productname>
+        <productnumber>1.11</productnumber>
+      </refentryinfo>
+      <refmeta>
+        <refentrytitle>btr</refentrytitle>
+        <manvolnum>1</manvolnum>
+        <refmiscinfo class="manual">btr</refmiscinfo> 
+      </refmeta>
+
+      <refnamediv>
+        <refname>btr</refname>
+        <refpurpose>B Tree index recovery</refpurpose>
+      </refnamediv>
+
+      <refsynopsisdiv>
+        <cmdsynopsis>
+          <command>btr</command>
+          <arg choice='opt'>-a</arg>
+          <arg choice='opt'>-d</arg>
+          <arg choice='opt'>-f</arg>
+          <arg choice='opt'>-k</arg>
+          <arg choice='opt'>-n <replaceable>cnt</replaceable></arg>
+          <arg choice='opt'>-r</arg>
+          <arg choice='opt'>-v</arg>
+          <arg choice='opt'>--</arg>
+          <arg choice='plain'><replaceable>old_file</replaceable></arg>
+          <arg choice='plain'><replaceable>new_file</replaceable></arg>
+        </cmdsynopsis>
+      </refsynopsisdiv>
+      <refsect1>
+        <title>Description</title>
+        <para>
+          <command>btr</command> will attempt to recover key (and
+          optionally data) information from the B Tree index file
+          identified by <replaceable>old_file</replaceable>.  The
+          recovered contents are written to the B Tree index file
+          identified by
+          <replaceable>new_file</replaceable>. <command>btr</command>
+          recovery is controlled by a number of arguments:
+        </para>
+          <table frame="none" summary="Command Arguments Table">
+            <title>Command Arguments</title>
+            <tgroup align="left" cols="3" colsep="0" rowsep="0">
+              <colspec colname="c1" colwidth="50cm"/>
+              <colspec colname="c2" colwidth="100cm" />
+              <colspec colname="c3" />
+              <tbody valign="top">
+                <row>
+                  <entry></entry>
+                  <entry>
+                    <cmdsynopsis>
+                      <group choice='opt'>
+                        <arg choice='plain'>-k</arg>
+                        <arg choice='plain'>-d</arg>
+                      </group>
+                    </cmdsynopsis> 
+                  </entry>
+                  <entry>
+                    <para>
+                      Specifies recovery mode; -k for keys, -d for keys and
+                      data.  Default if omitted is -k.
+                    </para>
+                  </entry>
+                </row>
+                <row>
+                  <entry></entry>
+                  <entry>
+                    <cmdsynopsis>
+                      <arg choice='opt'>-n <replaceable>cnt</replaceable></arg>
+                    </cmdsynopsis> 
+                  </entry>
+                  <entry>
+                    <para>
+                      Sets maximum number of io errors to ignore before
+                      terminating the recovery.  Default is 0.
+                    </para>
+                  </entry>
+                </row>
+                <row>
+                  <entry></entry>
+                  <entry>
+                    <cmdsynopsis>
+                      <arg choice='opt'>-v</arg>
+                    </cmdsynopsis> 
+                  </entry>
+                  <entry>
+                    <para>
+                      Causes <command>btr</command> to display information
+                      on the recovery process.  This flag may be repeated
+                      up to three times to increase the level of
+                      information.  For a large B Tree index this could
+                      lead to a significant amount of output.
+                    </para>
+                  </entry>
+                </row>
+                <row>
+                  <entry></entry>
+                  <entry>
+                    <cmdsynopsis>
+                      <arg choice='opt'>-a</arg>
+                    </cmdsynopsis> 
+                  </entry>
+                  <entry>
+                    <para>
+                      If specified, the B Tree index in
+                      <replaceable>new_file</replaceable> will allow
+                      duplicate keys.  The default is not to allow duplicates.
+                    </para>
+                  </entry>
+                </row>
+                <row>
+                  <entry></entry>
+                  <entry>
+                    <cmdsynopsis>
+                      <arg choice='opt'>-f</arg>
+                    </cmdsynopsis> 
+                  </entry>
+                  <entry>
+                    <para>
+                      If specified, the B Tree index represented by
+                      <replaceable>new_file</replaceable> will be
+                      overwritten.  Default is to preserve
+                      <replaceable>new_file</replaceable>, should it exist.
+                    </para>
+                  </entry>
+                </row>
+                <row>
+                  <entry></entry>
+                  <entry>
+                    <cmdsynopsis>
+                      <arg choice='opt'>-r</arg>
+                    </cmdsynopsis> 
+                  </entry>
+                  <entry>
+                    <para>
+                      Requests <command>btr</command> to attempt full
+                      recovery mode even if the version of the
+                      <replaceable>old_file</replaceable> does not support
+                      it.
+                    </para>
+                  </entry>
+                </row>
+                <row>
+                  <entry></entry>
+                  <entry>
+                    <cmdsynopsis>
+                      <arg choice='opt'>--</arg>
+                    </cmdsynopsis> 
+                  </entry>
+                  <entry>
+                    <para>
+                      Causes <command>btr</command> to stop processing
+                      command arguments.  Should be used if
+                      <replaceable>old_file</replaceable> begins with a '-'.
+                    </para>
+                  </entry>
+                </row>
+              </tbody>
+            </tgroup>
+          </table>
+        <refsect2>
+          <title>Recovery Processing</title>
+          <para>
+            <command>btr</command> will attempt to open the input btree
+            file using the btree library version of
+            <function>btopn</function>.  If this fails, the
+            <command>btr</command> version of
+            <function>btopn</function> is used instead, which bypasses
+            the consistency checks.
+          </para>
+          <para>
+            An attempt to read the superroot is made.  If successful,
+            the root names and root blocks are recorded.  Only the
+            roots present in the superroot are retained.  Root names
+            in any child blocks are ignored; the index structure may
+            be damaged and therefore no attempt to traverse it is made.
+          </para>
+          <para>
+            Each block, starting from 1, is read.  If marked as ZROOT,
+            ZINUSE or ZDUP the keys and values are extracted directly from
+            the in-memory array.  If -k specified, the key and value
+            are written to the <replaceable>new_btree</replaceable>
+            index file.  If -d specified, and the value is a valid
+            disk record address, an attempt is made to read the data
+            record.  Data record addresses are stored in a supporting
+            bt index file (<computeroutput>.bt_da.db</computeroutput>),
+            to enable detection of circular references.  If the data
+            record is read OK, the key and data record is written to
+            the <replaceable>new_file</replaceable> btree file.  If
+            the data record cannot be read, only the key is written.
+          </para>
+          <para>
+            In version 4 (and later) of the BTree index, each ZINUSE
+            block contains the root block it belongs to.  This data
+            allows <command>btr</command> to partition keys by their
+            roots.  Only those roots recovered from the superroot will
+            be named as in the <replaceable>old_file</replaceable>.
+            Keys from other roots will be copied to new roots, named after
+            their root block number (e.g. root_19834). 
+          </para>
+          <para>
+            <command>btr</command> will display summary statistics
+            about the recovery on stdout when complete.
+          </para>
+        </refsect2>
+        <refsect2>
+          <title>Exit Status</title>
+          <para>
+            0 if OK.
+          </para>
+        </refsect2>
+      </refsect1>
+      <refsect1>
+        <title>Notes</title>
+          <para>
+            <command>btr</command> can be used to recover (or indeed
+            migrate) data from earlier (i.e. pre-version 4) versions
+            of a Btree index file.  Since the root block numbers are
+            not held in the ZINUSE blocks, keys can not be partitioned
+            by root.  Therefore, this facility is only really
+            applicable to single-rooted B Tree index files.
+          </para>
+      </refsect1>
+    </refentry>
+  </chapter>
+  <chapter id="Customisation">
+    <title>Customisation</title>
+    <para>
+      All compile time constants are defined in the header file
+      <filename>bc.h</filename>.  The following constants may be altered
+      for different hardware environments.  The values used in the
+      example given are from the original UNIX implementation.
+    </para>
+    <variablelist>
+      <varlistentry>
+        <term>ZBPW</term>
+        <listitem>
+          <para>The number of bytes in a word.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>ZBYTEW</term>
+        <listitem>
+          <para>The number of bits in a byte.</para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>ZMXBLK</term>
+        <listitem>
+          <para>
+            Maximum number of in-memory disk blocks that can be
+            stored.  The minimum value for this parameter is 3; there
+            is no maximum.  The more in-memory blocks defined, the
+            lower the disk I/O requirements will be.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>ZBLKSZ</term> 
+        <listitem>
+          <para>
+            The number of
+            bytes allocated to a disk block.  This value should be set to
+            a multiple of the physical disk block size.  This must be
+            defined as a power of two.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>ZKEYSZ</term>
+        <listitem>
+          <para>
+            The maximum size (in bytes) of a key.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>ZTHRES</term>
+        <listitem>
+          <para>
+            Threshold for block joining.  This value determines the
+            number of free key slots that must exist before two blocks
+            are considered candidates for joining.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>ZMXACT</term>
+        <listitem>
+          <para>
+            The maximum number of B Tree files that may be
+            open concurrently.
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>ZSLEEP</term> 
+        <listitem>
+          <para>
+            The number of seconds to wait for a B Tree file to become
+            unlocked, when in shared mode.  
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>ZRNAMESZ</term> 
+        <listitem>
+          <para>
+            The maximum number of bytes returned for the name of the
+            function reporting a BT error (via btcerr)/
+            </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term>ZMSGSZ</term> 
+        <listitem>
+          <para>
+            The maximum number of bytes returned for the error message of the
+            corresponding to a BT library error (via btcerr).
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+    <para>
+      These compile time constants are assigned the following values
+      in the distributed version:
+    </para>
+    <programlisting>
+      ZBPW = 4
+      ZBYTEW = 8
+      ZMXBLK = 3     (16 when LFS=1)
+      ZBLKSZ = 1024  (8192 when LFS=1)
+      ZKEYSZ = 32
+      ZTHRES = 3
+      ZMXACT = 5
+      ZSLEEP = 5
+      ZRNAMESZ = 16
+      ZMSGSZ = 123
+    </programlisting>
+    <para>
+      These values result in the minimum memory usage.  If memory is
+      not a constraint, increasing the values for ZMXBLK and ZBLKSZ
+      will make the B Tree implementation much faster, e.g try:
+    </para>
+    <programlisting>
+      ZMXBLK = 100
+      ZBLKSZ = 8192
+    </programlisting>
+    <para>
+      The number of keys that can be stored in a block is
+      determined at compile time, using the following definition:
+    </para>
+    <programlisting>
+      #define ZMXKEY ((ZBLKSZ-ZBPW-ZINFSZ*ZBPW)/(ZKYLEN+2*ZBPW)) 
+    </programlisting>
+    <para>
+      N.B. ZINFSZ is the number of information words that a block
+      must carry as overhead.  This value is six in this
+      implementation.
+    </para>
+  </chapter>
+  <chapter id="Building">
+    <title>Building and installing the BT Library</title> 
+    <para>
+      The BT library is distributed as a tar file, which contains
+      a set of C source and header files, a
+      <filename>Makefile</filename> and a set of testcases.
+    </para>
+    <para>
+      First, unpack the tar file into a convenient directory.  cd to
+      the directory containing the source files and issue the command
+      <command>make clean;make</command>.  This will compile each BT
+      library file, and create the UNIX static library
+      <filename>libbt.a</filename> in the <filename>lib</filename>
+      sub-directory.  <command>make</command> will also built the BT
+      test harness <command>bt</command>, a utility,
+      <command>kcp</command>, which performs intelligent copies of BT
+      index files, a BTree index recovery tool <command>btr</command>
+      and two additional testing utilities, <command>bigt</command>
+      and <command>bigtdel</command>, for large file handling.
+    </para>
+    <para>
+      The default BT library build will create a 32-bit version, in
+      which the maximum size of the index file is 2GiB.  A version of
+      BT with Large File Support can be built with the command
+      <command>make clean;make LFS=1</command>.
+    </para>
+    <para>
+      When compiling programs against a LFS version of BT, if you need
+      to manipulate the <emphasis>BTint</emphasis> value associated
+      with a key, ensure you set the compile-time flag
+      _FILE_OFFSET_BITS=64, e.g:
+    </para>
+    <programlisting>
+      $ gcc -o yak yak.c -Iinc -Llib -lbt -D_FILE_OFFSET_BITS=64
+    </programlisting>
+    <para>
+      This is not necessary if you are just using the in-built data
+      record functions (<function>btsel</function> etc).
+    </para>
+    <para>
+      In order to test the newly created BT library, you can use the
+      <command>bt</command> test harness for ad-hoc testing.
+      Alternatively, the <filename>Makefile</filename> provides a
+      means of automated testing.  <command>make test_run</command>
+      will run a set of testcases, held in the
+      <filename>Testcases</filename> sub-directory.  These testcases
+      use <command>bt</command> scripts to test key components of the
+      BT library, comparing the results against known, good, output
+      templates.  The output templates distributed with BT should
+      suffice for most standard Linux and FreeBSD builds.
+    </para>
+  </chapter>
+  <colophon id="colophon"> 
+    <title>Colophon</title>
+    <para>
+      This manual was written using Emacs, with nXML mode, under the
+      DocBook 4.4 XML schema.  xsltproc was used to process the XML into
+      HTML.  </para>
+  </colophon>
+</book>

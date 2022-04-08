@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>B Tree Library - A History</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="index.html" title="B Tree: Library for indexed file management" /><link rel="prev" href="index.html" title="B Tree: Library for indexed file management" /><link rel="next" href="ch01.html" title="Chapter 1. Introduction" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">B Tree Library - A History</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="index.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch01.html">Next</a></td></tr></table><hr /></div><div class="preface"><div class="titlepage"><div><div><h1 class="title"><a id="preface"></a>B Tree Library - A History</h1></div></div></div><p>
+      The B Tree routines in this library were originally written in
+      Fortran 77 during the late 1980's for use in a gazetteer.
+    </p><p>
+      The routines were ported to C over a number years (as time
+      permitted), but still very much organised as the original
+      Fortran.  This version was utilised in the anag and dict
+      programs, for anagram solving.
+    </p><p>
+      The source was re-organised in early 2001 to adopt more closely
+      a C organisation style (note the source code itself still has a
+      Fortran flavour).  This was known as "bt_new".
+    </p><p>
+      The original B Tree implementation was designed solely as an
+      index handler.  Data was expected to be managed by the client
+      application.  In addition, the routines were only able to manage
+      exclusive access to the index file - shared access would result
+      in corrupt index files.  Lastly, only one index file could be
+      open at a time - effectively preventing any application-mediated
+      copying capability.
+    </p><p>
+      "bt_shared" was derived to resolve these three issues: to
+      provide a combined index and data file (yes, something like
+      CP-V/CP-6 keyed files), to allow shared access to a B Tree file
+      by concurrent processes, and to permit a single process to open
+      multiple index files concurrently.
+    </p><p>
+      These capabilities were provided in a 32 bit implementation,
+      meaning the largest file that could be supported was 2GiB.
+      Version 3.0 was developed to add support for larger files, i.e
+      those requiring 64 bit addressing.  This is dependent on kernel
+      and gcc Large File Support.
+    </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="index.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch01.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">B Tree: Library for indexed file management </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 1. Introduction</td></tr></table></div></body></html>

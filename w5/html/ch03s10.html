@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Finding a sequence of keys</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="ch03.html" title="Chapter 3. Function Descriptions" /><link rel="prev" href="ch03s09.html" title="Finding a key" /><link rel="next" href="ch03s11.html" title="Finding a reverse sequence of keys" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Finding a sequence of keys</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s09.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Function Descriptions</th><td width="20%" align="right"> <a accesskey="n" href="ch03s11.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="bnxtky"></a>Finding a sequence of keys</h2></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include "btree.h"</pre><p><code class="funcdef">int <strong class="fsfunc">bnxtky</strong>(</code>BTA* <var class="pdparam">btact</var>, char* <var class="pdparam">key</var>, BTint* <var class="pdparam">value</var><code>)</code>;</p></div><p>
+        The <code class="function">bnxtky</code> function returns the next key
+        from the current root in the file associated with the
+        <em class="parameter"><code>btact</code></em> context pointer.  The key, a
+        character string, is returned via the pointer in
+        <em class="parameter"><code>key</code></em>.  The value associated with the key
+        will be returned in the integer location identified by
+        <em class="parameter"><code>value</code></em>.  <em class="parameter"><code>value</code></em> is
+        declared as a BTint, which is normally a typedef for
+        <span class="emphasis"><em>int</em></span>, but with Large File Support will be
+        a typedef for <span class="emphasis"><em>long long</em></span>.
+      </p><p>
+        <code class="function">bnxtky</code> returns zero to indicate the next
+        key has been located.  If no next key exists,
+        <code class="function">bnxtky</code> returns the error code
+        <code class="literal">QNOKEY</code>.
+      </p><p>
+        To initialise the B Tree position, a call to <a class="link" href="ch03s09.html" title="Finding a key"><code class="function">bfndky</code></a> or <a class="link" href="ch03s12.html" title="Setting the position within a B Tree index"><code class="function">btpos</code></a> must be
+        made before the first call to <code class="function">bnxtky</code>.
+        Thereafter, repeated calls to <code class="function">bnxtky</code> may
+        be made.  Calls to <a class="link" href="ch03s11.html" title="Finding a reverse sequence of keys"><code class="function">bprvky</code></a> may be
+        freely intermingled with calls to <code class="function">bnxtky</code>.
+      </p><p>
+        A non-zero return from <code class="function">bnxtky</code>
+        indicates an error occurred during the key location process.
+      </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s09.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s11.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Finding a key </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Finding a reverse sequence of keys</td></tr></table></div></body></html>

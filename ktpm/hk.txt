@@ -1,0 +1,7 @@
+'TQB001', 1, 'Số 2 Tạ Quang Bửu, quần Hai Bà Trưng, Hà Nội', 8, 1-8
+'TQB002', 9, 'Số 1 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', 8, 9-16
+'TQB003', 17, 'Số 3 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', 8, 17-24
+'TQB004', 25, 'Số 4 Tạ Quang Bửu, quận Hai Bà Trưng, Hà Nội', 8, 25-32
+
+/*
+so_ho_khau, chu_ho, dia_chi, so-nguoi, Thành viên(id thành viên đầu- id thành viên cuối)

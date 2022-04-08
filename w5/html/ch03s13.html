@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Deleting a key</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="ch03.html" title="Chapter 3. Function Descriptions" /><link rel="prev" href="ch03s12.html" title="Setting the position within a B Tree index" /><link rel="next" href="ch03s14.html" title="Updating the value of a key" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Deleting a key</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s12.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Function Descriptions</th><td width="20%" align="right"> <a accesskey="n" href="ch03s14.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="bdelky"></a>Deleting a key</h2></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include "btree.h"</pre><p><code class="funcdef">int <strong class="fsfunc">bdelky</strong>(</code>BTA* <var class="pdparam">btact</var>, char* <var class="pdparam">key</var><code>)</code>;</p></div><p>
+        The <code class="function">bdelky</code> function deletes a key from
+        the current root in the file associated with the
+        <em class="parameter"><code>btact</code></em> context pointer.  The key, a
+        character string, is passed via the pointer in
+        <em class="parameter"><code>key</code></em>.  If the key does not exist,
+        <code class="function">bdelky</code> returns the error code
+        <code class="literal">QNOKEY</code>.  <code class="function">bdelky</code>
+        returns zero on successful deletion of a key.
+      </p><p>
+        If <code class="function">bdelky</code> is called with a
+        <em class="parameter"><code>key</code></em> value of NULL, the delete operation
+        will act against the current key, as selected by
+        <code class="function">bfndky</code>, <code class="function">bnxtky</code> or
+        <code class="function">bprvky</code> operations. This capability is
+        designed to allow deletion of a duplicate key, presumably
+        based on other, application managed, attributes.  
+      </p><p>
+        A non-zero return from <code class="function">bdelky</code> indicates
+        an error occurred during the key deletion process.
+      </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s12.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s14.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Setting the position within a B Tree index </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Updating the value of a key</td></tr></table></div></body></html>

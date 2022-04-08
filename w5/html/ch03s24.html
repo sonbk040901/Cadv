@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Locating data for the next key in sequence</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="ch03.html" title="Chapter 3. Function Descriptions" /><link rel="prev" href="ch03s23.html" title="Deleting a key and associated data" /><link rel="next" href="ch03s25.html" title="Locating data for the previous key in sequence" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Locating data for the next key in sequence</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s23.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Function Descriptions</th><td width="20%" align="right"> <a accesskey="n" href="ch03s25.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="btseln"></a>Locating data for the next key in sequence</h2></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include "btree.h"</pre><p><code class="funcdef">int <strong class="fsfunc">btseln</strong>(</code>BTA* <var class="pdparam">btact</var>, char* <var class="pdparam">key</var>, char* <var class="pdparam">data</var>, int <var class="pdparam">dsize</var>, int* <var class="pdparam">rsize</var><code>)</code>;</p></div><p>
+        The <code class="function">btseln</code> function locates and returns
+        the next key and data record in the file associated with the
+        <em class="parameter"><code>btact</code></em> context pointer.  Before using
+        <code class="function">btseln</code>, a call to <a class="link" href="ch03s22.html" title="Locating data for an existing key"><code class="function">btsel</code></a> or <a class="link" href="ch03s12.html" title="Setting the position within a B Tree index"><code class="function">btpos</code></a> must be made
+        to initialise the position within the B Tree.  Calls to <a class="link" href="ch03s25.html" title="Locating data for the previous key in sequence"><code class="function">btselp</code></a> may be
+        freely intermingled with calls to <code class="function">btseln</code>.
+      </p><p>
+        Both <em class="parameter"><code>key</code></em> and
+        <em class="parameter"><code>data</code></em> are character pointers.  The
+        <em class="parameter"><code>dsize</code></em> parameter must contain the
+        maximum number of bytes to be returned.  The caller should
+        ensure that the <em class="parameter"><code>data</code></em> pointer refers to
+        an area of memory of at least <em class="parameter"><code>dsize</code></em>
+        bytes.  The actual number of bytes returned is returned in
+        <em class="parameter"><code>rsize</code></em>.  Even if the data record
+        contains more than <em class="parameter"><code>dsize</code></em> bytes, only
+        <em class="parameter"><code>dsize</code></em> bytes will be returned.  If the
+        data record is successfully retrieved (even partially),
+        <code class="function">btseln</code> returns zero.
+      </p><p>
+        If no next key exists, <code class="function">btseln</code> will return
+        the error code <code class="literal">QNOKEY</code>.
+      </p><p>
+        An application program can determine the number of bytes
+        occupied by a data record through the <a class="link" href="ch03s26.html" title="Determine size of data record for specific key"><code class="function">btrecs</code></a> function.
+      </p><p>
+        A non-zero return from <code class="function">btseln</code> indicates
+        an error occurred.
+      </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s23.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s25.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Deleting a key and associated data </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Locating data for the previous key in sequence</td></tr></table></div></body></html>

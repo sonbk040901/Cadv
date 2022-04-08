@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Determine size of data record for specific key</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="ch03.html" title="Chapter 3. Function Descriptions" /><link rel="prev" href="ch03s25.html" title="Locating data for the previous key in sequence" /><link rel="next" href="ch03s27.html" title="Debugging information" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Determine size of data record for specific key</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch03s25.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Function Descriptions</th><td width="20%" align="right"> <a accesskey="n" href="ch03s27.html">Next</a></td></tr></table><hr /></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="btrecs"></a>Determine size of data record for specific key</h2></div></div></div><div class="funcsynopsis"><pre class="funcsynopsisinfo">#include "btree.h"</pre><p><code class="funcdef">int <strong class="fsfunc">btrecs</strong>(</code>BTA* <var class="pdparam">btact</var>, char* <var class="pdparam">key</var>, int* <var class="pdparam">rsize</var><code>)</code>;</p></div><p>
+        The <code class="function">btrecs</code> function returns the number of
+        bytes occupied by the data record of a key in the file
+        associated with the <em class="parameter"><code>btact</code></em> context
+        pointer.  The <em class="parameter"><code>key</code></em> parameter is a
+        character pointer, identifying the key to query.  The number
+        of bytes occupied by the data record is returned in
+        <em class="parameter"><code>rsize</code></em>. If the key is located and the
+        data size of the record returned successfully,
+        <code class="function">btrecs</code> returns zero.
+      </p><p>
+        If <code class="function">btrecs</code> is called with a
+        <em class="parameter"><code>key</code></em> value of NULL, the size operation
+        will act against the current key, as selected by
+        <code class="function">btsel</code>, <code class="function">btseln</code> or
+        <code class="function">btselp</code> operations. This capability is
+        designed to allow the determination of the size of the data
+        record of a duplicate key, presumably based on other,
+        application managed, attributes.
+      </p><p>
+        If <code class="function">btrecs</code> is invoked for a
+        <span class="emphasis"><em>key</em></span> without an associated data record,
+        the results are undefined.
+      </p><p>
+        A non-zero return from <code class="function">btrecs</code>
+        indicates an error occurred.
+      </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch03s25.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="ch03.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ch03s27.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Locating data for the previous key in sequence </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Debugging information</td></tr></table></div></body></html>

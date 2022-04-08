@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 6. B Tree Recovery</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="index.html" title="B Tree: Library for indexed file management" /><link rel="prev" href="ch05.html" title="Chapter 5. B Tree Test Harness" /><link rel="next" href="re01.html" title="btr" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 6. B Tree Recovery</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch05.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="re01.html">Next</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a id="Recovery"></a>Chapter 6. B Tree Recovery</h1></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="refentrytitle"><a href="re01.html">btr</a></span><span class="refpurpose"> — B Tree index recovery</span></dt></dl></div><p>
+      <span class="command"><strong>btr</strong></span> provides a B Tree recovery facility.
+      Recovery of a B Tree index file may be required if it is left in
+      an inconsistent state due to a hardware or software failure
+      during update processing.
+    </p><p>
+      <span class="command"><strong>btr</strong></span> may also be used to migrate a Btree index
+      file created with an earlier version of the Btree library to
+      current version.  Due to limited recovery information in earlier
+      versions of the Btree index file, such migration is really
+      only applicable to single-rooted B Tree index files.
+    </p></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch05.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="re01.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 5. B Tree Test Harness </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> btr</td></tr></table></div></body></html>

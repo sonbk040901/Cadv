@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>Chapter 2. System Description</title><link rel="stylesheet" type="text/css" href="/styles/gen_styles.css" /><meta name="generator" content="DocBook XSL Stylesheets V1.79.1" /><link rel="home" href="index.html" title="B Tree: Library for indexed file management" /><link rel="up" href="index.html" title="B Tree: Library for indexed file management" /><link rel="prev" href="ch01.html" title="Chapter 1. Introduction" /><link rel="next" href="ch02s02.html" title="Opening multiple B Tree files" /></head><body><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 2. System Description</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch01.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="ch02s02.html">Next</a></td></tr></table><hr /></div><div class="chapter"><div class="titlepage"><div><div><h1 class="title"><a id="SystemDescription"></a>Chapter 2. System Description</h1></div></div></div><div class="toc"><p><strong>Table of Contents</strong></p><dl class="toc"><dt><span class="section"><a href="ch02.html#SysDescOverview">Overview</a></span></dt><dt><span class="section"><a href="ch02s02.html">Opening multiple B Tree files</a></span></dt><dt><span class="section"><a href="ch02s03.html">Shared Access</a></span></dt><dt><span class="section"><a href="ch02s04.html">Large File Support</a></span></dt><dt><span class="section"><a href="ch02s05.html">Duplicate Keys</a></span></dt><dt><span class="section"><a href="ch02s06.html">Sample Program</a></span></dt></dl></div><div class="section"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a id="SysDescOverview"></a>Overview</h2></div></div></div><p>
+        The B Tree is stored in a standard UNIX file.  To support
+        efficient processing, the size of a B Tree node should be the
+        same as the hardware's disk block size. In the following
+        description, the terms node and block are interchangeable.
+      </p><p>
+        A B Tree has a root, which acts as the starting point for all
+        insertions, deletions and searches.  A B Tree has a master
+        root stored at file address 0 (zero), which is termed the
+        "superroot".  The superroot holds the names and root block
+        addresses of all the B Trees in the file.  The superroot also
+        holds the free block list for the file and other
+        administrative information.
+      </p><p>
+        Each block contains a number of keys, an associated integer
+        value and pointers to other blocks.  The maximum number of
+        keys that can be stored in a block depends on the size of a
+        block and the maximum number of bytes permitted for a key.
+        The integer value associated with a key can be used as desired
+        by the application program.  If the record storage facilities
+        of the B Tree are used, it will contain the block address of
+        an associated data record.
+      </p><p>
+        Version 3.1 and above allows the definition of duplicate keys,
+        which is enabled on a per-root basis.  If not enabled, this
+        version with behave as previous versions, that is, duplicate
+        keys will be rejected.
+      </p><p>
+        When a B Tree file is created, the superroot is initialised
+        with two named roots: itself and the default root.  These are
+        defined as "$$super" and "$$default" respectively.  The
+        application may create more roots as required.  When a B Tree
+        file is first opened, the default root ($$default) is always
+        selected.
+      </p><p>
+        The maximum size of a B Tree file is governed by the
+        implementation.  For an implementation with a 32 bit word
+        length, the maximum file size supported is 2GiB.  If
+        the B Tree library is built with Large File Support, that
+        limit is removed.
+      </p></div></div><div class="navfooter"><hr /><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch01.html">Prev</a> </td><td width="20%" align="center"> </td><td width="40%" align="right"> <a accesskey="n" href="ch02s02.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 1. Introduction </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Opening multiple B Tree files</td></tr></table></div></body></html>
